@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://chrglftj3iktl"]
+
+[ext_resource type="Script" path="res://emplacement_tuile.gd" id="1_lchd5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1nb5h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhdc5"]
+transparency = 1
+albedo_color = Color(0.945098, 0, 0.529412, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0kx5w"]
+
+[node name="EmplacementTuile" type="Node3D"]
+script = ExtResource("1_lchd5")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("BoxMesh_1nb5h")
+surface_material_override/0 = SubResource("StandardMaterial3D_hhdc5")
+
+[node name="Area3D" type="Area3D" parent="Mesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/Area3D"]
+shape = SubResource("BoxShape3D_0kx5w")
+
+[connection signal="mouse_entered" from="Mesh/Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Mesh/Area3D" to="." method="_on_area_3d_mouse_exited"]
