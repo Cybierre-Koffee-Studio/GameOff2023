@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://4tdtu246g70a"]
+
+[ext_resource type="PackedScene" uid="uid://dgm5lu4n2l3qn" path="res://tuile.tscn" id="1_qrokb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4lg6f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dmj3"]
+albedo_color = Color(0.352941, 0.352941, 0.352941, 1)
+
+[sub_resource type="Environment" id="Environment_vyuhg"]
+background_mode = 1
+background_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+
+[node name="Main" type="Node3D"]
+
+[node name="Plateau" type="Node3D" parent="."]
+
+[node name="Mesh" type="MeshInstance3D" parent="Plateau"]
+transform = Transform3D(12, 0, 0, 0, 0.5, 0, 0, 0, 12, 0, 0.25, 0)
+mesh = SubResource("BoxMesh_4lg6f")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7dmj3")
+
+[node name="TrucInvisiblePourPivoterCorrectement" type="MeshInstance3D" parent="Plateau"]
+transform = Transform3D(12, 0, 0, 0, 0.5, 0, 0, 0, 12, 0, -0.25, 0)
+visible = false
+mesh = SubResource("BoxMesh_4lg6f")
+skeleton = NodePath("../..")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 14, 15.097)
+environment = SubResource("Environment_vyuhg")
+fov = 33.3
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.5, 0.75, -0.433013, 1.49012e-08, 0.5, 0.866025, 0.866025, 0.433013, -0.25, -10.325, 11.9861, -8.74714)
+light_color = Color(0.870588, 0.862745, 0.819608, 1)
+light_energy = 4.352
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.524519, -0.664061, 0.532825, 0.353553, 0.739199, 0.573223, -0.774519, -0.112285, 0.622505, 15.712, 11.9861, 5.79846)
+light_color = Color(0.72549, 0.858824, 0.886275, 1)
+
+[node name="Tuile" parent="." instance=ExtResource("1_qrokb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.5, -6)
