@@ -22,13 +22,18 @@ func _process(delta):
     pass
 
 func deal_hand(nb_tiles):
+    var tween = create_tween()
+    var i = 0
     for t in range(nb_tiles):
         var tile = possible_tiles.pick_random().instantiate()
         tile.connect("select_tile", on_select_tile)
         #var tile = tile_empty.instantiate()
         tile.position = tile_markers[t].position
+        tile.position.z += 30
         current_hand.append(tile)
         add_child(tile)
+        tween.parallel().tween_property(tile, "position:z", tile.position.z - 30, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT).set_delay(i * 0.15)
+        i += 1
     pass
 
 func on_select_tile(tile):

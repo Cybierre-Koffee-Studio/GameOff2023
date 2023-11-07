@@ -12,9 +12,9 @@ background_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
 script = ExtResource("1_mync3")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 1, 20, 20.097)
+transform = Transform3D(1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 19, 16)
 environment = SubResource("Environment_vyuhg")
-fov = 60.0
+fov = 35.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.5, 0.75, -0.433013, 1.49012e-08, 0.5, 0.866025, 0.866025, 0.433013, -0.25, -10.325, 11.9861, -8.74714)
@@ -27,5 +27,5 @@ light_color = Color(0.72549, 0.858824, 0.886275, 1)
 
 [node name="Plateau" parent="." instance=ExtResource("2_8jvwn")]
 
-[node name="Hand" parent="." instance=ExtResource("2_cdqrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 16)
+[node name="hand" parent="." instance=ExtResource("2_cdqrf")]
+transform = Transform3D(0.8, 0, 0, 0, 0.69282, -0.4, 0, 0.4, 0.69282, 0, 0, 11)
