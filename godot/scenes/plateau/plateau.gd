@@ -1,7 +1,7 @@
 extends Node3D
 
-var sceneEmplacementTuile = load("res://emplacement_tuile.tscn")
-var sceneTuile = load("res://tuile.tscn")
+var sceneEmplacementTuile = load("res://scenes/plateau/emplacement_tuile.tscn")
+var sceneTuile = load("res://scenes/plateau/tuile.tscn")
 var GRID_SIZE = 12
 
 # Called when the node enters the scene tree for the first time.

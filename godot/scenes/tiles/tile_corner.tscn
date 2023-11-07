@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://kfa4865hkf1p"]
+
+[ext_resource type="PackedScene" uid="uid://8pomoi4omin2" path="res://models/tiles/corner/tile_corner.glb" id="1_g4ksh"]
+
+[node name="tile_corner" instance=ExtResource("1_g4ksh")]

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://2o4pwxsbx465"]
+
+[ext_resource type="PackedScene" uid="uid://d2kdgyckekyyk" path="res://models/tiles/corridor/tile_corridor.glb" id="1_ghjck"]
+
+[node name="tile_corridor" instance=ExtResource("1_ghjck")]

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d2kdgyckekyyk"
-path="res://.godot/imported/tile_corridor.glb-9186298953a365750b3a6d8c657e76d8.scn"
+uid="uid://8pomoi4omin2"
+path="res://.godot/imported/tile_corner.glb-9c81f61ed0efbbe77aa6b0bf5e4ed42d.scn"
 
 [deps]
 
-source_file="res://models/tiles/tile_corridor.glb"
-dest_files=["res://.godot/imported/tile_corridor.glb-9186298953a365750b3a6d8c657e76d8.scn"]
+source_file="res://models/tiles/corner/tile_corner.glb"
+dest_files=["res://.godot/imported/tile_corner.glb-9c81f61ed0efbbe77aa6b0bf5e4ed42d.scn"]
 
 [params]
 

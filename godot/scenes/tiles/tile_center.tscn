@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dab0prlwfuxlb"]
+
+[ext_resource type="PackedScene" uid="uid://hx7w45hicq7f" path="res://models/tiles/center/tile_center.glb" id="1_bitt6"]
+
+[node name="tile_center" instance=ExtResource("1_bitt6")]
