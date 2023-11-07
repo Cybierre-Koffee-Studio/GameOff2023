@@ -17,8 +17,6 @@ const selected_tile_position_shift = 0.6
 # Called when the node enters the scene tree for the first time.
 func _ready():
     deal_hand(GlobalVars.hand_size)
-    
-    pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -30,14 +28,12 @@ func deal_hand(nb_tiles):
     for t in range(nb_tiles):
         var tile = possible_tiles.pick_random().instantiate()
         tile.connect("select_tile", on_select_tile)
-        #var tile = tile_empty.instantiate()
         tile.position = tile_markers[t].position
         tile.position.z += 30
         current_hand.append(tile)
         add_child(tile)
         tween.parallel().tween_property(tile, "position:z", tile.position.z - 30, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT).set_delay(i * 0.15)
         i += 1
-    pass
 
 func on_select_tile(tile):
     var tween = create_tween()
@@ -47,7 +43,6 @@ func on_select_tile(tile):
     GlobalVars.selected_tile = tile
     tween.parallel().tween_property(GlobalVars.selected_tile, "scale", Vector3(selected_tile_scale, selected_tile_scale, selected_tile_scale), 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
     tween.parallel().tween_property(GlobalVars.selected_tile, "position:z", GlobalVars.selected_tile.position.z - selected_tile_position_shift, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-    pass
     
 func on_tile_placed(tile):
     GlobalVars.selected_tile.scale = Vector3(1, 1, 1)
@@ -55,7 +50,8 @@ func on_tile_placed(tile):
     GlobalVars.selected_tile = null
     current_hand.erase(tile)
     remove_child(tile)
+    GlobalVars.selected_tile = null
     for t in current_hand :
-        current_hand.erase(t)
         t.queue_free()
+    current_hand = []
     deal_hand(GlobalVars.hand_size)

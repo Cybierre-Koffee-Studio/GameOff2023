@@ -35,5 +35,6 @@ func _on_area_3d_mouse_exited():
 func _on_area_3d_input_event(camera, event, position, normal, shape_idx):
     if event is InputEventMouseButton:
         if event.button_index == MOUSE_BUTTON_LEFT and event.pressed == true:
-            add_tile.emit(self)
+            if GlobalVars.selected_tile != null:
+                add_tile.emit(self)
         
