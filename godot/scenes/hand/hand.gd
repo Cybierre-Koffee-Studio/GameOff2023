@@ -11,6 +11,9 @@ var current_hand : Array[Tile]  = []
 
 @onready var tile_markers : Array[Node3D] = [$Tile1, $Tile2, $Tile3, $Tile4, $Tile5]
 
+const selected_tile_scale = 1.3
+const selected_tile_position_shift = 0.6
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     deal_hand(GlobalVars.hand_size)
@@ -37,10 +40,19 @@ func deal_hand(nb_tiles):
     pass
 
 func on_select_tile(tile):
+    var tween = create_tween()
+    if GlobalVars.selected_tile != null:
+        tween.parallel().tween_property(GlobalVars.selected_tile, "scale", Vector3(1, 1, 1), 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+        tween.parallel().tween_property(GlobalVars.selected_tile, "position:z", GlobalVars.selected_tile.position.z + selected_tile_position_shift, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
     GlobalVars.selected_tile = tile
+    tween.parallel().tween_property(GlobalVars.selected_tile, "scale", Vector3(selected_tile_scale, selected_tile_scale, selected_tile_scale), 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+    tween.parallel().tween_property(GlobalVars.selected_tile, "position:z", GlobalVars.selected_tile.position.z - selected_tile_position_shift, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
     pass
     
 func on_tile_placed(tile):
+    GlobalVars.selected_tile.scale = Vector3(1, 1, 1)
+    GlobalVars.selected_tile.position.z += selected_tile_position_shift
+    GlobalVars.selected_tile = null
     current_hand.erase(tile)
     remove_child(tile)
     for t in current_hand :
