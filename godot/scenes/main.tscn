@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://4tdtu246g70a"]
+[gd_scene load_steps=5 format=3 uid="uid://4tdtu246g70a"]
 
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_mync3"]
 [ext_resource type="PackedScene" uid="uid://dcwawxg5537wa" path="res://scenes/plateau/plateau.tscn" id="2_8jvwn"]
 [ext_resource type="PackedScene" uid="uid://0737woac8q3q" path="res://scenes/hand/hand.tscn" id="2_cdqrf"]
 
@@ -8,6 +9,7 @@ background_mode = 1
 background_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_mync3")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 1, 20, 20.097)
@@ -23,7 +25,7 @@ light_energy = 4.352
 transform = Transform3D(0.524519, -0.664061, 0.532825, 0.353553, 0.739199, 0.573223, -0.774519, -0.112285, 0.622505, 15.712, 11.9861, 5.79846)
 light_color = Color(0.72549, 0.858824, 0.886275, 1)
 
-[node name="Plateau2" parent="." instance=ExtResource("2_8jvwn")]
+[node name="Plateau" parent="." instance=ExtResource("2_8jvwn")]
 
-[node name="hand" parent="." instance=ExtResource("2_cdqrf")]
+[node name="Hand" parent="." instance=ExtResource("2_cdqrf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 16)

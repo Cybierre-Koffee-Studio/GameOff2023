@@ -1,5 +1,7 @@
 extends Node3D
 
+signal tile_placed
+
 var sceneEmplacementTuile = load("res://scenes/plateau/emplacement_tuile.tscn")
 var sceneTuile = load("res://scenes/plateau/tuile.tscn")
 var GRID_SIZE = 12
@@ -19,7 +21,8 @@ func _process(delta):
     pass
     
 func on_add_tile(src):
-    var tuile = sceneTuile.instantiate()
+    var tuile = GlobalVars.selected_tile
+    emit_signal("tile_placed", tuile)
     tuile.position = src.position
     tuile.position.y = 50
     add_child(tuile)

@@ -1,5 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://2o4pwxsbx465"]
+[gd_scene load_steps=4 format=3 uid="uid://2o4pwxsbx465"]
 
-[ext_resource type="PackedScene" uid="uid://d2kdgyckekyyk" path="res://models/tiles/corridor/tile_corridor.glb" id="1_ghjck"]
+[ext_resource type="PackedScene" uid="uid://d2kdgyckekyyk" path="res://models/tiles/corridor/tile_corridor.glb" id="1_d8i5x"]
+[ext_resource type="Script" path="res://scenes/tiles/tiles.gd" id="2_0oqbf"]
 
-[node name="tile_corridor" instance=ExtResource("1_ghjck")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_2uqme"]
+size = Vector3(2, 0.2, 2)
+
+[node name="tile_corridor" instance=ExtResource("1_d8i5x")]
+script = ExtResource("2_0oqbf")
+
+[node name="Area3D" type="Area3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("BoxShape3D_2uqme")
+
+[connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
+[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]
