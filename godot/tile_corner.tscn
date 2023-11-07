@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://kfa4865hkf1p"]
+
+[ext_resource type="PackedScene" uid="uid://8pomoi4omin2" path="res://models/tiles/tile_corner.glb" id="1_g4ksh"]
+
+[node name="tile_corner" instance=ExtResource("1_g4ksh")]
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
