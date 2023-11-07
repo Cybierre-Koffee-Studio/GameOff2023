@@ -3,6 +3,3 @@
 [ext_resource type="PackedScene" uid="uid://d2kdgyckekyyk" path="res://models/tiles/tile_corridor.glb" id="1_ghjck"]
 
 [node name="tile_corridor" instance=ExtResource("1_ghjck")]
-
-[node name="Cube_003" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
