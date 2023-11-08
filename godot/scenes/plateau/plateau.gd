@@ -19,7 +19,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
     pass
-    
+
 func on_add_tile(src):
     var tuile = GlobalVars.selected_tile
     emit_signal("tile_placed", tuile)

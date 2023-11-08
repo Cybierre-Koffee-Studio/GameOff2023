@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqcuisqegmpvx"]
+
+[ext_resource type="Script" path="res://HUD/boot_screen.gd" id="1_tyfa3"]
+[ext_resource type="Texture2D" uid="uid://cqnw3i4miamfp" path="res://HUD/logoCKS.png" id="2_x5ceu"]
+[ext_resource type="AudioStream" uid="uid://d13ro47puyjj7" path="res://HUD/dlamerde2.wav" id="3_i64dy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0rita"]
+font_color = Color(0.839216, 0.678431, 0.376471, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kywds"]
+font_size = 21
+font_color = Color(0.890196, 0.694118, 0.0235294, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_w7051"]
+font_size = 21
+font_color = Color(0.137255, 0.0588235, 0.00784314, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_45kas"]
+font_color = Color(0, 0, 0, 1)
+
+[node name="BootScreen" type="Node2D"]
+script = ExtResource("1_tyfa3")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 180.0
+color = Color(1, 1, 0.909804, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 77.0
+offset_top = 24.0
+offset_right = 252.0
+offset_bottom = 94.0
+rotation = 0.0698132
+color = Color(0.956863, 0.921569, 0.815686, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = 116.0
+offset_top = 114.0
+offset_right = 201.0
+offset_bottom = 148.0
+rotation = -0.0698132
+color = Color(0.956863, 0.921569, 0.815686, 1)
+
+[node name="LogoCks2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.0352941)
+position = Vector2(165.459, 63.5)
+scale = Vector2(0.0725327, 0.0725327)
+texture = ExtResource("2_x5ceu")
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 76.0
+offset_top = 65.0
+offset_right = 250.0
+offset_bottom = 91.0
+text = "Studio"
+label_settings = SubResource("LabelSettings_0rita")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 83.0
+offset_top = 37.0
+offset_right = 168.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 16
+text = "Cybierre"
+label_settings = SubResource("LabelSettings_kywds")
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 173.0
+offset_top = 36.0
+offset_right = 238.0
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 16
+text = "Koffee"
+label_settings = SubResource("LabelSettings_w7051")
+
+[node name="Label4" type="Label" parent="."]
+offset_top = 114.0
+offset_right = 320.0
+offset_bottom = 140.0
+text = "presents"
+label_settings = SubResource("LabelSettings_45kas")
+horizontal_alignment = 1
+
+[node name="LogoCks" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(301, 160)
+scale = Vector2(0.0387931, 0.0387931)
+texture = ExtResource("2_x5ceu")
+
+[node name="JinglePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_i64dy")
+volume_db = 6.023

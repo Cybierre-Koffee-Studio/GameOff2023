@@ -1,0 +1,115 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqcuisqegmpvx"]
+
+[ext_resource type="Script" path="res://HUD/BootScene/boot_screen.gd" id="1_rjvo8"]
+[ext_resource type="Texture2D" uid="uid://cqnw3i4miamfp" path="res://HUD/BootScene/logoCKS.png" id="2_oa666"]
+[ext_resource type="AudioStream" uid="uid://d13ro47puyjj7" path="res://HUD/BootScene/dlamerde2.wav" id="3_t5mqv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0rita"]
+font_size = 32
+font_color = Color(0.839216, 0.678431, 0.376471, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kywds"]
+font_size = 42
+font_color = Color(0.890196, 0.694118, 0.0235294, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_w7051"]
+font_size = 42
+font_color = Color(0.137255, 0.0588235, 0.00784314, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_45kas"]
+font_size = 32
+font_color = Color(0, 0, 0, 1)
+
+[node name="BootScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rjvo8")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 0.909804, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 393.0
+offset_top = 182.0
+offset_right = 568.0
+offset_bottom = 252.0
+rotation = 0.0698132
+scale = Vector2(2, 2)
+color = Color(0.956863, 0.921569, 0.815686, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 385.859
+offset_right = 552.0
+offset_bottom = 419.859
+rotation = -0.0698132
+scale = Vector2(2, 2)
+color = Color(0.956863, 0.921569, 0.815686, 1)
+
+[node name="LogoCks2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.0352941)
+position = Vector2(562, 267)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_oa666")
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 473.0
+offset_top = 275.0
+offset_right = 647.0
+offset_bottom = 323.0
+text = "Studio"
+label_settings = SubResource("LabelSettings_0rita")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 405.0
+offset_top = 215.0
+offset_right = 577.0
+offset_bottom = 276.0
+theme_override_font_sizes/font_size = 16
+text = "Cybierre"
+label_settings = SubResource("LabelSettings_kywds")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 587.0
+offset_top = 215.0
+offset_right = 719.0
+offset_bottom = 276.0
+theme_override_font_sizes/font_size = 16
+text = "Koffee"
+label_settings = SubResource("LabelSettings_w7051")
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 397.0
+offset_top = 388.0
+offset_right = 717.0
+offset_bottom = 436.0
+text = "presents"
+label_settings = SubResource("LabelSettings_45kas")
+horizontal_alignment = 1
+
+[node name="LogoCks" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(301, 160)
+scale = Vector2(0.0387931, 0.0387931)
+texture = ExtResource("2_oa666")
+
+[node name="JinglePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_t5mqv")
+volume_db = 6.023

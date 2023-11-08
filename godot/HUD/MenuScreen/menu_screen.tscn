@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://do2sjedtusevy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ukjw4"]
+font_size = 50
+
+[node name="MenuScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.305882, 0.360784, 1)
+
+[node name="LabelTitle" type="Label" parent="."]
+layout_mode = 0
+offset_left = 147.0
+offset_top = 78.0
+offset_right = 481.0
+offset_bottom = 150.0
+text = "BOARD ALE"
+label_settings = SubResource("LabelSettings_ukjw4")
+
+[node name="ButtonPlay" type="Button" parent="."]
+layout_mode = 0
+offset_left = 825.0
+offset_top = 259.0
+offset_right = 1073.0
+offset_bottom = 342.0
+text = "Play"
+
+[node name="ButtonInfos" type="Button" parent="."]
+layout_mode = 0
+offset_left = 826.0
+offset_top = 361.0
+offset_right = 1074.0
+offset_bottom = 444.0
+text = "Infos"
+
+[node name="ButtonCredits" type="Button" parent="."]
+layout_mode = 0
+offset_left = 827.0
+offset_top = 463.0
+offset_right = 1075.0
+offset_bottom = 546.0
+text = "Credits"
