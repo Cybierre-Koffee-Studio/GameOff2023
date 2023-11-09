@@ -3,11 +3,6 @@ class_name Tile
 
 signal select_tile
 
-@onready var sfo:StandardMaterial3D
-var COLOR_BASE = Color("0062c0")
-var COLOR_BLUR = Color(COLOR_BASE, 0)
-var COLOR_FOCUS = Color(COLOR_BASE, 0.3)
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
     pass # Replace with function body.

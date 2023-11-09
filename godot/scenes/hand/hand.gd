@@ -1,6 +1,8 @@
 extends Node3D
 class_name Hand
 
+signal tile_selected
+
 const tile_template_center = preload("res://scenes/tiles/tile_center.tscn")
 const tile_template_corner = preload("res://scenes/tiles/tile_corner.tscn")
 const tile_template_corridor = preload("res://scenes/tiles/tile_corridor.tscn")
@@ -38,6 +40,7 @@ func deal_hand(nb_tiles):
         i += 1
 
 func on_select_tile(tile):
+    tile_selected.emit(tile)
     var tween = create_tween()
     if GlobalVars.selected_tile != null:
         tween.parallel().tween_property(GlobalVars.selected_tile, "scale", Vector3(1, 1, 1), 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)

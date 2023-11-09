@@ -3,7 +3,6 @@ extends Node3D
 signal tile_placed
 
 var tileSlotScene = load("res://scenes/board/tile_slot.tscn")
-var sceneTuile = load("res://scenes/board/tuile.tscn")
 var GRID_SIZE = 12
 
 # Called when the node enters the scene tree for the first time.
@@ -21,6 +20,8 @@ func _process(delta):
     pass
 
 func on_add_tile(src):
+    remove_child(GlobalVars.selected_tile_copy)
+    GlobalVars.selected_tile_copy = null
     var tuile = GlobalVars.selected_tile
     emit_signal("tile_placed", tuile)
     tuile.position = src.position
@@ -34,3 +35,11 @@ func on_add_tile(src):
 func tip(angle):
     var tween = create_tween()
     tween.tween_property(self, "rotation_degrees:z", rotation_degrees.z - angle, 0.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT).set_delay(0.6)
+    
+func on_tile_selected(tile):
+    GlobalVars.selected_tile_copy = tile.duplicate()
+    GlobalVars.selected_tile_copy.scale = Vector3(1,1,1)
+    #var material : StandardMaterial3D = GlobalVars.selected_tile_copy.get_surface_material_override(0)
+    #material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+    #material.albedo_color = Color(Color.WHITE, 0.8)
+    add_child(GlobalVars.selected_tile_copy)
