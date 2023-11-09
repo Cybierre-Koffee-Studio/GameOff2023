@@ -31,7 +31,7 @@ func deal_hand(nb_tiles):
         var marker = tile_markers[t]
         var tile = possible_tiles.pick_random().instantiate()
         tile.connect("select_tile", on_select_tile)
-        tile.position = Vector3(marker.position.x - 1, marker.position.y, marker.position.z - 1)
+        tile.position = Vector3(marker.position.x, marker.position.y, marker.position.z)
         tile.position.z += 30
         tile.scale = Vector3(2,2,2)
         current_hand.append(tile)

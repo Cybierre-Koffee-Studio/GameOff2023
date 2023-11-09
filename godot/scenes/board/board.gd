@@ -9,20 +9,23 @@ var GRID_SIZE = 12
 func _ready():
     for i in GRID_SIZE*GRID_SIZE:
         var tileSlot: Node3D = tileSlotScene.instantiate()
-        tileSlot.position.x = i/GRID_SIZE - 6
-        tileSlot.position.z = i%GRID_SIZE - 6
+        tileSlot.position.x = i/GRID_SIZE - 5.5
+        tileSlot.position.z = i%GRID_SIZE - 5.5
         tileSlot.position.y = 0.5
         tileSlot.connect("add_tile", on_add_tile)
         add_child(tileSlot)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+    if Input.is_action_just_pressed("rotate_tile"):
+        var tween = create_tween()
+        tween.tween_property(GlobalVars.selected_tile_copy, "rotation:y", GlobalVars.selected_tile_copy.rotation.y + deg_to_rad(90.0), 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
     pass
 
 func on_add_tile(src):
+    var tuile = GlobalVars.selected_tile_copy
     remove_child(GlobalVars.selected_tile_copy)
     GlobalVars.selected_tile_copy = null
-    var tuile = GlobalVars.selected_tile
     emit_signal("tile_placed", tuile)
     tuile.position = src.position
     tuile.position.y = 50
