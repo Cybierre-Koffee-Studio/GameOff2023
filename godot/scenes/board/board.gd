@@ -39,7 +39,4 @@ func tip(angle):
 func on_tile_selected(tile):
     GlobalVars.selected_tile_copy = tile.duplicate()
     GlobalVars.selected_tile_copy.scale = Vector3(1,1,1)
-    #var material : StandardMaterial3D = GlobalVars.selected_tile_copy.get_surface_material_override(0)
-    #material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-    #material.albedo_color = Color(Color.WHITE, 0.8)
     add_child(GlobalVars.selected_tile_copy)

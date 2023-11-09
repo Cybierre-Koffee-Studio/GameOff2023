@@ -43,7 +43,7 @@ func on_select_tile(tile):
     tile_selected.emit(tile)
     var tween = create_tween()
     if GlobalVars.selected_tile != null:
-        tween.parallel().tween_property(GlobalVars.selected_tile, "scale", Vector3(1, 1, 1), 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+        tween.parallel().tween_property(GlobalVars.selected_tile, "scale", Vector3(2, 2, 2), 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
         tween.parallel().tween_property(GlobalVars.selected_tile, "position:z", GlobalVars.selected_tile.position.z + selected_tile_position_shift, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
     GlobalVars.selected_tile = tile
     tween.parallel().tween_property(GlobalVars.selected_tile, "scale", Vector3(selected_tile_scale, selected_tile_scale, selected_tile_scale), 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
