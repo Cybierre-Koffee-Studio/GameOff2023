@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdkn1t5iiqvyd"]
+
+[ext_resource type="PackedScene" uid="uid://dsmwn1i50mord" path="res://models/tokens/key_token.glb" id="1_hd7gc"]
+
+[node name="key_marker" type="Node3D"]
+
+[node name="key_token" parent="." instance=ExtResource("1_hd7gc")]
+transform = Transform3D(0.173648, 0, -0.984808, 0, 1, 0, 0.984808, 0, 0.173648, 0, 0, 0)

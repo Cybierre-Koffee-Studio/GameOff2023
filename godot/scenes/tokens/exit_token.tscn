@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://x7jnkpt0v6eg"]
+
+[ext_resource type="PackedScene" uid="uid://c40q6ku0siwh8" path="res://models/tokens/exit_token.glb" id="1_50uxw"]
+
+[node name="exit_marker" type="Node3D"]
+
+[node name="exit_token" parent="." instance=ExtResource("1_50uxw")]
+transform = Transform3D(0.173648, 0, -0.984808, 0, 1, 0, 0.984808, 0, 0.173648, 0, 0, 0)
