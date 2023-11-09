@@ -2,8 +2,8 @@ extends Node3D
 
 signal tile_placed
 
-var tileSlotScene = load("res://scenes/plateau/tile_slot.tscn")
-var sceneTuile = load("res://scenes/plateau/tuile.tscn")
+var tileSlotScene = load("res://scenes/board/tile_slot.tscn")
+var sceneTuile = load("res://scenes/board/tuile.tscn")
 var GRID_SIZE = 12
 
 # Called when the node enters the scene tree for the first time.

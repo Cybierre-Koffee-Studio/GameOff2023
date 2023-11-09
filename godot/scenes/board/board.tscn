@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dcwawxg5537wa"]
 
-[ext_resource type="Script" path="res://scenes/plateau/plateau.gd" id="1_f07ly"]
+[ext_resource type="Script" path="res://scenes/board/board.gd" id="1_066hh"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_i4pbh"]
 
@@ -8,7 +8,7 @@
 albedo_color = Color(0.352941, 0.352941, 0.352941, 1)
 
 [node name="Plateau" type="Node3D"]
-script = ExtResource("1_f07ly")
+script = ExtResource("1_066hh")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(12, 0, 0, 0, 0.5, 0, 0, 0, 12, 0, 0.25, 0)

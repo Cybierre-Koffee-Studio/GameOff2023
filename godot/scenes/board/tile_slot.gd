@@ -21,13 +21,11 @@ func _process(delta):
 
 
 func _on_area_3d_mouse_entered():
-    print("mouse_entered")
     var tween: Tween = create_tween()
     tween.tween_property(sfo, "albedo_color", COLOR_FOCUS, 0.1).set_ease(Tween.EASE_OUT)
 
 
 func _on_area_3d_mouse_exited():
-    print("mouse_exited")
     var tween: Tween = create_tween()
     tween.tween_property(sfo, "albedo_color", COLOR_BLUR, 0.1).set_ease(Tween.EASE_OUT)
 
