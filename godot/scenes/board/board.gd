@@ -4,6 +4,7 @@ signal tile_placed
 
 var tileSlotScene = load("res://scenes/board/tile_slot.tscn")
 var GRID_SIZE = 12
+var currentTileRotation = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,9 +19,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
     if Input.is_action_just_pressed("rotate_tile"):
+        currentTileRotation -= deg_to_rad(90.0)
         var tween = create_tween()
-        tween.tween_property(GlobalVars.selected_tile_copy, "rotation:y", GlobalVars.selected_tile_copy.rotation.y + deg_to_rad(90.0), 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
-    pass
+        tween.tween_property(GlobalVars.selected_tile_copy, "rotation:y", currentTileRotation, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
 
 func on_add_tile(src):
     var tuile = GlobalVars.selected_tile_copy
@@ -40,6 +41,7 @@ func tip(angle):
     tween.tween_property(self, "rotation_degrees:z", rotation_degrees.z - angle, 0.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT).set_delay(0.6)
     
 func on_tile_selected(tile):
+    currentTileRotation = 0
     GlobalVars.selected_tile_copy = tile.duplicate()
     GlobalVars.selected_tile_copy.scale = Vector3(1,1,1)
     add_child(GlobalVars.selected_tile_copy)
