@@ -34,7 +34,7 @@ func on_add_tile(src):
     var tween = create_tween()
     tween.tween_property(tuile, "position:y", 0.5, 0.8).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
     tween.tween_callback(src.queue_free)
-    tip((tuile.position.x+0.5)*0.8)
+    tip(tuile.position.x*0.8)
 
 func tip(angle):
     var tween = create_tween()
@@ -42,6 +42,9 @@ func tip(angle):
     
 func on_tile_selected(tile):
     currentTileRotation = 0
+    if GlobalVars.selected_tile_copy != null:
+        remove_child(GlobalVars.selected_tile_copy)
     GlobalVars.selected_tile_copy = tile.duplicate()
     GlobalVars.selected_tile_copy.scale = Vector3(1,1,1)
+    GlobalVars.selected_tile_copy.visible = false
     add_child(GlobalVars.selected_tile_copy)

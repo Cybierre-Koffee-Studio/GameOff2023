@@ -22,6 +22,7 @@ func _process(delta):
 func _on_area_3d_mouse_entered():
     print("mouse_entered", GlobalVars.selected_tile_copy)
     if GlobalVars.selected_tile_copy != null:
+        GlobalVars.selected_tile_copy.visible = true
         GlobalVars.selected_tile_copy.position = self.position
 
 func _on_area_3d_input_event(camera, event, position, normal, shape_idx):
