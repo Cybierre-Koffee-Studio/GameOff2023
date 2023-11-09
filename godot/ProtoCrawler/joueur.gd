@@ -7,6 +7,7 @@ const JUMP_VELOCITY = 4.5
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var is_moving = false
+var cam_is_rotating = false
 
 func _physics_process(delta):
     # Add the gravity.
@@ -17,11 +18,13 @@ func _physics_process(delta):
     if Input.is_action_just_pressed("ui_accept") and is_on_floor():
         velocity.y = JUMP_VELOCITY
 
-    if Input.is_action_just_pressed("rotaCamDroite") :
+    if Input.is_action_just_pressed("rotaCamDroite") and !cam_is_rotating:
+        cam_is_rotating = true
         turn_cam(Vector3(0, -90, 0))
 #        rotation_degrees = rotation_degrees + Vector3(0, -90, 0)
         
-    if Input.is_action_just_pressed("rotaCamGauche") :
+    if Input.is_action_just_pressed("rotaCamGauche") and !cam_is_rotating:
+        cam_is_rotating = true
         turn_cam(Vector3(0, 90, 0))
 #        rotation_degrees = rotation_degrees + Vector3(0, 90, 0)
     # Get the input direction and handle the movement/deceleration.
@@ -63,4 +66,6 @@ func turn_cam(deg):
     var tween = get_tree().create_tween()
     var target_deg = rotation_degrees + deg
     tween.tween_property($".", "rotation_degrees", target_deg, 0.25)
+    await get_tree().create_timer(0.25).timeout
+    cam_is_rotating = false
     
