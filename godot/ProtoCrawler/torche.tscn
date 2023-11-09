@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5o47hkwlbute"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i22nl"]
+albedo_color = Color(0.615686, 0.141176, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wx602"]
+material = SubResource("StandardMaterial3D_i22nl")
+size = Vector3(0.05, 0.1, 0.05)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_helkd"]
+points = PackedVector3Array(0.025, 0.0477152, 0.025, -0.025, -0.0492544, -0.025, -0.0242063, -0.0477152, 0.025, -0.025, 0.0492544, -0.025, 0.025, -0.0477152, -0.0242063, 0.025, -0.0477152, 0.025, -0.0242063, 0.0477152, 0.025, 0.025, 0.0477152, -0.0242063)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kuuga"]
+albedo_color = Color(1, 0.788235, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xus04"]
+material = SubResource("StandardMaterial3D_kuuga")
+radius = 0.03
+height = 0.1
+
+[node name="torche" type="StaticBody3D"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0925018, 0)
+light_color = Color(1, 0.65098, 0, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_wx602")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_helkd")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0817123, 0)
+mesh = SubResource("SphereMesh_xus04")
