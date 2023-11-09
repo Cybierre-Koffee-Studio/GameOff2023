@@ -19,20 +19,10 @@ func _ready():
 func _process(delta):
     pass
 
-
 func _on_area_3d_mouse_entered():
     print("mouse_entered", GlobalVars.selected_tile_copy)
     if GlobalVars.selected_tile_copy != null:
         GlobalVars.selected_tile_copy.position = self.position
-    #var tween: Tween = create_tween()
-    #tween.tween_property(material, "albedo_color", COLOR_FOCUS, 0.1).set_ease(Tween.EASE_OUT)
-
-
-func _on_area_3d_mouse_exited():
-    #var tween: Tween = create_tween()
-    #tween.tween_property(material, "albedo_color", COLOR_BLUR, 0.1).set_ease(Tween.EASE_OUT)
-    pass
-
 
 func _on_area_3d_input_event(camera, event, position, normal, shape_idx):
     if event is InputEventMouseButton:
