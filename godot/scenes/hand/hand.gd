@@ -11,7 +11,7 @@ var current_hand : Array[Tile]  = []
 
 @onready var tile_markers : Array[Node3D] = [$Tile1, $Tile2, $Tile3, $Tile4, $Tile5]
 
-const selected_tile_scale = 1.3
+const selected_tile_scale = 2.6
 const selected_tile_position_shift = 0.6
 
 # Called when the node enters the scene tree for the first time.
@@ -26,10 +26,12 @@ func deal_hand(nb_tiles):
     var tween = create_tween()
     var i = 0
     for t in range(nb_tiles):
+        var marker = tile_markers[t]
         var tile = possible_tiles.pick_random().instantiate()
         tile.connect("select_tile", on_select_tile)
-        tile.position = tile_markers[t].position
+        tile.position = Vector3(marker.position.x - 1, marker.position.y, marker.position.z - 1)
         tile.position.z += 30
+        tile.scale = Vector3(2,2,2)
         current_hand.append(tile)
         add_child(tile)
         tween.parallel().tween_property(tile, "position:z", tile.position.z - 30, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT).set_delay(i * 0.15)

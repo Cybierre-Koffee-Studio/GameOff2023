@@ -2,19 +2,19 @@ extends Node3D
 
 signal tile_placed
 
-var sceneEmplacementTuile = load("res://scenes/plateau/emplacement_tuile.tscn")
+var tileSlotScene = load("res://scenes/plateau/tile_slot.tscn")
 var sceneTuile = load("res://scenes/plateau/tuile.tscn")
 var GRID_SIZE = 12
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
     for i in GRID_SIZE*GRID_SIZE:
-        var emplacementTuile: Node3D = sceneEmplacementTuile.instantiate()
-        emplacementTuile.position.x = i/GRID_SIZE - 6
-        emplacementTuile.position.z = i%GRID_SIZE - 6
-        emplacementTuile.position.y = 0.5
-        emplacementTuile.connect("add_tile", on_add_tile)
-        add_child(emplacementTuile)
+        var tileSlot: Node3D = tileSlotScene.instantiate()
+        tileSlot.position.x = i/GRID_SIZE - 6
+        tileSlot.position.z = i%GRID_SIZE - 6
+        tileSlot.position.y = 0.5
+        tileSlot.connect("add_tile", on_add_tile)
+        add_child(tileSlot)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

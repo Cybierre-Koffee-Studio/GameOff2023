@@ -1,15 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://kfa4865hkf1p"]
+[gd_scene load_steps=4 format=3 uid="uid://dtbaspjkepue5"]
 
-[ext_resource type="PackedScene" uid="uid://8pomoi4omin2" path="res://models/tiles/corner/tile_corner.glb" id="1_lvpyk"]
-[ext_resource type="Script" path="res://scenes/tiles/tiles.gd" id="2_x8n0p"]
+[ext_resource type="PackedScene" uid="uid://hx7w45hicq7f" path="res://models/tiles/center/tile_center.glb" id="1_kgduy"]
+[ext_resource type="Script" path="res://scenes/tiles/tiles.gd" id="2_7vw8e"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_2pf84"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_o0mh7"]
 size = Vector3(1, 0.1, 1)
 
-[node name="tile_corner" instance=ExtResource("1_lvpyk")]
-script = ExtResource("2_x8n0p")
+[node name="tile_center" instance=ExtResource("1_kgduy")]
+script = ExtResource("2_7vw8e")
 
-[node name="corner" parent="." index="0"]
+[node name="center" parent="." index="0"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0, 0.5)
 
 [node name="Area3D" type="Area3D" parent="." index="1"]
@@ -17,7 +17,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
-shape = SubResource("BoxShape3D_2pf84")
+shape = SubResource("BoxShape3D_o0mh7")
 
 [connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
 [connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
