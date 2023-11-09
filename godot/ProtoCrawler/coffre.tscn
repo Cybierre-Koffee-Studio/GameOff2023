@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://by32aipxjix1q"]
+
+[ext_resource type="Script" path="res://ProtoCrawler/coffre.gd" id="1_d1nub"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2lo42"]
+size = Vector3(0.4, 0.2, 0.3)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vm1gh"]
+top_radius = 0.15
+bottom_radius = 0.15
+height = 0.4
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ig2bu"]
+points = PackedVector3Array(0.145081, 0.1945, -0.0372624, -0.146626, -0.194443, -0.0311706, -0.139431, -0.192933, -0.0550419, 0.14546, -0.195005, 0.0357697, -0.0555779, 0.194839, 0.139242, -0.0311706, 0.194443, -0.146626, 0.0660588, -0.194494, -0.134498, -0.0372624, -0.1945, 0.145081, -0.147008, 0.194952, 0.0296629, 0.0897758, 0.193245, 0.119966, -0.115469, -0.193176, 0.0957851, -0.0550322, -0.192898, -0.139435, -0.114652, 0.1918, -0.0966845, 0.0593942, -0.192631, 0.137655, 0.0779085, 0.193787, -0.127952, 0.133587, -0.195476, -0.0679838, 0.14546, 0.195005, 0.0357697, 0.0357697, 0.195005, 0.14546, 0.119966, -0.193245, 0.0897758, -0.115469, 0.193176, 0.0957851, -0.146626, 0.194443, -0.0311706, 0.0296629, -0.194952, -0.147008, -0.147008, -0.194952, 0.0296629, 0.119216, 0.192046, -0.090801, -0.0966845, -0.1918, -0.114652, 0.0296629, 0.194952, -0.147008, -0.0790643, 0.192724, -0.127255, 0.131797, 0.192873, 0.0715337, 0.0957851, -0.193176, -0.115469, -0.090801, -0.192046, 0.119216, 0.145081, -0.1945, -0.0372624, 0.0357697, -0.195005, 0.14546)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bthk8"]
+size = Vector3(0.423539, 0.358283, 0.338207)
+
+[node name="coffre" type="StaticBody3D"]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+script = ExtResource("1_d1nub")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0751488, 0)
+mesh = SubResource("BoxMesh_2lo42")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0.171322, 0)
+mesh = SubResource("CylinderMesh_vm1gh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0.171322, 0)
+shape = SubResource("ConvexPolygonShape3D_ig2bu")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.150525, 0)
+shape = SubResource("BoxShape3D_bthk8")
+
+[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]
