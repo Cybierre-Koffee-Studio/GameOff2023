@@ -1,11 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://by32aipxjix1q"]
+[gd_scene load_steps=8 format=3 uid="uid://by32aipxjix1q"]
 
 [ext_resource type="Script" path="res://ProtoCrawler/coffre.gd" id="1_d1nub"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqwy8"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_2lo42"]
+material = SubResource("StandardMaterial3D_eqwy8")
 size = Vector3(0.4, 0.2, 0.3)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lk85u"]
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_vm1gh"]
+material = SubResource("StandardMaterial3D_lk85u")
 top_radius = 0.15
 bottom_radius = 0.15
 height = 0.4
