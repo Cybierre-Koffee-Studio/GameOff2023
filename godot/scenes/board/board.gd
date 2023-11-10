@@ -6,7 +6,6 @@ var tileSlotScene = preload("res://scenes/board/tile_slot.tscn")
 var keyTokenScene = preload("res://scenes/tokens/key_token.tscn")
 var exitTokenScene = preload("res://scenes/tokens/exit_token.tscn")
 var GRID_SIZE = 11
-var currentTileRotation = 0
 
 const tile_template_center = preload("res://scenes/tiles/tile_center.tscn")
 const tile_template_corner = preload("res://scenes/tiles/tile_corner.tscn")
@@ -43,11 +42,12 @@ func _ready():
     startTile.position = Vector3(0, 0.5, 0)
     add_child(startTile)
 
-#func _process(delta):
-#    if Input.is_action_just_pressed("rotate_tile"):
-#        currentTileRotation -= deg_to_rad(90.0)
-#        var tween = create_tween()
-#        tween.tween_property(GlobalVars.selected_tile_copy, "rotation:y", currentTileRotation, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
+func _process(_delta):
+    pass
+
+func _unhandled_input(_event):
+    if Input.is_action_just_pressed("rotate_tile") && GlobalVars.selected_tile && GlobalVars.selected_tile_copy != null && GlobalVars.selected_tile.can_rotate && GlobalVars.selected_tile_copy.can_rotate:
+        rotate_tile()
 
 func on_add_tile(src):
     var tuile = GlobalVars.selected_tile_copy
@@ -67,10 +67,22 @@ func tip(angle):
     tween.tween_property(self, "rotation_degrees:z", rotation_degrees.z - angle, 0.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT).set_delay(0.6)
     
 func on_tile_selected(tile):
-    currentTileRotation = 0
+    GlobalVars.selected_tile_rotation = tile.rotation.y
     if GlobalVars.selected_tile_copy != null:
         remove_child(GlobalVars.selected_tile_copy)
     GlobalVars.selected_tile_copy = tile.duplicate()
+    GlobalVars.selected_tile_copy.rotation = GlobalVars.selected_tile.rotation
     GlobalVars.selected_tile_copy.scale = Vector3(1,1,1)
     GlobalVars.selected_tile_copy.visible = false
     add_child(GlobalVars.selected_tile_copy)
+    
+func rotate_tile():
+    GlobalVars.selected_tile_copy.can_rotate = false
+    GlobalVars.selected_tile.can_rotate = false
+    GlobalVars.selected_tile_rotation += deg_to_rad(90.0)
+    var tween_selected_tile = create_tween()
+    tween_selected_tile.tween_property(GlobalVars.selected_tile, "rotation:y", GlobalVars.selected_tile_rotation, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
+    var tween_selected_tile_copy = create_tween()
+    tween_selected_tile_copy.tween_property(GlobalVars.selected_tile_copy, "rotation:y", GlobalVars.selected_tile_rotation, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
+    GlobalVars.selected_tile_copy.can_rotate = true
+    GlobalVars.selected_tile.can_rotate = true
