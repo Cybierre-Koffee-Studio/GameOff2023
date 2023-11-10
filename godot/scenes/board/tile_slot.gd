@@ -11,7 +11,7 @@ var COLOR_FOCUS = Color(COLOR_BASE, 0.3)
 func _ready():
     
     material = StandardMaterial3D.new()
-    material.albedo_color = COLOR_FOCUS
+    material.albedo_color = COLOR_BLUR
     material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
     $Mesh.set_surface_override_material(0,material)
 
