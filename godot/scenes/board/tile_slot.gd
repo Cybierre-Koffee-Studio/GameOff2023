@@ -17,7 +17,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
     pass
 
 func _on_area_3d_mouse_entered():
@@ -26,7 +26,7 @@ func _on_area_3d_mouse_entered():
         GlobalVars.selected_tile_copy.visible = true
         GlobalVars.selected_tile_copy.position = self.position
 
-func _on_area_3d_input_event(camera, event, position, normal, shape_idx):
+func _on_area_3d_input_event(_camera, event, _position, _normal, _shape_idx):
     if event is InputEventMouseButton:
         if event.button_index == MOUSE_BUTTON_LEFT and event.pressed == true:
             if GlobalVars.selected_tile != null:

@@ -27,5 +27,5 @@ light_color = Color(0.72549, 0.858824, 0.886275, 1)
 
 [node name="Plateau" parent="." instance=ExtResource("2_8jvwn")]
 
-[node name="hand" parent="." instance=ExtResource("2_cdqrf")]
+[node name="Hand" parent="." instance=ExtResource("2_cdqrf")]
 transform = Transform3D(0.8, 0, 0, 0, 0.69282, -0.4, 0, 0.4, 0.69282, 0, 0, 11)

@@ -23,7 +23,7 @@ func _ready():
     deal_hand(GlobalVars.hand_size)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
     pass
 
 func deal_hand(nb_tiles):
