@@ -11,6 +11,8 @@ const tile_template_straight = preload("res://scenes/tiles/tile_straight.tscn")
 const possible_tiles : Array[PackedScene] = [tile_template_center, tile_template_corner, tile_template_corridor, tile_template_straight]
 var current_hand : Array[Tile]  = []
 
+const rotations = [0, 90, 180, 270]
+
 @onready var tile_markers : Array[Node3D] = [$Tile1, $Tile2, $Tile3, $Tile4, $Tile5]
 
 const selected_tile_scale = 2.6
@@ -33,6 +35,7 @@ func deal_hand(nb_tiles):
         tile.connect("select_tile", on_select_tile)
         tile.position = Vector3(marker.position.x, marker.position.y, marker.position.z)
         tile.position.z += 30
+        tile.rotation.y = deg_to_rad(rotations.pick_random())
         tile.scale = Vector3(2,2,2)
         current_hand.append(tile)
         add_child(tile)

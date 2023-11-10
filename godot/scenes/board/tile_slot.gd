@@ -9,8 +9,9 @@ var COLOR_FOCUS = Color(COLOR_BASE, 0.3)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    
     material = StandardMaterial3D.new()
-    material.albedo_color = COLOR_BLUR
+    material.albedo_color = COLOR_FOCUS
     material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
     $Mesh.set_surface_override_material(0,material)
 
