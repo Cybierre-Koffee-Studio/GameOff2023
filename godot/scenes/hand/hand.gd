@@ -43,21 +43,25 @@ func deal_hand(nb_tiles):
         i += 1
 
 func on_select_tile(tile):
-    tile_selected.emit(tile)
-    var tween = create_tween()
-    if GlobalVars.selected_tile != null:
+    if GlobalVars.selected_tile != null && tile.can_move:
+        var tween = create_tween()
         tween.parallel().tween_property(GlobalVars.selected_tile, "scale", Vector3(2, 2, 2), 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
         tween.parallel().tween_property(GlobalVars.selected_tile, "position:z", GlobalVars.selected_tile.position.z + selected_tile_position_shift, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+        GlobalVars.selected_tile.can_move = true
     GlobalVars.selected_tile = tile
-    tween.parallel().tween_property(GlobalVars.selected_tile, "scale", Vector3(selected_tile_scale, selected_tile_scale, selected_tile_scale), 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-    tween.parallel().tween_property(GlobalVars.selected_tile, "position:z", GlobalVars.selected_tile.position.z - selected_tile_position_shift, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+    if tile.can_move :
+        var tween = create_tween()
+        tween.parallel().tween_property(GlobalVars.selected_tile, "scale", Vector3(selected_tile_scale, selected_tile_scale, selected_tile_scale), 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+        tween.parallel().tween_property(GlobalVars.selected_tile, "position:z", GlobalVars.selected_tile.position.z - selected_tile_position_shift, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+        tile.can_move = false
+    tile_selected.emit(tile)
 
 func on_tile_placed(tile):
     GlobalVars.selected_tile.scale = Vector3(1, 1, 1)
     GlobalVars.selected_tile.position.z += selected_tile_position_shift
     GlobalVars.selected_tile = null
+    tile.can_rotate = false
     current_hand.erase(tile)
-    remove_child(tile)
     GlobalVars.selected_tile = null
     for t in current_hand :
         t.queue_free()
