@@ -25,3 +25,4 @@ shape = SubResource("BoxShape3D_0kx5w")
 
 [connection signal="input_event" from="Mesh/Area3D" to="." method="_on_area_3d_input_event"]
 [connection signal="mouse_entered" from="Mesh/Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Mesh/Area3D" to="." method="_on_area_3d_mouse_exited"]
