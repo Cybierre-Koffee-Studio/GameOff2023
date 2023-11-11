@@ -2,10 +2,13 @@ extends Node3D
 
 signal tile_placed
 
-var tileSlotScene = preload("res://scenes/board/tile_slot.tscn")
-var keyTokenScene = preload("res://scenes/tokens/key_token.tscn")
-var exitTokenScene = preload("res://scenes/tokens/exit_token.tscn")
-var GRID_SIZE = 11
+const GRID_SIZE = 11
+# taille de la zone périphérique où les tuiles clé et sortie pourront être placées
+const PERIPHERAL_ZONE_WIDTH = max(floor(GRID_SIZE / 4), 1)
+
+const tileSlotScene = preload("res://scenes/board/tile_slot.tscn")
+const keyTokenScene = preload("res://scenes/tokens/key_token.tscn")
+const exitTokenScene = preload("res://scenes/tokens/exit_token.tscn")
 
 const tile_template_center = preload("res://scenes/tiles/tile_center.tscn")
 const tile_template_corner = preload("res://scenes/tiles/tile_corner.tscn")
@@ -23,27 +26,63 @@ func _ready():
         tileSlot.position.y = 0.5
         tileSlot.connect("add_tile", on_add_tile)
         add_child(tileSlot)
-    # placement de la tuile clé
-    var keyTile = possible_tiles.pick_random().instantiate()
-    keyTile.position = Vector3(randi_range(-GRID_SIZE/2, GRID_SIZE/2-1), 0.5, randi_range(-GRID_SIZE/2, GRID_SIZE/2-1))
-    add_child(keyTile)
-    var keyToken = keyTokenScene.instantiate()
-    keyToken.position = Vector3(keyTile.position.x, keyTile.position.y + 0.1, keyTile.position.z)
-    add_child(keyToken)
-    # placement de la tuile sortie
-    var exitTile = possible_tiles.pick_random().instantiate()
-    exitTile.position = Vector3(randi_range(-GRID_SIZE/2, GRID_SIZE/2-1), 0.5, randi_range(-GRID_SIZE/2, GRID_SIZE/2-1))
-    add_child(exitTile)
-    var exitToken = exitTokenScene.instantiate()
-    exitToken.position = Vector3(exitTile.position.x, exitTile.position.y + 0.1, exitTile.position.z)
-    add_child(exitToken)
+        
     # placement de la tuile de départ
     var startTile = tile_template_center.instantiate()
     startTile.position = Vector3(0, 0.5, 0)
     add_child(startTile)
+    
+    # on détermine les limites des zones périphériques du plateau
+    # pour chaque zone le tableau contient dans l'ordre :
+    #   la limite en haut à gauche de la zone
+    #   la limite en bas à droite de la zone
+    const zones = [
+        # 0 : zone du haut
+        [Vector2(0, 0), Vector2(GRID_SIZE-1, PERIPHERAL_ZONE_WIDTH-1)],
+        # 1 : à droite
+        [Vector2(GRID_SIZE-PERIPHERAL_ZONE_WIDTH, 0), Vector2(GRID_SIZE-1, GRID_SIZE-1)],
+        # 2 : en bas
+        [Vector2(0, GRID_SIZE-PERIPHERAL_ZONE_WIDTH), Vector2(GRID_SIZE-1, GRID_SIZE-1)],
+        # 4 : à gauche
+        [Vector2(0, 0), Vector2(PERIPHERAL_ZONE_WIDTH-1, GRID_SIZE-1)]
+    ]
+    print(zones)
 
-func _process(_delta):
-    pass
+    # on positionne les tuiles clé et sortie
+    # en résumé :
+    #   si randomPosition=0 : clé en haut, sortie en bas
+    #   si randomPosition=1 : clé à droite, sortie à gauche
+    #   si randomPosition=2 : clé en bas, sortie en haut
+    #   si randomPosition=3 : clé à gauche, sortie à droite
+    var randomPosition = randi_range(0, 3)
+    var keyTileZone = randomPosition
+    var exitTileZone = (randomPosition + 2) % 4
+    
+    # placement de la tuile clé
+    var keyTile = possible_tiles.pick_random().instantiate()
+    keyTile.position = Vector3(
+        randi_range(zones[keyTileZone][0].x - GRID_SIZE/2, zones[keyTileZone][1].x - GRID_SIZE/2),
+        0.5,
+        randi_range(zones[keyTileZone][0].y - GRID_SIZE/2, zones[keyTileZone][1].y - GRID_SIZE/2)
+    )
+    add_child(keyTile)
+    # avec le marqueur de clé dessus
+    var keyToken = keyTokenScene.instantiate()
+    keyToken.position = Vector3(keyTile.position.x, keyTile.position.y + 0.1, keyTile.position.z)
+    add_child(keyToken)
+    
+    # placement de la tuile sortie
+    var exitTile = possible_tiles.pick_random().instantiate()
+    exitTile.position = Vector3(
+        randi_range(zones[exitTileZone][0].x - GRID_SIZE/2, zones[exitTileZone][1].x - GRID_SIZE/2),
+        0.5,
+        randi_range(zones[exitTileZone][0].y - GRID_SIZE/2, zones[exitTileZone][1].y - GRID_SIZE/2)
+    )
+    add_child(exitTile)
+    # avec le marqueur de sortie dessus
+    var exitToken = exitTokenScene.instantiate()
+    exitToken.position = Vector3(exitTile.position.x, exitTile.position.y + 0.1, exitTile.position.z)
+    add_child(exitToken)
 
 #func _unhandled_input(_event):
 #    if Input.is_action_just_pressed("rotate_tile") && GlobalVars.selected_tile && GlobalVars.selected_tile_copy != null && GlobalVars.selected_tile.can_rotate && GlobalVars.selected_tile_copy.can_rotate:
