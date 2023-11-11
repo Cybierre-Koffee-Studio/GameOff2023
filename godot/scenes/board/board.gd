@@ -46,10 +46,8 @@ func _ready():
         # 4 : à gauche
         [Vector2(0, 0), Vector2(PERIPHERAL_ZONE_WIDTH-1, GRID_SIZE-1)]
     ]
-    print(zones)
 
-    # on positionne les tuiles clé et sortie
-    # en résumé :
+    # on positionne les tuiles clé et sortie :
     #   si randomPosition=0 : clé en haut, sortie en bas
     #   si randomPosition=1 : clé à droite, sortie à gauche
     #   si randomPosition=2 : clé en bas, sortie en haut
