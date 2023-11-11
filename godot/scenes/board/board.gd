@@ -38,16 +38,16 @@ func _ready():
     exitToken.position = Vector3(exitTile.position.x, exitTile.position.y + 0.1, exitTile.position.z)
     add_child(exitToken)
     # placement de la tuile de départ
-    var startTile = possible_tiles.pick_random().instantiate()
+    var startTile = tile_template_center.instantiate()
     startTile.position = Vector3(0, 0.5, 0)
     add_child(startTile)
 
 func _process(_delta):
     pass
 
-func _unhandled_input(_event):
-    if Input.is_action_just_pressed("rotate_tile") && GlobalVars.selected_tile && GlobalVars.selected_tile_copy != null && GlobalVars.selected_tile.can_rotate && GlobalVars.selected_tile_copy.can_rotate:
-        rotate_tile()
+#func _unhandled_input(_event):
+#    if Input.is_action_just_pressed("rotate_tile") && GlobalVars.selected_tile && GlobalVars.selected_tile_copy != null && GlobalVars.selected_tile.can_rotate && GlobalVars.selected_tile_copy.can_rotate:
+#        rotate_tile()
 
 func on_add_tile(src):
     var tuile = GlobalVars.selected_tile_copy
