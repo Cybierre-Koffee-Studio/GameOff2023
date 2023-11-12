@@ -123,8 +123,12 @@ func _ready():
     var exitToken = exitTokenScene.instantiate()
     exitToken.position = Vector3(exitTile.position.x, exitTile.position.y + 0.1, exitTile.position.z)
     add_child(exitToken)
-    
+
+# permet de mettre à jour les données des emplacements voisins dans GRID_MAP lors du placement d'une nouvelle tuile
 func map_tile(x, y, tileData):
+    # on supprime le tile_slot à l'emplacement où la tuile est posée
+    GRID_MAP[x][y][0].queue_free()
+    # on déréférence le tile_slot dans GRID_MAP
     GRID_MAP[x][y][0] = null
     if y > 0:
         # modification des infos de l'emplacement en haut de la tuile posée
@@ -157,10 +161,23 @@ func map_tile(x, y, tileData):
 #func _unhandled_input(_event):
 #    if Input.is_action_just_pressed("rotate_tile") && GlobalVars.selected_tile && GlobalVars.selected_tile_copy != null && GlobalVars.selected_tile.can_rotate && GlobalVars.selected_tile_copy.can_rotate:
 #        rotate_tile()
-        
+
+# permet de vérifier si une tuile (tile) peut être placée à un emplacement (x, y)
+# en fonction de ce qu'il y a autour dudit emplacement
 func slot_compatible(x, y, tile):
     var tile_data = tile.get_tile_data()
-    return GRID_MAP[x][y][1] | GRID_MAP[x][y][2] > 0 && !(GRID_MAP[x][y][2] & tile_data[0]) && !(GRID_MAP[x][y][1] & tile_data[1])
+    # il y a 3 règles de placement :
+    return (
+        # au moins une tuile doit être adjacente à l'emplacement
+        #   -> on regarde s'il y a au moins une ouverture ou un mur qui borde l'emplacement
+        GRID_MAP[x][y][1] | GRID_MAP[x][y][2] > 0
+        # les ouvertures de la tuile placée ne doivent pas être adjacentes à un mur
+        #   -> on vérifie qu'aucun mur adjacent à l'emplacement ne se trouve du même côté qu'une ouverture de la tuile placée
+        && !(GRID_MAP[x][y][2] & tile_data[0])
+        # les murs de la tuile placée ne doivent pas se retrouver en face d'une ouverture de tuile voisine
+        #   -> on vérifie qu'aucune ouverture adjacente à l'emplacement ne se trouve du même côté qu'un mur de la tuile placée
+        && !(GRID_MAP[x][y][1] & tile_data[1])
+    )
 
 func on_add_tile(src):
     for x in GRID_SIZE:

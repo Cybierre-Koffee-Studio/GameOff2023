@@ -60,7 +60,10 @@ func init(type : TYPE):
         TYPE.CORNER:
             base_material_copy.albedo_texture = corner_texture
     $mesh.set_surface_override_material(0, base_material_copy)
-    
+
+# renvoie les données sur les bords de la tuile sous forme d'un tableau de binaires :
+#  0 : les ouvertures (haut, droite, bas, gauche), exemple pour un couloir horizontal : 0b0101
+#  1 : les murs (haut, droite, bas, gauche), l'inverse des ouvertures en fait, exemple pour un couloir horizontal : 0b1010
 func get_tile_data():
     var rotation_degrees : int = floor(rad_to_deg(self.rotation.y))
     var opening_data = opening_data_by_type_and_rotation[instance_type][rotation_degrees%360]
