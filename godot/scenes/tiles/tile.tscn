@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dtbaspjkepue5"]
 
-[ext_resource type="Script" path="res://scenes/tiles/tiles.gd" id="2_7vw8e"]
+[ext_resource type="Script" path="res://scenes/tiles/tile.gd" id="1_6q3ss"]
 [ext_resource type="Texture2D" uid="uid://k7psx7dwefhv" path="res://models/tiles/corner/tile_corner_texture_corner.png" id="2_ehprs"]
 [ext_resource type="Texture2D" uid="uid://ccgjo2ptkk3qj" path="res://models/tiles/center/tile_center_texture_center.png" id="3_mqgc1"]
 
@@ -47,7 +47,7 @@ albedo_texture = ExtResource("3_mqgc1")
 size = Vector3(1, 0.1, 1)
 
 [node name="tile_center" type="Node3D"]
-script = ExtResource("2_7vw8e")
+script = ExtResource("1_6q3ss")
 
 [node name="mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

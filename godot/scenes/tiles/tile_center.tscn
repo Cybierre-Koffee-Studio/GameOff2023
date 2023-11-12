@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dab0prlwfuxlb"]
+[gd_scene load_steps=7 format=3 uid="uid://b35mrd5ktm5eo"]
 
+[ext_resource type="Script" path="res://scenes/tiles/tile.gd" id="1_ydw5i"]
 [ext_resource type="Texture2D" uid="uid://ccgjo2ptkk3qj" path="res://models/tiles/center/tile_center_texture_center.png" id="2_ekk0g"]
-[ext_resource type="Script" path="res://scenes/tiles/tiles.gd" id="2_k7g07"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_847dm"]
 resource_name = "Material.009"
@@ -43,7 +43,7 @@ shadow_mesh = SubResource("ArrayMesh_75le3")
 size = Vector3(1, 0.1, 1)
 
 [node name="tile_center" type="Node3D"]
-script = ExtResource("2_k7g07")
+script = ExtResource("1_ydw5i")
 
 [node name="mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

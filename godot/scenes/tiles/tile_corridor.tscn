@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://2o4pwxsbx465"]
+[gd_scene load_steps=7 format=3 uid="uid://daou3aye22vbu"]
 
-[ext_resource type="Script" path="res://scenes/tiles/tiles.gd" id="2_0oqbf"]
+[ext_resource type="Script" path="res://scenes/tiles/tile.gd" id="1_fcjuq"]
 [ext_resource type="Texture2D" uid="uid://d1agt4orktolr" path="res://models/tiles/corridor/tile_corridor_texture_corridor.png" id="2_tolde"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r5qga"]
@@ -43,7 +43,7 @@ shadow_mesh = SubResource("ArrayMesh_h1qsw")
 size = Vector3(1, 0.1, 1)
 
 [node name="tile_corridor" type="Node3D"]
-script = ExtResource("2_0oqbf")
+script = ExtResource("1_fcjuq")
 
 [node name="mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
