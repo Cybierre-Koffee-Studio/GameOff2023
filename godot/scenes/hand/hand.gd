@@ -3,12 +3,13 @@ class_name Hand
 
 signal tile_selected
 
+const tile_scene = preload("res://scenes/tiles/tile.tscn")
 const tile_template_center = preload("res://scenes/tiles/tile_center.tscn")
 const tile_template_corner = preload("res://scenes/tiles/tile_corner.tscn")
 const tile_template_corridor = preload("res://scenes/tiles/tile_corridor.tscn")
 const tile_template_straight = preload("res://scenes/tiles/tile_straight.tscn")
 
-const possible_tiles : Array[PackedScene] = [tile_template_center, tile_template_corner, tile_template_corridor, tile_template_straight]
+const possible_tiles : Array[Tile.TYPE] = [Tile.TYPE.CENTER, Tile.TYPE.CORNER, Tile.TYPE.CORRIDOR, Tile.TYPE.STRAIGHT]
 var current_hand : Array[Tile]  = []
 
 const rotations = [0, 90, 180, 270]
@@ -31,7 +32,8 @@ func deal_hand(nb_tiles):
     var i = 0
     for t in range(nb_tiles):
         var marker = tile_markers[t]
-        var tile = possible_tiles.pick_random().instantiate()
+        var tile = tile_scene.instantiate()
+        tile.init(possible_tiles.pick_random())
         tile.connect("select_tile", on_select_tile)
         tile.position = Vector3(marker.position.x, marker.position.y, marker.position.z)
         tile.position.z += 30
