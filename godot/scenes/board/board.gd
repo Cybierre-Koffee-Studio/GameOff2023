@@ -30,9 +30,12 @@ var GRID_MAP = [
     # ]
 ]
 
+var astar_grid : AStarGrid2D
+
 func _ready():
     $Mesh.scale = Vector3(GRID_SIZE, 0.5, GRID_SIZE)
     GRID_MAP.resize(GRID_SIZE)
+    init_astar_grid()
     for i in GRID_SIZE*GRID_SIZE:
         var tileSlot: Node3D = tileSlotScene.instantiate()
         var x = i/GRID_SIZE
@@ -54,14 +57,13 @@ func _ready():
             # aucun mur voisin
             0b0000
         ]
-
-    # placement de la tuile de départ
-    var startTile = tile_scene.instantiate()
-    startTile.init(Tile.TYPE.CENTER)
-    startTile.position = Vector3(0, 0.5, 0)
-    map_tile(GRID_SIZE/2, GRID_SIZE/2, [0b1111,0b0000])
-    add_child(startTile)
-
+        # Les emplacements vides sont des solides, le path finding 
+        # ne trouve pas de chemin
+        astar_grid.set_point_solid(Vector2i(x*3, y*3), true)
+        astar_grid.set_point_solid(Vector2i(x*3, y*3), true)
+        
+    place_starting_tile()
+    
     # on détermine les limites des zones périphériques du plateau
     # pour chaque zone le tableau contient dans l'ordre :
     #   la limite en haut à gauche de la zone
@@ -85,7 +87,26 @@ func _ready():
     var randomPosition = randi_range(0, 3)
     var keyTileZone = randomPosition
     var exitTileZone = (randomPosition + 2) % 4
+    place_key_tile(zones, keyTileZone)
+    place_exit_tile(zones, exitTileZone)
+    
+func init_astar_grid():
+    astar_grid = AStarGrid2D.new()
+    astar_grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
+    astar_grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
+    astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+    astar_grid.region = Rect2i(0, 0, GRID_SIZE*3, GRID_SIZE*3)
+    astar_grid.update()
 
+func place_starting_tile():
+    # placement de la tuile de départ
+    var startTile = tile_scene.instantiate()
+    startTile.init(Tile.TYPE.CENTER)
+    startTile.position = Vector3(0, 0.5, 0)
+    map_tile(GRID_SIZE/2, GRID_SIZE/2, [0b1111,0b0000])
+    add_child(startTile)
+    
+func place_key_tile(zones, keyTileZone):
     # placement de la tuile clé
     var keyTile = tile_scene.instantiate()
     var keyTileX = randi_range(zones[keyTileZone][0].x, zones[keyTileZone][1].x)
@@ -105,6 +126,7 @@ func _ready():
     keyToken.position = Vector3(keyTile.position.x, keyTile.position.y + 0.1, keyTile.position.z)
     add_child(keyToken)
 
+func place_exit_tile(zones, exitTileZone):
     # placement de la tuile sortie
     var exitTile = tile_scene.instantiate()
     var exitTileX = randi_range(zones[exitTileZone][0].x , zones[exitTileZone][1].x)
@@ -157,10 +179,6 @@ func map_tile(x, y, tileData):
         GRID_MAP[x-1][y][1] = GRID_MAP[x-1][y][1] | ((tileData[0] & 0b0001) << 2)
         # murs
         GRID_MAP[x-1][y][2] = GRID_MAP[x-1][y][2] | ((tileData[1] & 0b0001) << 2)
-
-#func _unhandled_input(_event):
-#    if Input.is_action_just_pressed("rotate_tile") && GlobalVars.selected_tile && GlobalVars.selected_tile_copy != null && GlobalVars.selected_tile.can_rotate && GlobalVars.selected_tile_copy.can_rotate:
-#        rotate_tile()
 
 # permet de vérifier si une tuile (tile) peut être placée à un emplacement (x, y)
 # en fonction de ce qu'il y a autour dudit emplacement
