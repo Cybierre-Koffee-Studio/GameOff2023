@@ -4,10 +4,6 @@ class_name Hand
 signal tile_selected
 
 const tile_scene = preload("res://scenes/tiles/tile.tscn")
-const tile_template_center = preload("res://scenes/tiles/tile_center.tscn")
-const tile_template_corner = preload("res://scenes/tiles/tile_corner.tscn")
-const tile_template_corridor = preload("res://scenes/tiles/tile_corridor.tscn")
-const tile_template_straight = preload("res://scenes/tiles/tile_straight.tscn")
 
 const possible_tiles : Array[Tile.TYPE] = [Tile.TYPE.CENTER, Tile.TYPE.CORNER, Tile.TYPE.CORRIDOR, Tile.TYPE.STRAIGHT]
 var current_hand : Array[Tile]  = []
