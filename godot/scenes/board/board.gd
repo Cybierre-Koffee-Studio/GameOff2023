@@ -54,14 +54,14 @@ func _ready():
             # aucun mur voisin
             0b0000
         ]
-        
+
     # placement de la tuile de départ
     var startTile = tile_scene.instantiate()
     startTile.init(Tile.TYPE.CENTER)
     startTile.position = Vector3(0, 0.5, 0)
     map_tile(GRID_SIZE/2, GRID_SIZE/2, [0b1111,0b0000])
     add_child(startTile)
-    
+
     # on détermine les limites des zones périphériques du plateau
     # pour chaque zone le tableau contient dans l'ordre :
     #   la limite en haut à gauche de la zone
@@ -85,7 +85,7 @@ func _ready():
     var randomPosition = randi_range(0, 3)
     var keyTileZone = randomPosition
     var exitTileZone = (randomPosition + 2) % 4
-    
+
     # placement de la tuile clé
     var keyTile = tile_scene.instantiate()
     var keyTileX = randi_range(zones[keyTileZone][0].x, zones[keyTileZone][1].x)
@@ -104,7 +104,7 @@ func _ready():
     var keyToken = keyTokenScene.instantiate()
     keyToken.position = Vector3(keyTile.position.x, keyTile.position.y + 0.1, keyTile.position.z)
     add_child(keyToken)
-    
+
     # placement de la tuile sortie
     var exitTile = tile_scene.instantiate()
     var exitTileX = randi_range(zones[exitTileZone][0].x , zones[exitTileZone][1].x)
@@ -136,21 +136,21 @@ func map_tile(x, y, tileData):
         GRID_MAP[x][y-1][1] = GRID_MAP[x][y-1][1] | ((tileData[0] & 0b1000) >> 2)
         # murs
         GRID_MAP[x][y-1][2] = GRID_MAP[x][y-1][2] | ((tileData[1] & 0b1000) >> 2)
-        
+
     if x < GRID_SIZE - 1:
         # modification des infos de l'emplacement à droite de la tuile posée
         # ouvertures
         GRID_MAP[x+1][y][1] = GRID_MAP[x+1][y][1] | ((tileData[0] & 0b0100) >> 2)
         # murs
         GRID_MAP[x+1][y][2] = GRID_MAP[x+1][y][2] | ((tileData[1] & 0b0100) >> 2)
-    
+
     if y < GRID_SIZE - 1:
         # modification des infos de l'emplacement en haut de la tuile posée
         # ouvertures
         GRID_MAP[x][y+1][1] = GRID_MAP[x][y+1][1] | ((tileData[0] & 0b0010) << 2)
         # murs
         GRID_MAP[x][y+1][2] = GRID_MAP[x][y+1][2] | ((tileData[1] & 0b0010) << 2)
-        
+
     if x > 0:
         # modification des infos de l'emplacement à gauche de la tuile posée
         # ouvertures
@@ -193,6 +193,7 @@ func on_add_tile(src):
     tile.position.y = 50
     add_child(tile)
     map_tile(tile.position.x + GRID_SIZE/2, tile.position.z + GRID_SIZE/2, tile.get_tile_data())
+    tile.get_neighbour_tile_color()
     var tween = create_tween()
     tween.tween_property(tile, "position:y", 0.5, 0.8).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
     tween.tween_callback(src.queue_free)
@@ -201,7 +202,7 @@ func on_add_tile(src):
 func tip(angle):
     var tween = create_tween()
     tween.tween_property(self, "rotation_degrees:z", rotation_degrees.z - angle, 0.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT).set_delay(0.6)
-    
+
 func on_tile_selected(tile):
     GlobalVars.selected_tile_rotation = tile.rotation.y
     if GlobalVars.selected_tile_copy != null:
@@ -219,7 +220,7 @@ func on_tile_selected(tile):
                 slot.set_unavailable()
                 if slot_compatible(x, y, GlobalVars.selected_tile_copy):
                     slot.set_available()
-    
+
 func rotate_tile():
     GlobalVars.selected_tile_copy.can_rotate = false
     GlobalVars.selected_tile.can_rotate = false

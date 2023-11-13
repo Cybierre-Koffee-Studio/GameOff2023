@@ -15,11 +15,11 @@ func _ready():
     material.albedo_color = COLOR_BLUR
     material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
     $Mesh.set_surface_override_material(0,material)
-    
+
 func set_available():
     available = true
     material.albedo_color = COLOR_FOCUS
-    
+
 func set_unavailable():
     available = false
     material.albedo_color = COLOR_BLUR

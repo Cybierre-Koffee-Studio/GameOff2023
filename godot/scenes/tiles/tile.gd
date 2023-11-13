@@ -2,6 +2,9 @@ extends Node
 class_name Tile
 
 enum TYPE {CENTER, CORRIDOR, STRAIGHT, CORNER}
+const COLORS = [Color.RED, Color.RED, Color.GREEN]
+
+var valeur_cluster_max = 1
 
 const center_texture = preload("res://models/tiles/center/tile_center_texture_center.png")
 const corridor_texture = preload("res://models/tiles/corridor/tile_corridor_texture_corridor.png")
@@ -59,6 +62,7 @@ func init(type : TYPE):
             base_material_copy.albedo_texture = straight_texture
         TYPE.CORNER:
             base_material_copy.albedo_texture = corner_texture
+    base_material_copy.albedo_color = COLORS.pick_random()
     $mesh.set_surface_override_material(0, base_material_copy)
 
 # renvoie les données sur les bords de la tuile sous forme d'un tableau de binaires :
@@ -68,7 +72,7 @@ func get_tile_data():
     var rotation_degrees : int = floor(rad_to_deg(self.rotation.y))
     var opening_data = opening_data_by_type_and_rotation[instance_type][rotation_degrees%360]
     return [opening_data, opening_data^0b1111]
-            
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
     pass
@@ -84,3 +88,15 @@ func _on_area_3d_input_event(_camera, event, _position, _normal, _shape_idx):
         if event.button_index == MOUSE_BUTTON_LEFT and event.pressed == true:
             select_tile.emit(self)
 
+func get_neighbour_tile_color():
+    var valeur_tampon = 0
+    for i in range(1,5) :
+        var un_raycast:RayCast3D = find_child("RayCast" + str(i))
+        if un_raycast.is_colliding() :
+            if un_raycast.get_collider().get_parent().get_tile_color() == get_tile_color() :
+                if un_raycast.get_collider().get_parent().valeur_cluster_max < valeur_tampon :
+                    valeur_cluster_max = un_raycast.get_collider().get_parent().valeur_cluster_max
+                print("C LA MEME")
+
+func get_tile_color():
+    return $mesh.get_surface_override_material(0).albedo_color
