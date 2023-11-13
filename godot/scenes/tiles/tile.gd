@@ -2,7 +2,7 @@ extends Node
 class_name Tile
 
 enum TYPE {CENTER, CORRIDOR, STRAIGHT, CORNER}
-const COLORS = [Color.RED, Color.RED, Color.GREEN]
+const COLORS = [Color.RED, Color.BLUE, Color.GREEN]
 
 var valeur_cluster_max = 1
 
