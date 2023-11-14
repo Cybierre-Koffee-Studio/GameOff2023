@@ -8,6 +8,7 @@ var COLOR_BLUR = Color(COLOR_BASE, 0)
 var COLOR_FOCUS = Color(COLOR_BASE, 0.3)
 
 var available = false
+var board : Board
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,10 +30,10 @@ func _process(_delta):
     pass
 
 func _on_area_3d_mouse_entered():
-    if GlobalVars.selected_tile_copy != null && available:
+    if board != null && board.selected_tile_copy != null && available:
         material.albedo_color = COLOR_BLUR
-        GlobalVars.selected_tile_copy.visible = true
-        GlobalVars.selected_tile_copy.position = self.position
+        board.selected_tile_copy.visible = true
+        board.selected_tile_copy.position = self.position
 
 func _on_area_3d_input_event(_camera, event, _position, _normal, _shape_idx):
     if event is InputEventMouseButton:
@@ -41,7 +42,7 @@ func _on_area_3d_input_event(_camera, event, _position, _normal, _shape_idx):
                 add_tile.emit(self)
 
 func _on_area_3d_mouse_exited():
-    if GlobalVars.selected_tile_copy != null:
-        GlobalVars.selected_tile_copy.visible = false
+    if board != null && board.selected_tile_copy != null:
+        board.selected_tile_copy.visible = false
         if available:
             material.albedo_color = COLOR_FOCUS

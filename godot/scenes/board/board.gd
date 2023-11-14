@@ -1,20 +1,40 @@
 extends Node3D
+class_name Board
 
 signal tile_placed
-
-const GRID_SIZE = 11
-# taille de la zone périphérique où les tuiles clé et sortie pourront être placées
-const PERIPHERAL_ZONE_WIDTH = max(floor(GRID_SIZE / 4), 1)
+signal has_path_start_key
+signal has_path_key_exit
+signal board_full
+signal board_toppled
+signal board_tipped(new_angle)
 
 const tile_slot_scene = preload("res://scenes/board/tile_slot.tscn")
 const key_tokenScene = preload("res://scenes/tokens/key_token.tscn")
 const exit_tokenScene = preload("res://scenes/tokens/exit_token.tscn")
-
 const tile_scene = preload("res://scenes/tiles/tile.tscn")
-
 const possible_tiles : Array[Tile.TYPE] = [Tile.TYPE.CENTER, Tile.TYPE.CORNER, Tile.TYPE.CORRIDOR, Tile.TYPE.STRAIGHT]
-
 const rotations = [0, 90, 180, 270]
+
+@export var GRID_SIZE = 11
+@export var pathfinding_service: PathfindingService
+
+# taille de la zone périphérique où les tuiles clé et sortie pourront être placées
+@onready var PERIPHERAL_ZONE_WIDTH = max(floor(GRID_SIZE / 4), 1)
+
+# on détermine les limites des zones périphériques du plateau
+# pour chaque zone le tableau contient dans l'ordre :
+#   la limite en haut à gauche de la zone
+#   la limite en bas à droite de la zone
+@onready var zones = [
+        # 0 : zone du haut
+        [Vector2(0, 0), Vector2(GRID_SIZE-1, PERIPHERAL_ZONE_WIDTH-1)],
+        # 1 : à droite
+        [Vector2(GRID_SIZE-PERIPHERAL_ZONE_WIDTH, 0), Vector2(GRID_SIZE-1, GRID_SIZE-1)],
+        # 2 : en bas
+        [Vector2(0, GRID_SIZE-PERIPHERAL_ZONE_WIDTH), Vector2(GRID_SIZE-1, GRID_SIZE-1)],
+        # 4 : à gauche
+        [Vector2(0, 0), Vector2(PERIPHERAL_ZONE_WIDTH-1, GRID_SIZE-1)]
+    ]
 
 # dans GRID_MAP on range des infos sur les emplacements du plateau utiles pour calculer les contraintes de placement
 # le premier point d'entrée est la colonne où est positionné l'emplacement (position en x dans la grille)
@@ -30,18 +50,24 @@ var GRID_MAP = [
     # ]
 ]
 
-var astar_grid : AStarGrid2D
-
 var start_coordinates : Vector2i
 var key_coordinates : Vector2i
 var exit_coordinates : Vector2i
+var selected_tile_copy : Tile
+var current_inclination
 
 func _ready():
+    
     $Mesh.scale = Vector3(GRID_SIZE, 0.5, GRID_SIZE)
     GRID_MAP.resize(GRID_SIZE)
-    init_astar_grid()
+    
+    # Init du pathfinding
+    pathfinding_service.size = GRID_SIZE*3
+    pathfinding_service.init_astar_grid()
+    
     for i in GRID_SIZE*GRID_SIZE:
         var tile_slot: Node3D = tile_slot_scene.instantiate()
+        tile_slot.board = self
         var x = i/GRID_SIZE
         var y = i%GRID_SIZE
         tile_slot.position.x = x - GRID_SIZE/2
@@ -61,28 +87,6 @@ func _ready():
             # aucun mur voisin
             0b0000
         ]
-    # Les emplacements vides sont des solides, le path finding 
-    # ne trouve pas de chemin
-    for i in range(0, GRID_SIZE*3):
-        for j in range(0, GRID_SIZE*3):
-            astar_grid.set_point_solid(Vector2i(j, i), true)
-        
-    place_starting_tile()
-    
-    # on détermine les limites des zones périphériques du plateau
-    # pour chaque zone le tableau contient dans l'ordre :
-    #   la limite en haut à gauche de la zone
-    #   la limite en bas à droite de la zone
-    const zones = [
-        # 0 : zone du haut
-        [Vector2(0, 0), Vector2(GRID_SIZE-1, PERIPHERAL_ZONE_WIDTH-1)],
-        # 1 : à droite
-        [Vector2(GRID_SIZE-PERIPHERAL_ZONE_WIDTH, 0), Vector2(GRID_SIZE-1, GRID_SIZE-1)],
-        # 2 : en bas
-        [Vector2(0, GRID_SIZE-PERIPHERAL_ZONE_WIDTH), Vector2(GRID_SIZE-1, GRID_SIZE-1)],
-        # 4 : à gauche
-        [Vector2(0, 0), Vector2(PERIPHERAL_ZONE_WIDTH-1, GRID_SIZE-1)]
-    ]
 
     # on positionne les tuiles clé et sortie :
     #   si random_position=0 : clé en haut, sortie en bas
@@ -92,16 +96,9 @@ func _ready():
     var random_position = randi_range(0, 3)
     var key_tile_zone = random_position
     var exit_tile_zone = (random_position + 2) % 4
-    place_key_tile(zones, key_tile_zone)
-    place_exit_tile(zones, exit_tile_zone)
-    
-func init_astar_grid():
-    astar_grid = AStarGrid2D.new()
-    astar_grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
-    astar_grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
-    astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
-    astar_grid.region = Rect2i(0, 0, GRID_SIZE*3, GRID_SIZE*3)
-    astar_grid.update()
+    place_starting_tile()
+    place_key_tile(key_tile_zone)
+    place_exit_tile(exit_tile_zone)
 
 func place_starting_tile():
     # placement de la tuile de départ
@@ -112,7 +109,7 @@ func place_starting_tile():
     map_tile(GRID_SIZE/2, GRID_SIZE/2, [0b1111,0b0000])
     add_child(start_tile)
     
-func place_key_tile(zones, key_tile_zone):
+func place_key_tile(key_tile_zone):
     # placement de la tuile clé
     var key_tile = tile_scene.instantiate()
     var key_tile_x = randi_range(zones[key_tile_zone][0].x, zones[key_tile_zone][1].x)
@@ -133,7 +130,7 @@ func place_key_tile(zones, key_tile_zone):
     key_token.position = Vector3(key_tile.position.x, key_tile.position.y + 0.1, key_tile.position.z)
     add_child(key_token)
 
-func place_exit_tile(zones, exit_tile_zone):
+func place_exit_tile(exit_tile_zone):
     # placement de la tuile sortie
     var exit_tile = tile_scene.instantiate()
     var exit_tile_x = randi_range(zones[exit_tile_zone][0].x , zones[exit_tile_zone][1].x)
@@ -190,24 +187,7 @@ func map_tile(x, y, tile_data):
     
     # Modification de l'astar_grid pour le pathfinding
     # en indiquant les murs et les ouvertures de la tuile placée
-    # haut
-    astar_grid.set_point_solid(Vector2i(x*3+1, y*3), ((tile_data[1] & 0b1000) == 0b1000))
-    # droite
-    astar_grid.set_point_solid(Vector2i(x*3+2, y*3+1), ((tile_data[1] & 0b0100) == 0b0100))
-    # bas
-    astar_grid.set_point_solid(Vector2i(x*3+1, y*3+2), ((tile_data[1] & 0b0010) == 0b0010))
-    # gauche
-    astar_grid.set_point_solid(Vector2i(x*3, y*3+1), ((tile_data[1] & 0b0001) == 0b0001))
-    # centre
-    astar_grid.set_point_solid(Vector2i(x*3+1, y*3+1), false)
-    
-    var path_from_start_to_key =  astar_grid.get_point_path(start_coordinates, key_coordinates)
-    var path_from_key_to_exit =  astar_grid.get_point_path(key_coordinates, exit_coordinates)
-    print("====================")
-    print_path()
-    print("====================")
-    print("Path from start to key exists :" + str(!path_from_start_to_key.is_empty()))
-    print("Path from key to exit exists :" + str(!path_from_key_to_exit.is_empty()))
+    pathfinding_service.set_astargrid_solidity(x, y, tile_data[1])
 
 # permet de vérifier si une tuile (tile) peut être placée à un emplacement (x, y)
 # en fonction de ce qu'il y a autour dudit emplacement
@@ -232,9 +212,9 @@ func on_add_tile(src):
             var slot = GRID_MAP[x][y][0]
             if slot != null:
                 slot.set_unavailable()
-    var tile = GlobalVars.selected_tile_copy
-    remove_child(GlobalVars.selected_tile_copy)
-    GlobalVars.selected_tile_copy = null
+    var tile = selected_tile_copy
+    remove_child(selected_tile_copy)
+    selected_tile_copy = null
     emit_signal("tile_placed", tile)
     tile.position = src.position
     tile.position.y = 50
@@ -244,48 +224,53 @@ func on_add_tile(src):
     var tween = create_tween()
     tween.tween_property(tile, "position:y", 0.5, 0.8).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
     tip(tile.position.x*0.8)
+    check_paths()
+
+func check_paths():
+    if is_path_start_key():
+        emit_signal("has_path_start_key")
+    if is_path_key_exit():
+        emit_signal("has_path_key_exit")
 
 func tip(angle):
     var tween = create_tween()
-    tween.tween_property(self, "rotation_degrees:z", rotation_degrees.z - angle, 0.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT).set_delay(0.6)
+    var new_angle = snapped(rotation_degrees.z - angle,0.01)
+    tween.tween_property(self, "rotation_degrees:z", new_angle, 0.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT).set_delay(0.6)
+    emit_signal("board_tipped", new_angle)
+    if abs(new_angle) > GRID_SIZE/2 + 1 :
+        emit_signal("board_toppled") 
 
 func on_tile_selected(tile):
     GlobalVars.selected_tile_rotation = tile.rotation.y
-    if GlobalVars.selected_tile_copy != null:
-        remove_child(GlobalVars.selected_tile_copy)
-    GlobalVars.selected_tile_copy = tile.duplicate()
-    GlobalVars.selected_tile_copy.instance_type = tile.instance_type
-    GlobalVars.selected_tile_copy.rotation = GlobalVars.selected_tile.rotation
-    GlobalVars.selected_tile_copy.scale = Vector3(1,1,1)
-    GlobalVars.selected_tile_copy.visible = false
-    add_child(GlobalVars.selected_tile_copy)
+    if selected_tile_copy != null:
+        remove_child(selected_tile_copy)
+    selected_tile_copy = tile.duplicate()
+    selected_tile_copy.instance_type = tile.instance_type
+    selected_tile_copy.rotation = GlobalVars.selected_tile.rotation
+    selected_tile_copy.scale = Vector3(1,1,1)
+    selected_tile_copy.visible = false
+    add_child(selected_tile_copy)
     for x in GRID_SIZE:
         for y in GRID_SIZE:
             var slot = GRID_MAP[x][y][0]
             if slot != null:
                 slot.set_unavailable()
-                if slot_compatible(x, y, GlobalVars.selected_tile_copy):
+                if slot_compatible(x, y, selected_tile_copy):
                     slot.set_available()
 
 func rotate_tile():
-    GlobalVars.selected_tile_copy.can_rotate = false
+    selected_tile_copy.can_rotate = false
     GlobalVars.selected_tile.can_rotate = false
     GlobalVars.selected_tile_rotation += deg_to_rad(90.0)
     var tween_selected_tile = create_tween()
     tween_selected_tile.tween_property(GlobalVars.selected_tile, "rotation:y", GlobalVars.selected_tile_rotation, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
     var tween_selected_tile_copy = create_tween()
-    tween_selected_tile_copy.tween_property(GlobalVars.selected_tile_copy, "rotation:y", GlobalVars.selected_tile_rotation, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
-    GlobalVars.selected_tile_copy.can_rotate = true
-    GlobalVars.selected_tile.can_rotate = true
+    tween_selected_tile_copy.tween_property(selected_tile_copy, "rotation:y", GlobalVars.selected_tile_rotation, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
+    selected_tile_copy.can_rotate = true
+    GlobalVars.selected_tile.can_rotate = true           
 
-func print_path():
-    var line : String = ""
-    for j in range(0, GRID_SIZE*3):
-        for i in range(0, GRID_SIZE*3):
-            if astar_grid.is_point_solid(Vector2i(i,j)):
-                line = line + "X"
-            else:
-                line = line + "O"
-        print(line)
-        line = ""
-            
+func is_path_start_key() -> bool :
+    return pathfinding_service.is_path_a_to_b(start_coordinates, key_coordinates)
+
+func is_path_key_exit() -> bool :
+    return pathfinding_service.is_path_a_to_b(key_coordinates, exit_coordinates)
