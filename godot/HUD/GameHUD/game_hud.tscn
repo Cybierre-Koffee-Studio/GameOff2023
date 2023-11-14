@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://b747blytdeucf"]
+[gd_scene load_steps=2 format=3 uid="uid://b747blytdeucf"]
+
+[ext_resource type="Script" path="res://HUD/GameHUD/game_hud.gd" id="1_hwsf3"]
 
 [node name="GameHUD" type="Control"]
 layout_mode = 3
@@ -7,3 +9,32 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_hwsf3")
+
+[node name="StartKeyLabel" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Start => Key : Nope"
+
+[node name="KeyExitLabel" type="Label" parent="."]
+layout_mode = 0
+offset_top = 27.0
+offset_right = 105.0
+offset_bottom = 53.0
+text = "Key => Exit : Nope"
+
+[node name="BoardAngle" type="Label" parent="."]
+layout_mode = 0
+offset_top = 56.0
+offset_right = 115.0
+offset_bottom = 82.0
+text = "Board angle : 0"
+
+[node name="BoardToppled" type="Label" parent="."]
+layout_mode = 0
+offset_top = 80.0
+offset_right = 115.0
+offset_bottom = 106.0
+text = "Board toppled : false"
