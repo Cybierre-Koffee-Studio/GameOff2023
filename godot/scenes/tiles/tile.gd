@@ -62,7 +62,7 @@ func init(type : TYPE):
             base_material_copy.albedo_texture = straight_texture
         TYPE.CORNER:
             base_material_copy.albedo_texture = corner_texture
-    base_material_copy.albedo_color = COLORS.pick_random()
+    #base_material_copy.albedo_color = COLORS.pick_random()
     $mesh.set_surface_override_material(0, base_material_copy)
 
 # renvoie les données sur les bords de la tuile sous forme d'un tableau de binaires :

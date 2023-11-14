@@ -50,6 +50,7 @@ size = Vector3(1, 0.1, 1)
 size = Vector3(0.759675, 0.472864, 0.750755)
 
 [node name="tile_center" type="Node3D"]
+transform = Transform3D(0.96, 0, 0, 0, 0.96, 0, 0, 0, 0.96, 0, 0, 0)
 script = ExtResource("1_6q3ss")
 
 [node name="mesh" type="MeshInstance3D" parent="."]

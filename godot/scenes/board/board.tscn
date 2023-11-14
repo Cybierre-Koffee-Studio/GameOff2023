@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcwawxg5537wa"]
+[gd_scene load_steps=7 format=3 uid="uid://dcwawxg5537wa"]
 
 [ext_resource type="Script" path="res://scenes/board/board.gd" id="1_066hh"]
 [ext_resource type="Script" path="res://scenes/board/pathfinding_service.gd" id="2_8ldfh"]
@@ -6,17 +6,28 @@
 [sub_resource type="BoxMesh" id="BoxMesh_i4pbh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_atdo0"]
-albedo_color = Color(0.352941, 0.352941, 0.352941, 1)
+albedo_color = Color(0.541176, 0.537255, 0.513726, 1)
 
-[node name="Plateau" type="Node3D" node_paths=PackedStringArray("pathfinding_service")]
+[sub_resource type="BoxMesh" id="BoxMesh_ui7xu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8x38"]
+albedo_color = Color(0.121569, 0.133333, 0.180392, 1)
+
+[node name="Board" type="Node3D" node_paths=PackedStringArray("pathfinding_service")]
 script = ExtResource("1_066hh")
 pathfinding_service = NodePath("PathfindingService")
 
-[node name="Mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(12, 0, 0, 0, 0.5, 0, 0, 0, 12, 0, 0.25, 0)
+[node name="Map" type="MeshInstance3D" parent="."]
+transform = Transform3D(7, 0, 0, 0, 0.1, 0, 0, 0, 7, 0, 0.05, 0)
+visible = false
 mesh = SubResource("BoxMesh_i4pbh")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_atdo0")
+
+[node name="Border" type="MeshInstance3D" parent="."]
+transform = Transform3D(9, 0, 0, 0, 0.2, 0, 0, 0, 9, 0, -0.025, 0)
+mesh = SubResource("BoxMesh_ui7xu")
+surface_material_override/0 = SubResource("StandardMaterial3D_w8x38")
 
 [node name="TrucInvisiblePourPivoterCorrectement" type="MeshInstance3D" parent="."]
 transform = Transform3D(12, 0, 0, 0, 0.5, 0, 0, 0, 12, 0, -0.25, 0)

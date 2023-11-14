@@ -15,6 +15,8 @@ const tile_scene = preload("res://scenes/tiles/tile.tscn")
 const possible_tiles : Array[Tile.TYPE] = [Tile.TYPE.CENTER, Tile.TYPE.CORNER, Tile.TYPE.CORRIDOR, Tile.TYPE.STRAIGHT]
 const rotations = [0, 90, 180, 270]
 
+const BOARD_THICKNESS = 0.1
+
 @export var GRID_SIZE = 11
 @export var pathfinding_service: PathfindingService
 
@@ -58,7 +60,8 @@ var current_inclination
 
 func _ready():
     
-    $Mesh.scale = Vector3(GRID_SIZE, 0.5, GRID_SIZE)
+    $Map.scale = Vector3(GRID_SIZE, $Map.scale.y, GRID_SIZE)
+    $Border.scale = Vector3(GRID_SIZE + 1, $Border.scale.y, GRID_SIZE + 1)
     GRID_MAP.resize(GRID_SIZE)
     
     # Init du pathfinding
@@ -72,8 +75,7 @@ func _ready():
         var y = i%GRID_SIZE
         tile_slot.position.x = x - GRID_SIZE/2
         tile_slot.position.z = y - GRID_SIZE/2
-        tile_slot.position.y = 0.5
-        tile_slot.connect("add_tile", on_add_tile)
+        tile_slot.position.y = BOARD_THICKNESS
         add_child(tile_slot)
         if GRID_MAP[x] == null:
             GRID_MAP[x] = []
@@ -99,12 +101,18 @@ func _ready():
     place_starting_tile()
     place_key_tile(key_tile_zone)
     place_exit_tile(exit_tile_zone)
+    
+#func _unhandled_input(event):
+#    if event is InputEventMouseButton:
+#        if event.button_index == MOUSE_BUTTON_LEFT and event.pressed == true:
+#            if GlobalVars.selected_tile != null && selected_tile_copy.visible:
+#                add_tile()
 
 func place_starting_tile():
     # placement de la tuile de départ
     var start_tile = tile_scene.instantiate()
     start_tile.init(Tile.TYPE.CENTER)
-    start_tile.position = Vector3(0, 0.5, 0)
+    start_tile.position = Vector3(0, BOARD_THICKNESS, 0)
     start_coordinates = Vector2i(GRID_SIZE*3/2, GRID_SIZE*3/2)
     map_tile(GRID_SIZE/2, GRID_SIZE/2, [0b1111,0b0000])
     add_child(start_tile)
@@ -117,7 +125,7 @@ func place_key_tile(key_tile_zone):
     key_tile.init(possible_tiles.pick_random())
     key_tile.position = Vector3(
         key_tile_x - GRID_SIZE/2,
-        0.5,
+        BOARD_THICKNESS,
         key_tile_y - GRID_SIZE/2
     )
     var key_tile_rotation = rotations.pick_random()
@@ -138,7 +146,7 @@ func place_exit_tile(exit_tile_zone):
     exit_tile.init(possible_tiles.pick_random())
     exit_tile.position = Vector3(
         exit_tile_x - GRID_SIZE/2,
-        0.5,
+        BOARD_THICKNESS,
         exit_tile_y - GRID_SIZE/2
     )
     var exit_tile_rotation = rotations.pick_random()
@@ -206,7 +214,7 @@ func slot_compatible(x, y, tile):
         && !(GRID_MAP[x][y][1] & tile_data[1])
     )
 
-func on_add_tile(src):
+func add_tile(tile_copy):
     for x in GRID_SIZE:
         for y in GRID_SIZE:
             var slot = GRID_MAP[x][y][0]
@@ -214,15 +222,17 @@ func on_add_tile(src):
                 slot.set_unavailable()
     var tile = selected_tile_copy
     remove_child(selected_tile_copy)
+    tile.position = selected_tile_copy.position
     selected_tile_copy = null
     emit_signal("tile_placed", tile)
-    tile.position = src.position
     tile.position.y = 50
     add_child(tile)
-    map_tile(tile.position.x + GRID_SIZE/2, tile.position.z + GRID_SIZE/2, tile.get_tile_data())
+    var tile_x = tile.position.x + GRID_SIZE/2
+    var tile_y = tile.position.z + GRID_SIZE/2
     tile.get_neighbour_tile_color()
     var tween = create_tween()
-    tween.tween_property(tile, "position:y", 0.5, 0.8).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+    tween.tween_property(tile, "position:y", BOARD_THICKNESS, 0.8).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+    tween.tween_callback(map_tile.bind(tile_x, tile_y, tile.get_tile_data()))
     tip(tile.position.x*0.8)
     check_paths()
 
@@ -249,6 +259,7 @@ func on_tile_selected(tile):
     selected_tile_copy.rotation = GlobalVars.selected_tile.rotation
     selected_tile_copy.scale = Vector3(1,1,1)
     selected_tile_copy.visible = false
+    selected_tile_copy.connect("select_tile", add_tile)
     add_child(selected_tile_copy)
     for x in GRID_SIZE:
         for y in GRID_SIZE:

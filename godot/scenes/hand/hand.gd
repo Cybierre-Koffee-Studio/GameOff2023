@@ -57,7 +57,6 @@ func on_select_tile(tile):
 func on_tile_placed(tile):
     GlobalVars.selected_tile.scale = Vector3(1, 1, 1)
     GlobalVars.selected_tile.position.z += selected_tile_position_shift
-    GlobalVars.selected_tile = null
     tile.can_rotate = false
     current_hand.erase(tile)
     GlobalVars.selected_tile = null
