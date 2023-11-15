@@ -57,7 +57,10 @@ var key_coordinates : Vector2i
 var exit_coordinates : Vector2i
 var selected_tile_copy : Tile
 var current_inclination
+
 var character_token : Node3D
+var key_token : Node3D
+var exit_token : Node3D
 
 func _ready():
     
@@ -134,7 +137,7 @@ func place_key_tile(key_tile_zone):
     key_coordinates = Vector2i(key_tile_x*3+1, key_tile_y*3+1)
     map_tile(key_tile_x, key_tile_y, key_tile.get_tile_data())
     # avec le marqueur de clé dessus
-    var key_token = key_tokenScene.instantiate()
+    key_token = key_tokenScene.instantiate()
     key_token.position = Vector3(key_tile.position.x, key_tile.position.y + 0.1, key_tile.position.z)
     add_child(key_token)
 
@@ -155,7 +158,7 @@ func place_exit_tile(exit_tile_zone):
     exit_coordinates = Vector2i(exit_tile_x*3+1, exit_tile_y*3+1)
     map_tile(exit_tile_x, exit_tile_y, exit_tile.get_tile_data())
     # avec le marqueur de sortie dessus
-    var exit_token = exit_tokenScene.instantiate()
+    exit_token = exit_tokenScene.instantiate()
     exit_token.position = Vector3(exit_tile.position.x, exit_tile.position.y + 0.1, exit_tile.position.z)
     add_child(exit_token)
 
@@ -238,13 +241,13 @@ func add_tile(tile_copy):
     tip(tile.position.x*0.8)
     
 func check_paths():
-    if is_path_start_key():
-        if !GlobalVars.got_key:
-            emit_signal("has_path_start_key")
-            GlobalVars.got_key = true
-            move_token(get_start_key_path())
-    if is_path_key_exit():
+    if is_path_start_key() && !GlobalVars.got_key:
+        emit_signal("has_path_start_key")
+        GlobalVars.got_key = true
+        move_token(get_start_key_path())
+    if is_path_key_exit() && !GlobalVars.at_exit:
         emit_signal("has_path_key_exit")
+        GlobalVars.at_exit = true
         move_token(get_key_exit_path())
 
 func get_start_key_path():
@@ -268,7 +271,7 @@ func move_token(path: Array):
     if !path.is_empty():
         var new_pos = Vector3(path[0].x - GRID_SIZE/2, 0.2, path[0].y - GRID_SIZE/2)
         var tween = create_tween()
-        tween.tween_property(character_token, "position", new_pos, 1).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+        tween.tween_property(character_token, "position", new_pos, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
         tween.tween_callback(move_token.bind(path.slice(1)))
         
 func tip(angle):
