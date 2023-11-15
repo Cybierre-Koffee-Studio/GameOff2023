@@ -7,6 +7,7 @@ signal has_path_key_exit
 signal board_full
 signal board_toppled
 signal board_tipped(new_angle)
+signal mouvement_finished
 
 const tile_slot_scene = preload("res://scenes/board/tile_slot.tscn")
 const key_tokenScene = preload("res://scenes/tokens/key_token.tscn")
@@ -219,7 +220,7 @@ func slot_compatible(x, y, tile):
         && !(GRID_MAP[x][y][1] & tile_data[1])
     )
 
-func add_tile(tile_copy):
+func add_tile(_tile_copy):
     for x in GRID_SIZE:
         for y in GRID_SIZE:
             var slot = GRID_MAP[x][y][0]
@@ -245,10 +246,12 @@ func check_paths():
         emit_signal("has_path_start_key")
         GlobalVars.got_key = true
         move_token(get_start_key_path())
-    if is_path_key_exit() && !GlobalVars.at_exit:
+        await mouvement_finished
+    if is_path_key_exit() && GlobalVars.got_key && !GlobalVars.at_exit:
         emit_signal("has_path_key_exit")
         GlobalVars.at_exit = true
         move_token(get_key_exit_path())
+        await mouvement_finished
 
 func get_start_key_path():
     var path_start_key = pathfinding_service.get_path_a_to_b(start_coordinates, key_coordinates)
@@ -273,6 +276,8 @@ func move_token(path: Array):
         var tween = create_tween()
         tween.tween_property(character_token, "position", new_pos, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
         tween.tween_callback(move_token.bind(path.slice(1)))
+    else:
+        emit_signal("mouvement_finished")
         
 func tip(angle):
     var tween = create_tween()

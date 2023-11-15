@@ -20,6 +20,7 @@ func init():
     board.connect("board_toppled", hud.on_board_toppled)
     board.connect("board_toppled", on_board_toppled)
     board.connect("tile_placed", hand.on_tile_placed)
+    board.exit_token.connect("exit_reached", on_exit_reached)
     hand.connect("tile_selected", board.on_tile_selected)
 
 func on_replay(game_over_screen):
@@ -43,4 +44,7 @@ func game_over():
     add_child(game_over_instance)
 
 func on_board_toppled():
+    game_over()
+
+func on_exit_reached():
     game_over()

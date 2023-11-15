@@ -38,7 +38,7 @@ func _on_area_3d_mouse_entered():
         else:
             board.selected_tile_copy.visible = false
         
-func emit_add_tile(tile):
+func emit_add_tile(_tile):
     add_tile.emit(self)
     set_available()
 
