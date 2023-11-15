@@ -27,7 +27,10 @@ func deal_hand(nb_tiles):
     for t in range(nb_tiles):
         var marker = tile_markers[t]
         var tile = tile_scene.instantiate()
-        tile.init(possible_tiles.pick_random())
+        if (GlobalVars.debug):
+            tile.init(Tile.TYPE.CENTER)
+        else:
+            tile.init(possible_tiles.pick_random())
         tile.connect("select_tile", on_select_tile)
         tile.position = Vector3(marker.position.x, marker.position.y, marker.position.z)
         tile.position.z += 30
