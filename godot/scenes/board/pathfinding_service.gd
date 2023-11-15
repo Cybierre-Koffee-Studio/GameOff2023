@@ -6,9 +6,10 @@ var size
 
 func init_astar_grid():
     astar_grid = AStarGrid2D.new()
+    astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+    # On utilise l'heuristique Manhattan parce qu'on n'autorise pas les déplacements en diagonale
     astar_grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
     astar_grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
-    astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
     astar_grid.region = Rect2i(0, 0, size, size)
     astar_grid.update()
     

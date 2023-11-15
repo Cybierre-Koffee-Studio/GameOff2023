@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://dobrenmdj124y"]
+
+[ext_resource type="Script" path="res://HUD/GameOverScreen/game_over.gd" id="1_5iat4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fyii7"]
+font_size = 50
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_force_pass_scroll_events = false
+script = ExtResource("1_5iat4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LabelGameOver" type="Label" parent="CanvasLayer"]
+offset_left = 147.0
+offset_top = 78.0
+offset_right = 445.0
+offset_bottom = 150.0
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_fyii7")
+
+[node name="ButtonReplay" type="Button" parent="CanvasLayer"]
+offset_left = 825.0
+offset_top = 259.0
+offset_right = 1073.0
+offset_bottom = 342.0
+text = "Replay"
+
+[node name="ButtonInfos" type="Button" parent="CanvasLayer"]
+offset_left = 826.0
+offset_top = 361.0
+offset_right = 1074.0
+offset_bottom = 444.0
+text = "Infos"
+
+[node name="ButtonCredits" type="Button" parent="CanvasLayer"]
+offset_left = 827.0
+offset_top = 463.0
+offset_right = 1075.0
+offset_bottom = 546.0
+text = "Credits"
+
+[connection signal="pressed" from="CanvasLayer/ButtonReplay" to="." method="_on_button_replay_pressed"]

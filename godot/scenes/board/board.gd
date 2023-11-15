@@ -247,7 +247,7 @@ func tip(angle):
     var new_angle = snapped(rotation_degrees.z - angle,0.01)
     tween.tween_property(self, "rotation_degrees:z", new_angle, 0.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT).set_delay(0.6)
     emit_signal("board_tipped", new_angle)
-    if abs(new_angle) > GRID_SIZE/2 + 1 :
+    if abs(new_angle) > GRID_SIZE*4/5 :
         emit_signal("board_toppled") 
 
 func on_tile_selected(tile):
