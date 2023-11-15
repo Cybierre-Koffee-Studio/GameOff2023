@@ -17,7 +17,7 @@ const rotations = [0, 90, 180, 270]
 
 const BOARD_THICKNESS = 0.1
 
-@export var GRID_SIZE = 11
+@export var GRID_SIZE = 5
 @export var pathfinding_service: PathfindingService
 
 # taille de la zone périphérique où les tuiles clé et sortie pourront être placées
@@ -57,6 +57,7 @@ var key_coordinates : Vector2i
 var exit_coordinates : Vector2i
 var selected_tile_copy : Tile
 var current_inclination
+var character_token : Node3D
 
 func _ready():
     
@@ -101,13 +102,8 @@ func _ready():
     place_starting_tile()
     place_key_tile(key_tile_zone)
     place_exit_tile(exit_tile_zone)
+    GlobalVars.started = true
     
-#func _unhandled_input(event):
-#    if event is InputEventMouseButton:
-#        if event.button_index == MOUSE_BUTTON_LEFT and event.pressed == true:
-#            if GlobalVars.selected_tile != null && selected_tile_copy.visible:
-#                add_tile()
-
 func place_starting_tile():
     # placement de la tuile de départ
     var start_tile = tile_scene.instantiate()
@@ -116,6 +112,10 @@ func place_starting_tile():
     start_coordinates = Vector2i(GRID_SIZE*3/2, GRID_SIZE*3/2)
     map_tile(GRID_SIZE/2, GRID_SIZE/2, [0b1111,0b0000])
     add_child(start_tile)
+    # avec le marqueur de perso dessus
+    character_token = exit_tokenScene.instantiate()
+    character_token.position = Vector3(start_tile.position.x, start_tile.position.y + 0.1, start_tile.position.z)
+    add_child(character_token)
     
 func place_key_tile(key_tile_zone):
     # placement de la tuile clé
@@ -196,6 +196,8 @@ func map_tile(x, y, tile_data):
     # Modification de l'astar_grid pour le pathfinding
     # en indiquant les murs et les ouvertures de la tuile placée
     pathfinding_service.set_astargrid_solidity(x, y, tile_data[1])
+    if GlobalVars.started:
+        check_paths()
 
 # permet de vérifier si une tuile (tile) peut être placée à un emplacement (x, y)
 # en fonction de ce qu'il y a autour dudit emplacement
@@ -234,14 +236,41 @@ func add_tile(tile_copy):
     tween.tween_property(tile, "position:y", BOARD_THICKNESS, 0.8).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
     tween.tween_callback(map_tile.bind(tile_x, tile_y, tile.get_tile_data()))
     tip(tile.position.x*0.8)
-    check_paths()
-
+    
 func check_paths():
     if is_path_start_key():
-        emit_signal("has_path_start_key")
+        if !GlobalVars.got_key:
+            emit_signal("has_path_start_key")
+            GlobalVars.got_key = true
+            move_token(get_start_key_path())
     if is_path_key_exit():
         emit_signal("has_path_key_exit")
+        move_token(get_key_exit_path())
 
+func get_start_key_path():
+    var path_start_key = pathfinding_service.get_path_a_to_b(start_coordinates, key_coordinates)
+    var copy : Array = path_start_key.duplicate(true)
+    for i in range(0, path_start_key.size()):
+        if i%3 != 0 :
+            path_start_key.erase(copy[i])
+    return path_start_key.map(func(a: Vector2i): return a/3)
+
+func get_key_exit_path():
+    var path_key_exit = pathfinding_service.get_path_a_to_b(key_coordinates, exit_coordinates)
+    var copy : Array = path_key_exit.duplicate(true)
+    for i in range(0, path_key_exit.size()):
+        if i%3 != 0 :
+            path_key_exit.erase(copy[i])
+    return path_key_exit.map(func(a: Vector2i): return a/3)
+    
+
+func move_token(path: Array):
+    if !path.is_empty():
+        var new_pos = Vector3(path[0].x - GRID_SIZE/2, 0.2, path[0].y - GRID_SIZE/2)
+        var tween = create_tween()
+        tween.tween_property(character_token, "position", new_pos, 1).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+        tween.tween_callback(move_token.bind(path.slice(1)))
+        
 func tip(angle):
     var tween = create_tween()
     var new_angle = snapped(rotation_degrees.z - angle,0.01)
