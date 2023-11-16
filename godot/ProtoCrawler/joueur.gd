@@ -19,6 +19,7 @@ func _physics_process(delta):
         turn_cam(Vector3(0, 90, 0))
     if Input.is_action_just_pressed("changement_gameplay") :
         $Camera3D.current = true
+        get_tree().call_group("TILE_ZONE", "activate")
     if Input.is_action_just_pressed("Avancer") :
         if $RayCastForward.is_colliding() and !is_moving:
             is_moving = true

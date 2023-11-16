@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6mq1xyx5miqc"]
+[gd_scene load_steps=11 format=3 uid="uid://b6mq1xyx5miqc"]
 
 [ext_resource type="Texture2D" uid="uid://k7psx7dwefhv" path="res://models/tiles/corner/tile_corner_texture_corner.png" id="2_fjlgs"]
+[ext_resource type="Script" path="res://ProtoCrawler/tuiles_design/tileZone.gd" id="3_3cffi"]
 [ext_resource type="Texture2D" uid="uid://d1agt4orktolr" path="res://models/tiles/corridor/tile_corridor_texture_corridor.png" id="3_ciaxk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c00xg"]
@@ -108,9 +109,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472203, 0.577894, -0.487403
 layers = 512
 mesh = SubResource("CylinderMesh_2dmn6")
 
-[node name="tileZone" type="Area3D" parent="."]
+[node name="tileZone" type="Area3D" parent="." groups=["TILE_ZONE"]]
+visible = false
 collision_layer = 4
 collision_mask = 3
+script = ExtResource("3_3cffi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="tileZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.552677, 0)
