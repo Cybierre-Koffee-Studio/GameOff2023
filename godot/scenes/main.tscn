@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://4tdtu246g70a"]
+[gd_scene load_steps=7 format=3 uid="uid://4tdtu246g70a"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_mync3"]
 [ext_resource type="PackedScene" uid="uid://dcwawxg5537wa" path="res://scenes/board/board.tscn" id="2_8jvwn"]
 [ext_resource type="PackedScene" uid="uid://0737woac8q3q" path="res://scenes/hand/hand.tscn" id="2_cdqrf"]
 [ext_resource type="PackedScene" uid="uid://b747blytdeucf" path="res://HUD/GameHUD/game_hud.tscn" id="4_muk8p"]
+[ext_resource type="PackedScene" uid="uid://cj6w2grctcokj" path="res://ProtoCrawler/joueur.tscn" id="5_31lb7"]
 
 [sub_resource type="Environment" id="Environment_vyuhg"]
 background_mode = 1
@@ -29,7 +30,9 @@ omni_attenuation = 0.659755
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 19, 16)
+cull_mask = 1048063
 environment = SubResource("Environment_vyuhg")
+current = true
 fov = 35.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -48,3 +51,5 @@ light_energy = 1.104
 transform = Transform3D(0.8, 0, 0, 0, 0.69282, -0.4, 0, 0.4, 0.69282, 0, 0, 11)
 
 [node name="GameHUD" parent="." instance=ExtResource("4_muk8p")]
+
+[node name="joueur" parent="." instance=ExtResource("5_31lb7")]

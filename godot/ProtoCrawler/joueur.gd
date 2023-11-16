@@ -10,27 +10,15 @@ var is_moving = false
 var cam_is_rotating = false
 
 func _physics_process(delta):
-    # Add the gravity.
-    if not is_on_floor():
-        velocity.y -= gravity * delta
-
-    # Handle Jump.
-    if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-        velocity.y = JUMP_VELOCITY
 
     if Input.is_action_just_pressed("rotaCamDroite") and !cam_is_rotating:
         cam_is_rotating = true
         turn_cam(Vector3(0, -90, 0))
-#        rotation_degrees = rotation_degrees + Vector3(0, -90, 0)
-        
     if Input.is_action_just_pressed("rotaCamGauche") and !cam_is_rotating:
         cam_is_rotating = true
         turn_cam(Vector3(0, 90, 0))
-#        rotation_degrees = rotation_degrees + Vector3(0, 90, 0)
-    # Get the input direction and handle the movement/deceleration.
-    # As good practice, you should replace UI actions with custom gameplay actions.
-#    var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-#    var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+    if Input.is_action_just_pressed("changement_gameplay") :
+        $Camera3D.current = true
     if Input.is_action_just_pressed("Avancer") :
         if $RayCastForward.is_colliding() and !is_moving:
             is_moving = true
@@ -47,12 +35,6 @@ func _physics_process(delta):
         if $RayCastLeft.is_colliding() and !is_moving:
             is_moving = true
             move($RayCastLeft.get_collider().global_position)
-#    if direction:
-#        velocity.x = direction.x * SPEED
-#        velocity.z = direction.z * SPEED
-#    else:
-#        velocity.x = move_toward(velocity.x, 0, SPEED)
-#        velocity.z = move_toward(velocity.z, 0, SPEED)
 
     move_and_slide()
 

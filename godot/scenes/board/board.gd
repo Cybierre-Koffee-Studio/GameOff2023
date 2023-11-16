@@ -229,7 +229,7 @@ func add_tile(tile_copy):
     add_child(tile)
     var tile_x = tile.position.x + GRID_SIZE/2
     var tile_y = tile.position.z + GRID_SIZE/2
-    tile.get_neighbour_tile_color()
+#    tile.get_neighbour_tile_color()
     var tween = create_tween()
     tween.tween_property(tile, "position:y", BOARD_THICKNESS, 0.8).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
     tween.tween_callback(map_tile.bind(tile_x, tile_y, tile.get_tile_data()))

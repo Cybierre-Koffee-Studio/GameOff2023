@@ -2,7 +2,7 @@ extends Node
 class_name Tile
 
 enum TYPE {CENTER, CORRIDOR, STRAIGHT, CORNER}
-const COLORS = [Color.RED, Color.BLUE, Color.GREEN]
+#const COLORS = [Color.RED, Color.BLUE, Color.GREEN]
 
 var valeur_cluster_max = 1
 
@@ -10,6 +10,11 @@ const center_texture = preload("res://models/tiles/center/tile_center_texture_ce
 const corridor_texture = preload("res://models/tiles/corridor/tile_corridor_texture_corridor.png")
 const straight_texture = preload("res://models/tiles/straight/tile_straight_texture_t.png")
 const corner_texture = preload("res://models/tiles/corner/tile_corner_texture_corner.png")
+
+const center = preload("res://ProtoCrawler/tuiles_design/tileOuvert.tscn")
+const corridor = preload("res://ProtoCrawler/tuiles_design/tileCouloir.tscn")
+const straight = preload("res://ProtoCrawler/tuiles_design/tileEnT.tscn")
+const corner = preload("res://ProtoCrawler/tuiles_design/tileVirage.tscn")
 
 const opening_data_by_type_and_rotation = {
     TYPE.CENTER: {
@@ -56,14 +61,22 @@ func init(type : TYPE):
     match type:
         TYPE.CENTER:
             base_material_copy.albedo_texture = center_texture
+            ajout_model_physique(center)
         TYPE.CORRIDOR:
             base_material_copy.albedo_texture = corridor_texture
+            ajout_model_physique(corridor)
         TYPE.STRAIGHT:
             base_material_copy.albedo_texture = straight_texture
+            ajout_model_physique(straight)
         TYPE.CORNER:
             base_material_copy.albedo_texture = corner_texture
+            ajout_model_physique(corner)
     #base_material_copy.albedo_color = COLORS.pick_random()
     $mesh.set_surface_override_material(0, base_material_copy)
+
+func ajout_model_physique(model):
+    var le_model = model.instantiate()
+    add_child(le_model)
 
 # renvoie les données sur les bords de la tuile sous forme d'un tableau de binaires :
 #  0 : les ouvertures (haut, droite, bas, gauche), exemple pour un couloir horizontal : 0b0101
@@ -88,15 +101,15 @@ func _on_area_3d_input_event(_camera, event, _position, _normal, _shape_idx):
         if event.button_index == MOUSE_BUTTON_LEFT and event.pressed == true:
             select_tile.emit(self)
 
-func get_neighbour_tile_color():
-    var valeur_tampon = 0
-    for i in range(1,5) :
-        var un_raycast:RayCast3D = find_child("RayCast" + str(i))
-        if un_raycast.is_colliding() :
-            if un_raycast.get_collider().get_parent().get_tile_color() == get_tile_color() :
-                if un_raycast.get_collider().get_parent().valeur_cluster_max < valeur_tampon :
-                    valeur_cluster_max = un_raycast.get_collider().get_parent().valeur_cluster_max
-                print("C LA MEME")
+#func get_neighbour_tile_color():
+#    var valeur_tampon = 0
+#    for i in range(1,5) :
+#        var un_raycast:RayCast3D = find_child("RayCast" + str(i))
+#        if un_raycast.is_colliding() :
+#            if un_raycast.get_collider().get_parent().get_tile_color() == get_tile_color() :
+#                if un_raycast.get_collider().get_parent().valeur_cluster_max < valeur_tampon :
+#                    valeur_cluster_max = un_raycast.get_collider().get_parent().valeur_cluster_max
+#                print("C LA MEME")
 
-func get_tile_color():
-    return $mesh.get_surface_override_material(0).albedo_color
+#func get_tile_color():
+#    return $mesh.get_surface_override_material(0).albedo_color
