@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl44svjbgo6vg"]
+
+[ext_resource type="Script" path="res://scenes/items/reroll/reroll.gd" id="1_m227c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hm2m2"]
+albedo_color = Color(0.976471, 0, 0.419608, 1)
+
+[node name="reroll" type="Node3D"]
+script = ExtResource("1_m227c")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+radius = 0.2
+height = 0.1
+sides = 6
+material = SubResource("StandardMaterial3D_hm2m2")

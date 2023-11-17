@@ -7,6 +7,7 @@ var got_key
 var at_exit
 var started
 var debug
+var reroll_number
 
 func _init():
     started = false
@@ -16,3 +17,4 @@ func _init():
     got_key = false
     at_exit = false
     debug = false
+    reroll_number = 0

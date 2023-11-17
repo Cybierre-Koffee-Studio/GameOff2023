@@ -229,10 +229,13 @@ func add_tile(_tile_copy):
     var tile = selected_tile_copy
     remove_child(selected_tile_copy)
     tile.position = selected_tile_copy.position
+    selected_tile_copy.disconnect("select_tile", add_tile)
     selected_tile_copy = null
     emit_signal("tile_placed", tile)
     tile.position.y = 50
     add_child(tile)
+    if tile.has_item():
+        tile.item.on_placement()
     var tile_x = tile.position.x + GRID_SIZE/2
     var tile_y = tile.position.z + GRID_SIZE/2
     tile.get_neighbour_tile_color()
@@ -282,10 +285,17 @@ func move_token(path: Array):
 func tip(angle):
     var tween = create_tween()
     var new_angle = snapped(rotation_degrees.z - angle,0.01)
-    tween.tween_property(self, "rotation_degrees:z", new_angle, 0.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT).set_delay(0.6)
-    emit_signal("board_tipped", new_angle)
     if abs(new_angle) > GRID_SIZE*4/5 :
-        emit_signal("board_toppled") 
+        if rotation_degrees.z > 0:
+            new_angle = 180
+        else:
+            new_angle = -180
+        tween.tween_property(self, "rotation_degrees:z", new_angle, 0.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+        tween.tween_callback(emit_signal.bind("board_toppled")) 
+    else:
+        tween.tween_property(self, "rotation_degrees:z", new_angle, 0.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT).set_delay(0.6)
+        emit_signal("board_tipped", new_angle)
+        
 
 func on_tile_selected(tile):
     GlobalVars.selected_tile_rotation = tile.rotation.y
@@ -296,6 +306,8 @@ func on_tile_selected(tile):
     selected_tile_copy.rotation = GlobalVars.selected_tile.rotation
     selected_tile_copy.scale = Vector3(1,1,1)
     selected_tile_copy.visible = false
+    if tile.has_item():
+        selected_tile_copy.item = tile.item.duplicate()
     selected_tile_copy.connect("select_tile", add_tile)
     add_child(selected_tile_copy)
     for x in GRID_SIZE:
