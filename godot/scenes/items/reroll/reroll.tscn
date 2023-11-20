@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dl44svjbgo6vg"]
+
+[ext_resource type="Script" path="res://scenes/items/reroll/reroll.gd" id="1_m227c"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hm2m2"]
+albedo_color = Color(0.976471, 0, 0.419608, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jgs0y"]
+height = 0.1
+radius = 0.2
+
+[node name="reroll" type="Node3D"]
+script = ExtResource("1_m227c")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+radius = 0.2
+height = 0.1
+sides = 6
+material = SubResource("StandardMaterial3D_hm2m2")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CylinderShape3D_jgs0y")

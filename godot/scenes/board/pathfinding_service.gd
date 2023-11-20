@@ -35,6 +35,9 @@ func is_path_a_to_b(a_coordinates: Vector2i, b_coordinates: Vector2i) -> bool :
     var path_from_a_to_b =  astar_grid.get_point_path(a_coordinates, b_coordinates)
     return !path_from_a_to_b.is_empty()
 
+func get_path_a_to_b(a_coordinates: Vector2i, b_coordinates: Vector2i) -> Array :
+    return astar_grid.get_point_path(a_coordinates, b_coordinates)
+
 func print_astar_grid():
     var line : String = ""
     for j in range(0, size):

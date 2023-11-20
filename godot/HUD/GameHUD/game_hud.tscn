@@ -25,16 +25,23 @@ offset_right = 105.0
 offset_bottom = 53.0
 text = "Key => Exit : Nope"
 
-[node name="BoardAngle" type="Label" parent="."]
+[node name="BoardAngleLabel" type="Label" parent="."]
 layout_mode = 0
 offset_top = 56.0
 offset_right = 115.0
 offset_bottom = 82.0
 text = "Board angle : 0"
 
-[node name="BoardToppled" type="Label" parent="."]
+[node name="BoardToppledLabel" type="Label" parent="."]
 layout_mode = 0
 offset_top = 80.0
 offset_right = 115.0
 offset_bottom = 106.0
 text = "Board toppled : false"
+
+[node name="DebugLabel" type="Label" parent="."]
+layout_mode = 0
+offset_top = 104.0
+offset_right = 40.0
+offset_bottom = 127.0
+text = "Debug : false"

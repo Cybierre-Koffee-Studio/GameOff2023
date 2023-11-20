@@ -15,6 +15,7 @@ const center = preload("res://ProtoCrawler/tuiles_design/tileOuvert.tscn")
 const corridor = preload("res://ProtoCrawler/tuiles_design/tileCouloir.tscn")
 const straight = preload("res://ProtoCrawler/tuiles_design/tileEnT.tscn")
 const corner = preload("res://ProtoCrawler/tuiles_design/tileVirage.tscn")
+const reroll_item_scene = preload("res://scenes/items/reroll/reroll.tscn")
 
 const opening_data_by_type_and_rotation = {
     TYPE.CENTER: {
@@ -51,6 +52,8 @@ signal rotate_tile
 @export var can_rotate : bool = true
 @export var can_move : bool = true
 
+var item : Item = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     pass # Replace with function body.
@@ -73,6 +76,9 @@ func init(type : TYPE):
             ajout_model_physique(corner)
     #base_material_copy.albedo_color = COLORS.pick_random()
     $mesh.set_surface_override_material(0, base_material_copy)
+    var proba_item = randi_range(0,100)
+    if proba_item >= 50:
+        add_item()
 
 func ajout_model_physique(model):
     var le_model = model.instantiate()
@@ -85,6 +91,16 @@ func get_tile_data():
     var rotation_degrees : int = floor(rad_to_deg(self.rotation.y))
     var opening_data = opening_data_by_type_and_rotation[instance_type][rotation_degrees%360]
     return [opening_data, opening_data^0b1111]
+
+func add_item():
+    var new_item = reroll_item_scene.instantiate()
+    new_item.place_on_tile(self)
+    item = new_item
+    add_child(new_item)
+    pass
+
+func has_item():
+    return item != null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

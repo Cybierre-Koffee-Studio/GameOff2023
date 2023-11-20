@@ -13,6 +13,10 @@ const selected_tile_position_shift = 0.6
 
 var current_hand : Array[Tile]  = []
 
+func _unhandled_input(event):
+    if event.is_action_pressed("reroll"):
+        reroll()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
     deal_hand(GlobalVars.hand_size)
@@ -27,7 +31,10 @@ func deal_hand(nb_tiles):
     for t in range(nb_tiles):
         var marker = tile_markers[t]
         var tile = tile_scene.instantiate()
-        tile.init(possible_tiles.pick_random())
+        if (GlobalVars.debug):
+            tile.init(Tile.TYPE.CENTER)
+        else:
+            tile.init(possible_tiles.pick_random())
         tile.connect("select_tile", on_select_tile)
         tile.position = Vector3(marker.position.x, marker.position.y, marker.position.z)
         tile.position.z += 30
@@ -42,6 +49,12 @@ func discard_hand():
     for t in current_hand :
         t.queue_free()
     current_hand = []
+
+func reroll():
+    if GlobalVars.reroll_number > 0:
+        GlobalVars.reroll_number -= 1
+        discard_hand()
+        deal_hand(GlobalVars.hand_size)
 
 func on_select_tile(tile):
     if GlobalVars.selected_tile != null && tile.can_move:
