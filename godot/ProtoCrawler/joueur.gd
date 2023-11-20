@@ -9,7 +9,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var is_moving = false
 var cam_is_rotating = false
 
-func _physics_process(delta):
+func _physics_process(_delta):
 
     if Input.is_action_just_pressed("rotaCamDroite") and !cam_is_rotating:
         cam_is_rotating = true
@@ -17,9 +17,6 @@ func _physics_process(delta):
     if Input.is_action_just_pressed("rotaCamGauche") and !cam_is_rotating:
         cam_is_rotating = true
         turn_cam(Vector3(0, 90, 0))
-    if Input.is_action_just_pressed("changement_gameplay") :
-        $Camera3D.current = true
-        get_tree().call_group("TILE_ZONE", "activate")
     if Input.is_action_just_pressed("Avancer") :
         if $RayCastForward.is_colliding() and !is_moving:
             is_moving = true
@@ -51,4 +48,6 @@ func turn_cam(deg):
     tween.tween_property($".", "rotation_degrees", target_deg, 0.25)
     await get_tree().create_timer(0.25).timeout
     cam_is_rotating = false
-    
+
+func set_cam_current():
+    $Camera3D.current = true

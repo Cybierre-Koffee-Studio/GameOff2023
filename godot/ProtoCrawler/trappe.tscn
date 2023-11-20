@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://lum6j3jpjeg3"]
+
+[ext_resource type="Script" path="res://ProtoCrawler/trappe.gd" id="1_pjnka"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tgfxi"]
+albedo_color = Color(0.278431, 0.156863, 0.0705882, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_248aa"]
+material = SubResource("StandardMaterial3D_tgfxi")
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tj4i1"]
+material = SubResource("StandardMaterial3D_tgfxi")
+size = Vector3(0.8, 0.05, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qnqml"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_viukr"]
+material = SubResource("StandardMaterial3D_qnqml")
+size = Vector3(0.8, 0.05, 0.8)
+
+[node name="trappe" type="StaticBody3D" groups=["TRAPPE"]]
+script = ExtResource("1_pjnka")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.0142214, 0)
+layers = 512
+mesh = SubResource("BoxMesh_248aa")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.124216, 0)
+layers = 512
+mesh = SubResource("BoxMesh_tj4i1")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0800834, 0)
+layers = 512
+mesh = SubResource("BoxMesh_viukr")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0.462138, -0.21707)
+visible = false
+layers = 512
+mesh = SubResource("BoxMesh_tj4i1")
+skeleton = NodePath("../..")

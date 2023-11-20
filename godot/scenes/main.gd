@@ -26,9 +26,9 @@ func on_replay(game_over_screen):
     game_over_screen.queue_free()
     board.queue_free()
     hud.queue_free()
-    
+
     GlobalVars._init()
-    
+
     board = board_scene.instantiate()
     add_child(board)
     hud = hud_scene.instantiate()
@@ -44,3 +44,18 @@ func game_over():
 
 func on_board_toppled():
     game_over()
+
+func _on_plateau_has_path_key_exit():
+    can_start_explo()
+
+func _on_plateau_has_path_start_key():
+    can_start_explo()
+
+func can_start_explo():
+    if GlobalVars.fin_reliee and GlobalVars.key_reliee :
+        get_tree().call_group("TILE_ZONE", "activate")
+        $joueur.set_cam_current()
+        await get_tree().create_timer(2.5).timeout
+        $Plateau.set_flat()
+
+

@@ -18,7 +18,7 @@ visible = false
 mesh = SubResource("CapsuleMesh_goy86")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.557087, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49255, 0)
 shape = SubResource("ConvexPolygonShape3D_3x555")
 
 [node name="RayCastBack" type="RayCast3D" parent="."]
@@ -50,5 +50,5 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.2222e-08, 0.258819, -0.965926, 1.13133e-08, 0.965926, 0.258819, 1, 5.24025e-14, -4.37114e-08, -0.199631, 0.661601, 0)
+transform = Transform3D(-4.2222e-08, 0.258819, -0.965926, 1.13133e-08, 0.965926, 0.258819, 1, 4.61853e-14, -4.37114e-08, -0.199631, 0.383878, 0)
 cull_mask = 1048574

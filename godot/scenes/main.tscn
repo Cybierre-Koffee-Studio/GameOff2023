@@ -53,3 +53,6 @@ transform = Transform3D(0.8, 0, 0, 0, 0.69282, -0.4, 0, 0.4, 0.69282, 0, 0, 11)
 [node name="GameHUD" parent="." instance=ExtResource("4_muk8p")]
 
 [node name="joueur" parent="." instance=ExtResource("5_31lb7")]
+
+[connection signal="has_path_key_exit" from="Plateau" to="." method="_on_plateau_has_path_key_exit"]
+[connection signal="has_path_start_key" from="Plateau" to="." method="_on_plateau_has_path_start_key"]

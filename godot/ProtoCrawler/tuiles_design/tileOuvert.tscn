@@ -49,13 +49,14 @@ points = PackedVector3Array(0.95801, 0.2, 0.95801, -1.01587, -0.0158513, -1.0158
 [sub_resource type="CylinderMesh" id="CylinderMesh_2dmn6"]
 top_radius = 0.1
 bottom_radius = 0.1
-height = 1.0
+height = 0.6
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qc54n"]
 radius = 0.3
 
 [node name="TileModel" type="StaticBody3D"]
 transform = Transform3D(0.96, 0, 0, 0, 0.96, 0, 0, 0, 0.96, 0, 0, 0)
+collision_layer = 0
 
 [node name="mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -69,29 +70,29 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_n0flx")
 
 [node name="mesh2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 1.01185, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.633837, 0)
 layers = 512
 mesh = SubResource("ArrayMesh_bnvsw")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_24exy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.494469, 0.577894, 0.497549)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.494469, 0.355781, 0.497549)
 layers = 512
 mesh = SubResource("CylinderMesh_2dmn6")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.494469, 0.577894, -0.487402)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.494469, 0.355781, -0.487402)
 layers = 512
 mesh = SubResource("CylinderMesh_2dmn6")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472203, 0.577894, 0.497549)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472203, 0.355781, 0.497549)
 layers = 512
 mesh = SubResource("CylinderMesh_2dmn6")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472203, 0.577894, -0.487403)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472203, 0.355781, -0.487403)
 layers = 512
 mesh = SubResource("CylinderMesh_2dmn6")
 
