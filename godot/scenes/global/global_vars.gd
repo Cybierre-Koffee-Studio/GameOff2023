@@ -8,7 +8,6 @@ var fin_reliee = false
 var key_reliee = false
 var got_key
 var at_exit
-var started
 var debug
 var reroll_number
 

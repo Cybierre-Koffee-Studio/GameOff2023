@@ -38,10 +38,3 @@ offset_top = 80.0
 offset_right = 115.0
 offset_bottom = 106.0
 text = "Board toppled : false"
-
-[node name="DebugLabel" type="Label" parent="."]
-layout_mode = 0
-offset_top = 104.0
-offset_right = 40.0
-offset_bottom = 127.0
-text = "Debug : false"

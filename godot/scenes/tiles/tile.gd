@@ -15,7 +15,9 @@ const center = preload("res://ProtoCrawler/tuiles_design/tileOuvert.tscn")
 const corridor = preload("res://ProtoCrawler/tuiles_design/tileCouloir.tscn")
 const straight = preload("res://ProtoCrawler/tuiles_design/tileEnT.tscn")
 const corner = preload("res://ProtoCrawler/tuiles_design/tileVirage.tscn")
+
 const reroll_item_scene = preload("res://scenes/items/reroll/reroll.tscn")
+const monster_item_scene = preload("res://scenes/items/monstres/monstre.tscn")
 
 const opening_data_by_type_and_rotation = {
     TYPE.CENTER: {
@@ -93,7 +95,8 @@ func get_tile_data():
     return [opening_data, opening_data^0b1111]
 
 func add_item():
-    var new_item = reroll_item_scene.instantiate()
+#    var new_item = reroll_item_scene.instantiate()
+    var new_item = monster_item_scene.instantiate()
     new_item.place_on_tile(self)
     item = new_item
     add_child(new_item)

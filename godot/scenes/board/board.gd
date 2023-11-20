@@ -107,7 +107,7 @@ func _ready():
     place_key_tile(key_tile_zone)
     place_exit_tile(exit_tile_zone)
     GlobalVars.started = true
-    
+
 func place_starting_tile():
     # placement de la tuile de départ
     var start_tile = tile_scene.instantiate()
@@ -117,11 +117,11 @@ func place_starting_tile():
     map_tile(GRID_SIZE/2, GRID_SIZE/2, [0b1111,0b0000])
     add_child(start_tile)
     # avec le marqueur de perso dessus
-    character_token = exit_tokenScene.instantiate()
-    character_token.add_to_group("player")
-    character_token.position = Vector3(start_tile.position.x, start_tile.position.y + 0.1, start_tile.position.z)
-    add_child(character_token)
-    
+#    character_token = exit_tokenScene.instantiate()
+#    character_token.add_to_group("player")
+#    character_token.position = Vector3(start_tile.position.x, start_tile.position.y + 0.1, start_tile.position.z)
+#    add_child(character_token)
+
 func place_key_tile(key_tile_zone):
     # placement de la tuile clé
     var key_tile = tile_scene.instantiate()
@@ -249,18 +249,18 @@ func add_tile(_tile_copy):
     tween.tween_property(tile, "position:y", BOARD_THICKNESS, 0.8).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
     tween.tween_callback(map_tile.bind(tile_x, tile_y, tile.get_tile_data()))
     tip(tile.position.x*0.8)
-    
+
 func check_paths():
-    if is_path_start_key() && !GlobalVars.got_key:
+    if is_path_start_key(): # && !GlobalVars.got_key:
         emit_signal("has_path_start_key")
-        GlobalVars.got_key = true
-        move_token(get_start_key_path())
-        await mouvement_finished
-    if is_path_key_exit() && GlobalVars.got_key && !GlobalVars.at_exit:
+#        GlobalVars.got_key = true
+#        move_token(get_start_key_path())
+#        await mouvement_finished
+    if is_path_key_exit(): # && GlobalVars.got_key && !GlobalVars.at_exit:
         emit_signal("has_path_key_exit")
-        GlobalVars.at_exit = true
-        move_token(get_key_exit_path())
-        await mouvement_finished
+#        GlobalVars.at_exit = true
+#        move_token(get_key_exit_path())
+#        await mouvement_finished
 
 func get_start_key_path():
     var path_start_key = pathfinding_service.get_path_a_to_b(start_coordinates, key_coordinates)
@@ -277,7 +277,7 @@ func get_key_exit_path():
         if i%3 != 0 :
             path_key_exit.erase(copy[i])
     return path_key_exit.map(func(a: Vector2i): return a/3)
-    
+
 
 func move_token(path: Array):
     if !path.is_empty():
@@ -287,7 +287,7 @@ func move_token(path: Array):
         tween.tween_callback(move_token.bind(path.slice(1)))
     else:
         emit_signal("mouvement_finished")
-        
+
 func tip(angle):
     var tween = create_tween()
     var new_angle = snapped(rotation_degrees.z - angle,0.01)
@@ -297,11 +297,11 @@ func tip(angle):
         else:
             new_angle = -180
         tween.tween_property(self, "rotation_degrees:z", new_angle, 0.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-        tween.tween_callback(emit_signal.bind("board_toppled")) 
+        tween.tween_callback(emit_signal.bind("board_toppled"))
     else:
         tween.tween_property(self, "rotation_degrees:z", new_angle, 0.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT).set_delay(0.6)
         emit_signal("board_tipped", new_angle)
-        
+
 
 
 func set_flat():

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://by32aipxjix1q"]
 
-[ext_resource type="Script" path="res://ProtoCrawler/coffre.gd" id="1_d1nub"]
+[ext_resource type="Script" path="res://scenes/items/coffre/coffre.gd" id="1_d1nub"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqwy8"]
 

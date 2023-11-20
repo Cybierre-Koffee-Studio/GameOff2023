@@ -47,13 +47,16 @@ func on_board_toppled():
     game_over()
 
 func _on_plateau_has_path_key_exit():
+    GlobalVars.fin_reliee = true
     can_start_explo()
 
 func _on_plateau_has_path_start_key():
+    GlobalVars.key_reliee = true
     can_start_explo()
 
 func can_start_explo():
     if GlobalVars.fin_reliee and GlobalVars.key_reliee :
+        print("3")
         get_tree().call_group("TILE_ZONE", "activate")
         $joueur.set_cam_current()
         await get_tree().create_timer(2.5).timeout
