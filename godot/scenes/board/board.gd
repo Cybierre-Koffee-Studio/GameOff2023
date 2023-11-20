@@ -118,6 +118,7 @@ func place_starting_tile():
     add_child(start_tile)
     # avec le marqueur de perso dessus
     character_token = exit_tokenScene.instantiate()
+    character_token.add_to_group("player")
     character_token.position = Vector3(start_tile.position.x, start_tile.position.y + 0.1, start_tile.position.z)
     add_child(character_token)
     
@@ -234,8 +235,6 @@ func add_tile(_tile_copy):
     emit_signal("tile_placed", tile)
     tile.position.y = 50
     add_child(tile)
-    if tile.has_item():
-        tile.item.on_placement()
     var tile_x = tile.position.x + GRID_SIZE/2
     var tile_y = tile.position.z + GRID_SIZE/2
     tile.get_neighbour_tile_color()
@@ -297,7 +296,7 @@ func tip(angle):
         emit_signal("board_tipped", new_angle)
         
 
-func on_tile_selected(tile):
+func on_tile_selected(tile: Tile):
     GlobalVars.selected_tile_rotation = tile.rotation.y
     if selected_tile_copy != null:
         remove_child(selected_tile_copy)
@@ -308,6 +307,7 @@ func on_tile_selected(tile):
     selected_tile_copy.visible = false
     if tile.has_item():
         selected_tile_copy.item = tile.item.duplicate()
+        connect("tile_placed", selected_tile_copy.item.on_tile_placed)
     selected_tile_copy.connect("select_tile", add_tile)
     add_child(selected_tile_copy)
     for x in GRID_SIZE:

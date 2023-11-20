@@ -1,7 +1,5 @@
 extends Item
 
-func on_placement():
+func on_tile_placed(_tile):
     GlobalVars.reroll_number += 1
-
-func on_pickup():
-    print("Reroll picked up")
+    queue_free()
