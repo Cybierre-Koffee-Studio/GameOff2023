@@ -111,7 +111,7 @@ func _ready():
 func place_starting_tile():
     # placement de la tuile de départ
     var start_tile = tile_scene.instantiate()
-    start_tile.init(Tile.TYPE.CENTER)
+    start_tile.init(Tile.TYPE.CENTER, true)
     start_tile.position = Vector3(0, BOARD_THICKNESS, 0)
     start_coordinates = Vector2i(GRID_SIZE*3/2, GRID_SIZE*3/2)
     map_tile(GRID_SIZE/2, GRID_SIZE/2, [0b1111,0b0000])
@@ -127,7 +127,7 @@ func place_key_tile(key_tile_zone):
     var key_tile = tile_scene.instantiate()
     var key_tile_x = randi_range(zones[key_tile_zone][0].x, zones[key_tile_zone][1].x)
     var key_tile_y = randi_range(zones[key_tile_zone][0].y, zones[key_tile_zone][1].y)
-    key_tile.init(possible_tiles.pick_random())
+    key_tile.init(possible_tiles.pick_random(), true)
     key_tile.position = Vector3(
         key_tile_x - GRID_SIZE/2,
         BOARD_THICKNESS,
@@ -152,7 +152,7 @@ func place_exit_tile(exit_tile_zone):
     var exit_tile = tile_scene.instantiate()
     var exit_tile_x = randi_range(zones[exit_tile_zone][0].x , zones[exit_tile_zone][1].x)
     var exit_tile_y = randi_range(zones[exit_tile_zone][0].y, zones[exit_tile_zone][1].y)
-    exit_tile.init(possible_tiles.pick_random())
+    exit_tile.init(possible_tiles.pick_random(), true)
     exit_tile.position = Vector3(
         exit_tile_x - GRID_SIZE/2,
         BOARD_THICKNESS,
@@ -279,14 +279,14 @@ func get_key_exit_path():
     return path_key_exit.map(func(a: Vector2i): return a/3)
 
 
-func move_token(path: Array):
-    if !path.is_empty():
-        var new_pos = Vector3(path[0].x - GRID_SIZE/2, 0.2, path[0].y - GRID_SIZE/2)
-        var tween = create_tween()
-        tween.tween_property(character_token, "position", new_pos, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-        tween.tween_callback(move_token.bind(path.slice(1)))
-    else:
-        emit_signal("mouvement_finished")
+#func move_token(path: Array):
+#    if !path.is_empty():
+#        var new_pos = Vector3(path[0].x - GRID_SIZE/2, 0.2, path[0].y - GRID_SIZE/2)
+#        var tween = create_tween()
+#        tween.tween_property(character_token, "position", new_pos, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+#        tween.tween_callback(move_token.bind(path.slice(1)))
+#    else:
+#        emit_signal("mouvement_finished")
 
 func tip(angle):
     var tween = create_tween()

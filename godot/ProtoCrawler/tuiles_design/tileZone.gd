@@ -1,4 +1,4 @@
 extends Area3D
 
-func activate():
-    visible = true
+#func activate():
+#    visible = true

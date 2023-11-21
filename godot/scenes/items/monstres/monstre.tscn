@@ -1,37 +1,55 @@
-[gd_scene load_steps=6 format=3 uid="uid://dd4k7xgc2ems8"]
+[gd_scene load_steps=7 format=3 uid="uid://dd4k7xgc2ems8"]
 
 [ext_resource type="Script" path="res://scenes/items/monstres/monstre.gd" id="1_ryi0m"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mqohf"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_cfl7d"]
+size = Vector3(0.365198, 0.487579, 0.351333)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m70no"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_4lqbv"]
-material = SubResource("StandardMaterial3D_mqohf")
-size = Vector3(0.2, 0.2, 0.2)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_cfl7d"]
-size = Vector3(0.240087, 0.253277, 0.253908)
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_m70no")
+size = Vector3(0.3, 0.4, 0.3)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_bqwpk"]
 top_radius = 0.2
 bottom_radius = 0.2
 height = 0.1
 
-[node name="monstre" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_12oqd"]
+size = Vector3(0.335308, 0.489814, 0.303036)
+
+[node name="monstre" type="Node3D" groups=["MONSTRE_COFFRE"]]
 script = ExtResource("1_ryi0m")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.240001, 0)
+collision_layer = 8
+collision_mask = 2
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00978461, 0)
+shape = SubResource("BoxShape3D_cfl7d")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.240001, 0)
 layers = 512
 mesh = SubResource("BoxMesh_4lqbv")
 
-[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
-shape = SubResource("BoxShape3D_cfl7d")
-
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45428, 0, -0.377796)
 mesh = SubResource("CylinderMesh_bqwpk")
 
-[connection signal="mouse_entered" from="MeshInstance3D/Area3D" to="." method="_on_area_3d_mouse_entered"]
-[connection signal="mouse_exited" from="MeshInstance3D/Area3D" to="." method="_on_area_3d_mouse_exited"]
+[node name="hitbox" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 2
+input_ray_pickable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.221814, 0)
+shape = SubResource("BoxShape3D_12oqd")
+
+[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]

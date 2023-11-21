@@ -60,7 +60,7 @@ var item : Item = null
 func _ready():
     pass # Replace with function body.
 
-func init(type : TYPE):
+func init(type : TYPE, obj : bool):
     instance_type = type
     var base_material_copy = $mesh.get_surface_override_material(0).duplicate()
     match type:
@@ -78,9 +78,10 @@ func init(type : TYPE):
             ajout_model_physique(corner)
     #base_material_copy.albedo_color = COLORS.pick_random()
     $mesh.set_surface_override_material(0, base_material_copy)
-    var proba_item = randi_range(0,100)
-    if proba_item >= 50:
-        add_item()
+    if !obj :
+        var proba_item = randi_range(0,100)
+        if proba_item >= 50:
+            add_item()
 
 func ajout_model_physique(model):
     var le_model = model.instantiate()

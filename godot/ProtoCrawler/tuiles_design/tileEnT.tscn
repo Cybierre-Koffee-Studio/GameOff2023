@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://diaqrdgeblurt"]
+[gd_scene load_steps=10 format=3 uid="uid://diaqrdgeblurt"]
 
 [ext_resource type="Texture2D" uid="uid://k7psx7dwefhv" path="res://models/tiles/corner/tile_corner_texture_corner.png" id="2_53jq0"]
-[ext_resource type="Script" path="res://ProtoCrawler/tuiles_design/tileZone.gd" id="3_ksucx"]
 [ext_resource type="Texture2D" uid="uid://cpxigyigugih8" path="res://models/tiles/straight/tile_straight_texture_t.png" id="3_x22wo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c00xg"]
@@ -67,6 +66,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_24exy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
 shape = SubResource("ConvexPolygonShape3D_qtcct")
 
 [node name="mesh2" type="MeshInstance3D" parent="."]
@@ -104,11 +104,10 @@ layers = 512
 mesh = SubResource("CylinderMesh_2dmn6")
 
 [node name="tileZone" type="Area3D" parent="." groups=["TILE_ZONE"]]
-visible = false
 collision_layer = 4
 collision_mask = 3
-script = ExtResource("3_ksucx")
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="tileZone"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.552677, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("SphereShape3D_ffhnw")

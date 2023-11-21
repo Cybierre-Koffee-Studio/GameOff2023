@@ -56,12 +56,10 @@ func _on_plateau_has_path_start_key():
 
 func can_start_explo():
     if GlobalVars.fin_reliee and GlobalVars.key_reliee :
-        print("3")
-        get_tree().call_group("TILE_ZONE", "activate")
+        get_tree().call_group("MONSTRE_COFFRE", "activate")
         $joueur.set_cam_current()
         await get_tree().create_timer(2.5).timeout
         $Plateau.set_flat()
-
 
 func on_exit_reached():
     game_over()

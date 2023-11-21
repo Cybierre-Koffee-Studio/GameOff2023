@@ -10,7 +10,6 @@ var is_moving = false
 var cam_is_rotating = false
 
 func _physics_process(_delta):
-
     if Input.is_action_just_pressed("rotaCamDroite") and !cam_is_rotating:
         cam_is_rotating = true
         turn_cam(Vector3(0, -90, 0))
@@ -18,19 +17,19 @@ func _physics_process(_delta):
         cam_is_rotating = true
         turn_cam(Vector3(0, 90, 0))
     if Input.is_action_just_pressed("Avancer") :
-        if $RayCastForward.is_colliding() and !is_moving:
+        if $RayCastForward.is_colliding() and !is_moving and !$RayCastForwardMonster.is_colliding():
             is_moving = true
             move($RayCastForward.get_collider().global_position)
     if Input.is_action_just_pressed("Reculer") :
-        if $RayCastBack.is_colliding() and !is_moving:
+        if $RayCastBack.is_colliding() and !is_moving and !$RayCastBackMonster.is_colliding():
             is_moving = true
             move($RayCastBack.get_collider().global_position)
     if Input.is_action_just_pressed("AllerADroite") :
-        if $RayCastRight.is_colliding() and !is_moving:
+        if $RayCastRight.is_colliding() and !is_moving and !$RayCastRightMonster.is_colliding():
             is_moving = true
             move($RayCastRight.get_collider().global_position)
     if Input.is_action_just_pressed("AllerAGauche") :
-        if $RayCastLeft.is_colliding() and !is_moving:
+        if $RayCastLeft.is_colliding() and !is_moving and !$RayCastLeftMonster.is_colliding():
             is_moving = true
             move($RayCastLeft.get_collider().global_position)
 
