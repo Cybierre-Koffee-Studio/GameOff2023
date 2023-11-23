@@ -18,6 +18,9 @@ const corner = preload("res://ProtoCrawler/tuiles_design/tileVirage.tscn")
 
 const reroll_item_scene = preload("res://scenes/items/reroll/reroll.tscn")
 const monster_item_scene = preload("res://scenes/items/monstres/monstre.tscn")
+const chest_item_scene = preload("res://scenes/items/coffre/coffre.tscn")
+
+const items_list = [reroll_item_scene, monster_item_scene, chest_item_scene]
 
 const opening_data_by_type_and_rotation = {
     TYPE.CENTER: {
@@ -47,6 +50,7 @@ const opening_data_by_type_and_rotation = {
 }
 
 var instance_type
+@onready var rota_tuile = $rotile.rotation_degrees.y
 
 signal select_tile
 signal rotate_tile
@@ -62,7 +66,7 @@ func _ready():
 
 func init(type : TYPE, obj : bool):
     instance_type = type
-    var base_material_copy = $mesh.get_surface_override_material(0).duplicate()
+    var base_material_copy = $rotile/mesh.get_surface_override_material(0).duplicate()
     match type:
         TYPE.CENTER:
             base_material_copy.albedo_texture = center_texture
@@ -77,31 +81,33 @@ func init(type : TYPE, obj : bool):
             base_material_copy.albedo_texture = corner_texture
             ajout_model_physique(corner)
     #base_material_copy.albedo_color = COLORS.pick_random()
-    $mesh.set_surface_override_material(0, base_material_copy)
+    $rotile/mesh.set_surface_override_material(0, base_material_copy)
     if !obj :
-        var proba_item = randi_range(0,100)
-        if proba_item >= 50:
-            add_item()
+        add_item()
+#        var proba_item = randi_range(0,100)
+#        if proba_item >= 50:
+#            add_item()
 
 func ajout_model_physique(model):
     var le_model = model.instantiate()
-    add_child(le_model)
+    $rotile.add_child(le_model)
 
 # renvoie les données sur les bords de la tuile sous forme d'un tableau de binaires :
 #  0 : les ouvertures (haut, droite, bas, gauche), exemple pour un couloir horizontal : 0b0101
 #  1 : les murs (haut, droite, bas, gauche), l'inverse des ouvertures en fait, exemple pour un couloir horizontal : 0b1010
 func get_tile_data():
-    var rotation_degrees : int = floor(rad_to_deg(self.rotation.y))
-    var opening_data = opening_data_by_type_and_rotation[instance_type][rotation_degrees%360]
+#    var rota_degrees : int = self.rotation_degrees.y
+    var rota_degrees : int = $rotile.rotation_degrees.y
+    print(self.rota_tuile)
+    var opening_data = opening_data_by_type_and_rotation[instance_type][rota_degrees%360]
     return [opening_data, opening_data^0b1111]
 
 func add_item():
 #    var new_item = reroll_item_scene.instantiate()
-    var new_item = monster_item_scene.instantiate()
+    var new_item = items_list.pick_random().instantiate()
     new_item.place_on_tile(self)
     item = new_item
     add_child(new_item)
-    pass
 
 func has_item():
     return item != null
@@ -121,6 +127,12 @@ func _on_area_3d_input_event(_camera, event, _position, _normal, _shape_idx):
         if event.button_index == MOUSE_BUTTON_LEFT and event.pressed == true:
             select_tile.emit(self)
 
+func rotate_subtile(degr):
+    $rotile.rotation_degrees.y = degr
+
+func get_rota_degrees():
+    return $rotile.rotation_degrees.y
+
 #func get_neighbour_tile_color():
 #    var valeur_tampon = 0
 #    for i in range(1,5) :
@@ -133,3 +145,10 @@ func _on_area_3d_input_event(_camera, event, _position, _normal, _shape_idx):
 
 #func get_tile_color():
 #    return $mesh.get_surface_override_material(0).albedo_color
+func check_murs_vides():
+    for i in range(1,5) :
+        var un_raycast:RayCast3D = find_child("RayCast" + str(i))
+        if !un_raycast.is_colliding() :
+            var un_mur = find_child("mur" + str(i))
+            un_mur.visible = true
+

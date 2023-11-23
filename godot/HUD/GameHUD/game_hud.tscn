@@ -38,3 +38,44 @@ offset_top = 80.0
 offset_right = 115.0
 offset_bottom = 106.0
 text = "Board toppled : false"
+
+[node name="Crawler" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Crawler"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -101.0
+offset_right = 243.0
+grow_vertical = 0
+color = Color(0, 0, 0, 0.352941)
+
+[node name="LifeBar" type="ProgressBar" parent="Crawler"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -46.0
+offset_right = 217.0
+offset_bottom = -19.0
+grow_vertical = 0
+max_value = 3.0
+value = 3.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Crawler"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 632.0
+offset_right = 68.0
+offset_bottom = 658.0
+text = "Power : 0"

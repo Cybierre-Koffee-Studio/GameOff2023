@@ -19,6 +19,7 @@ sides = 6
 material = SubResource("StandardMaterial3D_hm2m2")
 
 [node name="Area3D" type="Area3D" parent="."]
+input_ray_pickable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CylinderShape3D_jgs0y")

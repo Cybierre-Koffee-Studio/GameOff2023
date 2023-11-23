@@ -10,6 +10,8 @@ var is_moving = false
 var cam_is_rotating = false
 
 func _physics_process(_delta):
+    if !GlobalVars.can_player_move : return
+
     if Input.is_action_just_pressed("rotaCamDroite") and !cam_is_rotating:
         cam_is_rotating = true
         turn_cam(Vector3(0, -90, 0))
@@ -49,4 +51,5 @@ func turn_cam(deg):
     cam_is_rotating = false
 
 func set_cam_current():
+    GlobalVars.can_player_move = true
     $Camera3D.current = true

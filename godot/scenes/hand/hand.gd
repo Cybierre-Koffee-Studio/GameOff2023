@@ -38,7 +38,8 @@ func deal_hand(nb_tiles):
         tile.connect("select_tile", on_select_tile)
         tile.position = Vector3(marker.position.x, marker.position.y, marker.position.z)
         tile.position.z += 30
-        tile.rotation.y = deg_to_rad(rotations.pick_random())
+#        tile.rotation_degrees.y = rotations.pick_random()
+        tile.rotate_subtile(rotations.pick_random())
         tile.scale = Vector3(2,2,2)
         current_hand.append(tile)
         add_child(tile)

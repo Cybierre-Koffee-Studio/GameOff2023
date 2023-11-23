@@ -12,8 +12,8 @@ func init_astar_grid():
     astar_grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
     astar_grid.region = Rect2i(0, 0, size, size)
     astar_grid.update()
-    
-    # Les emplacements vides sont des solides, le path finding 
+
+    # Les emplacements vides sont des solides, le path finding
     # ne trouve pas de chemin
     for i in range(0, size):
         for j in range(0, size):
@@ -30,7 +30,7 @@ func set_astargrid_solidity(x,y,tile_wall_data):
     astar_grid.set_point_solid(Vector2i(x*3, y*3+1), ((tile_wall_data & 0b0001) == 0b0001))
     # centre
     astar_grid.set_point_solid(Vector2i(x*3+1, y*3+1), false)
-    
+
 func is_path_a_to_b(a_coordinates: Vector2i, b_coordinates: Vector2i) -> bool :
     var path_from_a_to_b =  astar_grid.get_point_path(a_coordinates, b_coordinates)
     return !path_from_a_to_b.is_empty()

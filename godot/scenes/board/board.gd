@@ -64,7 +64,10 @@ var key_token : Node3D
 var exit_token : Node3D
 
 func _ready():
+    pass
 
+func _init_board(grid_size):
+    GRID_SIZE = grid_size
     $Map.scale = Vector3(GRID_SIZE, $Map.scale.y, GRID_SIZE)
     $Border.scale = Vector3(GRID_SIZE + 1, $Border.scale.y, GRID_SIZE + 1)
     GRID_MAP.resize(GRID_SIZE)
@@ -94,7 +97,17 @@ func _ready():
             # aucun mur voisin
             0b0000
         ]
-
+    PERIPHERAL_ZONE_WIDTH = max(floor(GRID_SIZE / 4), 1)
+    zones = [
+        # 0 : zone du haut
+        [Vector2(0, 0), Vector2(GRID_SIZE-1, PERIPHERAL_ZONE_WIDTH-1)],
+        # 1 : à droite
+        [Vector2(GRID_SIZE-PERIPHERAL_ZONE_WIDTH, 0), Vector2(GRID_SIZE-1, GRID_SIZE-1)],
+        # 2 : en bas
+        [Vector2(0, GRID_SIZE-PERIPHERAL_ZONE_WIDTH), Vector2(GRID_SIZE-1, GRID_SIZE-1)],
+        # 4 : à gauche
+        [Vector2(0, 0), Vector2(PERIPHERAL_ZONE_WIDTH-1, GRID_SIZE-1)]
+    ]
     # on positionne les tuiles clé et sortie :
     #   si random_position=0 : clé en haut, sortie en bas
     #   si random_position=1 : clé à droite, sortie à gauche
@@ -121,6 +134,7 @@ func place_starting_tile():
 #    character_token.add_to_group("player")
 #    character_token.position = Vector3(start_tile.position.x, start_tile.position.y + 0.1, start_tile.position.z)
 #    add_child(character_token)
+    get_parent().position_tuile_centrale = start_tile.position
 
 func place_key_tile(key_tile_zone):
     # placement de la tuile clé
@@ -134,7 +148,8 @@ func place_key_tile(key_tile_zone):
         key_tile_y - GRID_SIZE/2
     )
     var key_tile_rotation = rotations.pick_random()
-    key_tile.rotation.y = deg_to_rad(key_tile_rotation)
+#    key_tile.rotation.y = deg_to_rad(key_tile_rotation)
+    key_tile.rotate_subtile(key_tile_rotation)
     add_child(key_tile)
     key_coordinates = Vector2i(key_tile_x*3+1, key_tile_y*3+1)
     map_tile(key_tile_x, key_tile_y, key_tile.get_tile_data())
@@ -159,7 +174,8 @@ func place_exit_tile(exit_tile_zone):
         exit_tile_y - GRID_SIZE/2
     )
     var exit_tile_rotation = rotations.pick_random()
-    exit_tile.rotation.y = deg_to_rad(exit_tile_rotation)
+#    exit_tile.rotation.y = deg_to_rad(exit_tile_rotation)
+    exit_tile.rotate_subtile(exit_tile_rotation)
     add_child(exit_tile)
     exit_coordinates = Vector2i(exit_tile_x*3+1, exit_tile_y*3+1)
     map_tile(exit_tile_x, exit_tile_y, exit_tile.get_tile_data())
@@ -309,12 +325,14 @@ func set_flat():
     print("ta mère la pute")
 
 func on_tile_selected(tile: Tile):
-    GlobalVars.selected_tile_rotation = tile.rotation.y
+#    GlobalVars.selected_tile_rotation = tile.rotation.y
+    GlobalVars.selected_tile_rotation = tile.get_rota_degrees()
     if selected_tile_copy != null:
         remove_child(selected_tile_copy)
     selected_tile_copy = tile.duplicate()
     selected_tile_copy.instance_type = tile.instance_type
-    selected_tile_copy.rotation = GlobalVars.selected_tile.rotation
+#    selected_tile_copy.rotation = GlobalVars.selected_tile.rotation
+    selected_tile_copy.rotate_subtile(GlobalVars.selected_tile_rotation)
     selected_tile_copy.scale = Vector3(1,1,1)
     selected_tile_copy.visible = false
     if tile.has_item():
@@ -330,16 +348,16 @@ func on_tile_selected(tile: Tile):
                 if slot_compatible(x, y, selected_tile_copy):
                     slot.set_available()
 
-func rotate_tile():
-    selected_tile_copy.can_rotate = false
-    GlobalVars.selected_tile.can_rotate = false
-    GlobalVars.selected_tile_rotation += deg_to_rad(90.0)
-    var tween_selected_tile = create_tween()
-    tween_selected_tile.tween_property(GlobalVars.selected_tile, "rotation:y", GlobalVars.selected_tile_rotation, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
-    var tween_selected_tile_copy = create_tween()
-    tween_selected_tile_copy.tween_property(selected_tile_copy, "rotation:y", GlobalVars.selected_tile_rotation, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
-    selected_tile_copy.can_rotate = true
-    GlobalVars.selected_tile.can_rotate = true
+#func rotate_tile():
+#    selected_tile_copy.can_rotate = false
+#    GlobalVars.selected_tile.can_rotate = false
+#    GlobalVars.selected_tile_rotation += deg_to_rad(90.0)
+#    var tween_selected_tile = create_tween()
+#    tween_selected_tile.tween_property(GlobalVars.selected_tile, "rotation:y", GlobalVars.selected_tile_rotation, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
+#    var tween_selected_tile_copy = create_tween()
+#    tween_selected_tile_copy.tween_property(selected_tile_copy, "rotation:y", GlobalVars.selected_tile_rotation, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
+#    selected_tile_copy.can_rotate = true
+#    GlobalVars.selected_tile.can_rotate = true
 
 func is_path_start_key() -> bool :
     return pathfinding_service.is_path_a_to_b(start_coordinates, key_coordinates)

@@ -5,6 +5,8 @@ const hud_scene = preload("res://HUD/GameHUD/game_hud.tscn")
 const hand_scene = preload("res://scenes/hand/hand.tscn")
 const game_over_scene = preload("res://HUD/GameOverScreen/game_over.tscn")
 
+var board_size = 5
+var position_tuile_centrale = null
 @onready var hand : Hand = $Hand
 @onready var board : Board = $Plateau
 @onready var hud = $GameHUD
@@ -14,7 +16,10 @@ func _ready():
     init()
 
 func init():
+    board._init_board(board_size)
     board.connect("has_path_start_key", hud.on_has_start_key_path)
+    board.connect("has_path_start_key", _on_plateau_has_path_start_key)
+    board.connect("has_path_key_exit", _on_plateau_has_path_key_exit)
     board.connect("has_path_key_exit", hud.on_has_key_exit_path)
     board.connect("board_tipped", hud.on_board_tipped)
     board.connect("board_toppled", hud.on_board_toppled)
@@ -22,15 +27,37 @@ func init():
     board.connect("tile_placed", hand.on_tile_placed)
     board.exit_token.connect("exit_reached", on_exit_reached)
     hand.connect("tile_selected", board.on_tile_selected)
+    GlobalVars.connect("heal_player", hud.heal_player)
+    GlobalVars.connect("player_power_up", hud.player_power_up)
+    GlobalVars.connect("blesser_joueur", hud.blesser_le_joueur)
+    await get_tree().create_timer(1).timeout
+    $joueur.position = position_tuile_centrale
 
 func on_replay(game_over_screen):
     game_over_screen.queue_free()
     board.queue_free()
     hud.queue_free()
-
+    $Camera3D.current = true
     GlobalVars._init()
-
+    $joueur.position = Vector3(0, 0, 0)
     board = board_scene.instantiate()
+    add_child(board)
+#    board._init_board(board_size)
+    hud = hud_scene.instantiate()
+    add_child(hud)
+    hand.discard_hand()
+    hand.deal_hand(GlobalVars.hand_size)
+    init()
+
+func next_level():
+    board_size += 2
+#    game_over_screen.queue_free()
+    board.queue_free()
+    hud.queue_free()
+    $Camera3D.current = true
+    GlobalVars._init()
+    board = board_scene.instantiate()
+#    board._init_board(board_size)
     add_child(board)
     hud = hud_scene.instantiate()
     add_child(hud)
@@ -42,24 +69,30 @@ func game_over():
     var game_over_instance = game_over_scene.instantiate()
     game_over_instance.connect("replay", on_replay)
     add_child(game_over_instance)
+    GlobalVars.can_player_move = false
 
 func on_board_toppled():
     game_over()
 
 func _on_plateau_has_path_key_exit():
     GlobalVars.fin_reliee = true
+    print("key exit")
     can_start_explo()
 
 func _on_plateau_has_path_start_key():
     GlobalVars.key_reliee = true
+    print("start key")
     can_start_explo()
 
 func can_start_explo():
     if GlobalVars.fin_reliee and GlobalVars.key_reliee :
         get_tree().call_group("MONSTRE_COFFRE", "activate")
+        get_tree().call_group("TILE", "check_murs_vides")
+
         $joueur.set_cam_current()
-        await get_tree().create_timer(2.5).timeout
-        $Plateau.set_flat()
+        await get_tree().create_timer(1.5).timeout
+        board.set_flat()
+        $Hand.discard_hand()
 
 func on_exit_reached():
     game_over()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtbaspjkepue5"]
+[gd_scene load_steps=11 format=3 uid="uid://dtbaspjkepue5"]
 
 [ext_resource type="Script" path="res://scenes/tiles/tile.gd" id="1_6q3ss"]
 [ext_resource type="Texture2D" uid="uid://k7psx7dwefhv" path="res://models/tiles/corner/tile_corner_texture_corner.png" id="2_ehprs"]
@@ -49,57 +49,89 @@ size = Vector3(1, 0.1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_g5q4l"]
 size = Vector3(0.759675, 0.472864, 0.750755)
 
-[node name="tile_center" type="Node3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_i4d1u"]
+size = Vector3(0.05, 1, 1)
+
+[node name="tile_center" type="Node3D" groups=["TILE"]]
 transform = Transform3D(0.96, 0, 0, 0, 0.96, 0, 0, 0, 0.96, 0, 0, 0)
 script = ExtResource("1_6q3ss")
 
-[node name="mesh" type="MeshInstance3D" parent="."]
+[node name="rotile" type="Node3D" parent="."]
+
+[node name="mesh" type="MeshInstance3D" parent="rotile"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("ArrayMesh_bnvsw")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_24exy")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="rotile"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="rotile/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 shape = SubResource("BoxShape3D_o0mh7")
 
-[node name="colorArea" type="Area3D" parent="."]
+[node name="colorArea" type="Area3D" parent="rotile"]
 collision_layer = 512
 collision_mask = 1024
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="colorArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="rotile/colorArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.288661, 0)
 shape = SubResource("BoxShape3D_g5q4l")
 
-[node name="Raycasts" type="Node3D" parent="."]
+[node name="Raycasts" type="Node3D" parent="rotile"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.353727, 0)
 
-[node name="RayCast1" type="RayCast3D" parent="Raycasts"]
+[node name="RayCast1" type="RayCast3D" parent="rotile/Raycasts"]
 target_position = Vector3(1, 0, 0)
 collision_mask = 512
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="RayCast2" type="RayCast3D" parent="Raycasts"]
+[node name="mur1" type="MeshInstance3D" parent="rotile/Raycasts/RayCast1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.518, 0.9, 0)
+visible = false
+layers = 512
+mesh = SubResource("BoxMesh_i4d1u")
+
+[node name="RayCast2" type="RayCast3D" parent="rotile/Raycasts"]
 target_position = Vector3(-1, 0, 0)
 collision_mask = 512
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="RayCast3" type="RayCast3D" parent="Raycasts"]
+[node name="mur2" type="MeshInstance3D" parent="rotile/Raycasts/RayCast2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.503, 0.9, 0)
+visible = false
+layers = 512
+mesh = SubResource("BoxMesh_i4d1u")
+skeleton = NodePath("../../RayCast1")
+
+[node name="RayCast3" type="RayCast3D" parent="rotile/Raycasts"]
 target_position = Vector3(0, 0, 1)
 collision_mask = 512
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="RayCast4" type="RayCast3D" parent="Raycasts"]
+[node name="mur3" type="MeshInstance3D" parent="rotile/Raycasts/RayCast3"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.017, 0.9, 0.511)
+visible = false
+layers = 512
+mesh = SubResource("BoxMesh_i4d1u")
+skeleton = NodePath("../../RayCast1")
+
+[node name="RayCast4" type="RayCast3D" parent="rotile/Raycasts"]
 target_position = Vector3(0, 0, -1)
 collision_mask = 512
 collide_with_areas = true
 collide_with_bodies = false
 
-[connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]
-[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
-[connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]
+[node name="mur4" type="MeshInstance3D" parent="rotile/Raycasts/RayCast4"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.017, 0.9, -0.503)
+visible = false
+layers = 512
+mesh = SubResource("BoxMesh_i4d1u")
+skeleton = NodePath("../../RayCast1")
+
+[connection signal="input_event" from="rotile/Area3D" to="." method="_on_area_3d_input_event"]
+[connection signal="mouse_entered" from="rotile/Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="rotile/Area3D" to="." method="_on_area_3d_mouse_exited"]

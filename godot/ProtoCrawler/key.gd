@@ -31,8 +31,6 @@ func _physics_process(_delta:float):
 # Fonctions privées
 #------------------------------------------
 
-
-
 func _on_area_3d_body_entered(_body):
     get_tree().call_group("TRAPPE", "ouvrir_trappe")
     queue_free()
