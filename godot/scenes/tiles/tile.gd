@@ -60,8 +60,11 @@ signal rotate_tile
 
 var item : Item = null
 var poids = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+#    poids = randi_range(1,3)
+#    $Label3D.text = str(poids)
     pass
 
 func init(type : TYPE, obj : bool):

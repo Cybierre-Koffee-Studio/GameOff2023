@@ -252,6 +252,8 @@ func add_tile(_tile_copy):
                 slot.set_unavailable()
     var tile = selected_tile_copy
     remove_child(selected_tile_copy)
+    tile.poids = selected_tile_copy.poids
+    print(tile.poids)
     tile.position = selected_tile_copy.position
     selected_tile_copy.disconnect("select_tile", add_tile)
     selected_tile_copy = null
@@ -332,6 +334,7 @@ func on_tile_selected(tile: Tile):
     if selected_tile_copy != null:
         remove_child(selected_tile_copy)
     selected_tile_copy = tile.duplicate()
+    selected_tile_copy.poids = tile.poids
     selected_tile_copy.instance_type = tile.instance_type
 #    selected_tile_copy.rotation = GlobalVars.selected_tile.rotation
     selected_tile_copy.rotate_subtile(GlobalVars.selected_tile_rotation)
