@@ -322,8 +322,6 @@ func tip(angle):
         tween.tween_property(self, "rotation_degrees:z", new_angle, 0.6).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT).set_delay(0.6)
         emit_signal("board_tipped", new_angle)
 
-
-
 func set_flat():
     rotation_degrees.z = 0
     print("ta mère la pute")

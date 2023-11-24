@@ -1,5 +1,7 @@
 extends StaticBody3D
 
+const game_end_scene = preload("res://ProtoCrawler/game_end_hud.tscn")
+
 var trappe_ouverte = false
 #------------------------------------------
 # Signaux
@@ -33,9 +35,8 @@ func ouvrir_trappe():
 # Fonctions privées
 #------------------------------------------
 
-
-
 func _on_area_3d_body_entered(_body):
     if trappe_ouverte :
+        var lecran = game_end_scene.instantiate()
+        get_parent().add_child(lecran)
         GlobalVars.can_player_move = false
-        get_parent().get_parent().next_level()
