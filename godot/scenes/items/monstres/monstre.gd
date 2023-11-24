@@ -12,6 +12,7 @@ func _input(event):
             if GlobalVars.player_power < niveau :
                 GlobalVars.blesser_le_joueur()
             queue_free()
+            GlobalVars.add_score(niveau)
 
 func _on_area_3d_mouse_entered():
     cliquable = true

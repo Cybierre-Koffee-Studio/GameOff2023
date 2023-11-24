@@ -264,7 +264,9 @@ func add_tile(_tile_copy):
     var tween = create_tween()
     tween.tween_property(tile, "position:y", BOARD_THICKNESS, 0.8).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
     tween.tween_callback(map_tile.bind(tile_x, tile_y, tile.get_tile_data()))
-    tip(tile.position.x*0.8)
+#    tip(tile.position.x*0.8)
+    tip(tile.position.x*(tile.poids/2))
+    GlobalVars.add_score(tile.poids)
 
 func check_paths():
     if is_path_start_key(): # && !GlobalVars.got_key:

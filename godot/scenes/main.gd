@@ -27,9 +27,16 @@ func init():
     board.connect("tile_placed", hand.on_tile_placed)
     board.exit_token.connect("exit_reached", on_exit_reached)
     hand.connect("tile_selected", board.on_tile_selected)
-    GlobalVars.connect("heal_player", hud.heal_player)
-    GlobalVars.connect("player_power_up", hud.player_power_up)
-    GlobalVars.connect("blesser_joueur", hud.blesser_le_joueur)
+    if !GlobalVars.is_connected("heal_player", hud.heal_player):
+        GlobalVars.connect("heal_player", hud.heal_player)
+    if !GlobalVars.is_connected("player_power_up", hud.player_power_up):
+        GlobalVars.connect("player_power_up", hud.player_power_up)
+    if !GlobalVars.is_connected("blesser_joueur", hud.blesser_le_joueur):
+        GlobalVars.connect("blesser_joueur", hud.blesser_le_joueur)
+    if !GlobalVars.is_connected("score_changed", hud.update_score):
+        GlobalVars.connect("score_changed", hud.update_score)
+    if !GlobalVars.is_connected("cave_level_changed", hud.update_cave):
+        GlobalVars.connect("cave_level_changed", hud.update_cave)
     await get_tree().create_timer(1).timeout
     $joueur.position = position_tuile_centrale
 
@@ -53,16 +60,17 @@ func next_level():
     board_size += 2
 #    game_over_screen.queue_free()
     board.queue_free()
-    hud.queue_free()
+#    hud.queue_free()
     $Camera3D.current = true
     GlobalVars._init()
     board = board_scene.instantiate()
 #    board._init_board(board_size)
     add_child(board)
-    hud = hud_scene.instantiate()
-    add_child(hud)
+#    hud = hud_scene.instantiate()
+#    add_child(hud)
     hand.discard_hand()
     hand.deal_hand(GlobalVars.hand_size)
+    GlobalVars.level_ended()
     init()
 
 func game_over():
@@ -76,12 +84,10 @@ func on_board_toppled():
 
 func _on_plateau_has_path_key_exit():
     GlobalVars.fin_reliee = true
-    print("key exit")
     can_start_explo()
 
 func _on_plateau_has_path_start_key():
     GlobalVars.key_reliee = true
-    print("start key")
     can_start_explo()
 
 func can_start_explo():

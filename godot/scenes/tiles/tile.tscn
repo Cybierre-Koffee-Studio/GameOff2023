@@ -132,6 +132,12 @@ layers = 512
 mesh = SubResource("BoxMesh_i4d1u")
 skeleton = NodePath("../../RayCast1")
 
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, -4.37114e-08, -4.37114e-08, 4.37115e-08, 1.5522e-08, 1, -4.37114e-08, -1, 1.5522e-08, 0.28584, 0.318005, 0.215821)
+modulate = Color(0.333333, 0.376471, 0.447059, 1)
+text = "1"
+font_size = 75
+
 [connection signal="input_event" from="rotile/Area3D" to="." method="_on_area_3d_input_event"]
 [connection signal="mouse_entered" from="rotile/Area3D" to="." method="_on_area_3d_mouse_entered"]
 [connection signal="mouse_exited" from="rotile/Area3D" to="." method="_on_area_3d_mouse_exited"]

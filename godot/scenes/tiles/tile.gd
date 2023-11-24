@@ -59,12 +59,14 @@ signal rotate_tile
 @export var can_move : bool = true
 
 var item : Item = null
-
+var poids = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    pass # Replace with function body.
+    pass
 
 func init(type : TYPE, obj : bool):
+    poids = randi_range(1,3)
+    $Label3D.text = str(poids)
     instance_type = type
     var base_material_copy = $rotile/mesh.get_surface_override_material(0).duplicate()
     match type:
@@ -98,7 +100,6 @@ func ajout_model_physique(model):
 func get_tile_data():
 #    var rota_degrees : int = self.rotation_degrees.y
     var rota_degrees : int = $rotile.rotation_degrees.y
-    print(self.rota_tuile)
     var opening_data = opening_data_by_type_and_rotation[instance_type][rota_degrees%360]
     return [opening_data, opening_data^0b1111]
 

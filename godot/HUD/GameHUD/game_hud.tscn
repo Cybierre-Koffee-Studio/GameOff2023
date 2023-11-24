@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://b747blytdeucf"]
+[gd_scene load_steps=5 format=3 uid="uid://b747blytdeucf"]
 
 [ext_resource type="Script" path="res://HUD/GameHUD/game_hud.gd" id="1_hwsf3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0b8mf"]
+bg_color = Color(0.764706, 0.764706, 0.764706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2j4ew"]
+bg_color = Color(0.729412, 1, 0.721569, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_t35qw"]
+font_color = Color(0, 0, 0, 1)
 
 [node name="GameHUD" type="Control"]
 layout_mode = 3
@@ -53,7 +62,7 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -101.0
+offset_top = -165.0
 offset_right = 243.0
 grow_vertical = 0
 color = Color(0, 0, 0, 0.352941)
@@ -68,9 +77,20 @@ offset_top = -46.0
 offset_right = 217.0
 offset_bottom = -19.0
 grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_0b8mf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2j4ew")
 max_value = 3.0
 value = 3.0
 show_percentage = false
+
+[node name="Label" type="Label" parent="Crawler/LifeBar"]
+layout_mode = 0
+offset_right = 202.0
+offset_bottom = 27.0
+text = "3 / 3"
+label_settings = SubResource("LabelSettings_t35qw")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Label" type="Label" parent="Crawler"]
 layout_mode = 0
@@ -79,3 +99,19 @@ offset_top = 632.0
 offset_right = 68.0
 offset_bottom = 658.0
 text = "Power : 0"
+
+[node name="LabelScore" type="Label" parent="Crawler"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 600.0
+offset_right = 84.0
+offset_bottom = 626.0
+text = "Score : 0"
+
+[node name="LabelCave" type="Label" parent="Crawler"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 567.0
+offset_right = 84.0
+offset_bottom = 593.0
+text = "Cave level : 1"

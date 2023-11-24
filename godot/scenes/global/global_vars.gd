@@ -3,6 +3,8 @@ extends Node
 signal heal_player
 signal player_power_up
 signal blesser_joueur
+signal score_changed
+signal cave_level_changed
 
 var selected_tile : Tile
 var selected_tile_rotation
@@ -15,10 +17,13 @@ var at_exit
 var debug
 var reroll_number
 var can_player_move = false
-
+var score = 0
+var cave_level = 1
 var player_power = 0
 
 func _init():
+    score = 0
+    cave_level = 1
     started = false
     hand_size = 5
     selected_tile = null
@@ -41,3 +46,11 @@ func power_up(valeur):
 
 func blesser_le_joueur():
     emit_signal("blesser_joueur")
+
+func add_score(value):
+    score += value
+    emit_signal("score_changed")
+
+func level_ended():
+    cave_level += 1
+    emit_signal("cave_level_changed")
