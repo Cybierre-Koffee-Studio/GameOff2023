@@ -6,10 +6,10 @@ enum TYPE {CENTER, CORRIDOR, STRAIGHT, CORNER}
 
 var valeur_cluster_max = 1
 
-const center_texture = preload("res://models/tiles/center/tile_center_texture_center.png")
-const corridor_texture = preload("res://models/tiles/corridor/tile_corridor_texture_corridor.png")
-const straight_texture = preload("res://models/tiles/straight/tile_straight_texture_t.png")
-const corner_texture = preload("res://models/tiles/corner/tile_corner_texture_corner.png")
+const center_texture = preload("res://models/tiles/center/tile_center_texture.png")
+const corridor_texture = preload("res://models/tiles/corridor/tile_corridor_texture.png")
+const straight_texture = preload("res://models/tiles/straight/tile_straight_texture.png")
+const corner_texture = preload("res://models/tiles/corner/tile_corner_texture.png")
 
 const center = preload("res://ProtoCrawler/tuiles_design/tileOuvert.tscn")
 const corridor = preload("res://ProtoCrawler/tuiles_design/tileCouloir.tscn")
@@ -30,10 +30,10 @@ const opening_data_by_type_and_rotation = {
         270: 0b1111
     },
     TYPE.CORRIDOR: {
-        0:   0b1010,
-        90:  0b0101,
-        180: 0b1010,
-        270: 0b0101
+        0:   0b0101,
+        90:  0b1010,
+        180: 0b0101,
+        270: 0b1010
     },
     TYPE.STRAIGHT: {
         0:   0b0111,

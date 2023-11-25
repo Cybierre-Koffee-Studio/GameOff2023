@@ -1,14 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://dtbaspjkepue5"]
+[gd_scene load_steps=10 format=3 uid="uid://dtbaspjkepue5"]
 
 [ext_resource type="Script" path="res://scenes/tiles/tile.gd" id="1_6q3ss"]
-[ext_resource type="Texture2D" uid="uid://k7psx7dwefhv" path="res://models/tiles/corner/tile_corner_texture_corner.png" id="2_ehprs"]
-[ext_resource type="Texture2D" uid="uid://ccgjo2ptkk3qj" path="res://models/tiles/center/tile_center_texture_center.png" id="3_mqgc1"]
+[ext_resource type="Texture2D" uid="uid://hifsgnimo652" path="res://models/tiles/corner/tile_corner_texture.png" id="2_7dc2a"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c00xg"]
 resource_name = "Material.008"
 cull_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_ehprs")
+albedo_texture = ExtResource("2_7dc2a")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_j7xtf"]
 _surfaces = [{
@@ -40,8 +39,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_j7xtf")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24exy"]
-albedo_texture = ExtResource("3_mqgc1")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tp4uk"]
+shading_mode = 2
+diffuse_mode = 2
+specular_mode = 1
+disable_ambient_light = true
+albedo_texture = ExtResource("2_7dc2a")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o0mh7"]
 size = Vector3(1, 0.1, 1)
@@ -62,7 +65,7 @@ script = ExtResource("1_6q3ss")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("ArrayMesh_bnvsw")
 skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_24exy")
+surface_material_override/0 = SubResource("StandardMaterial3D_tp4uk")
 
 [node name="Area3D" type="Area3D" parent="rotile"]
 

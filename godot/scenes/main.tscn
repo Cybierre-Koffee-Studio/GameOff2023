@@ -8,7 +8,7 @@
 
 [sub_resource type="Environment" id="Environment_vyuhg"]
 background_mode = 1
-background_color = Color(0.101961, 0.109804, 0.141176, 1)
+background_color = Color(0.0134, 0.0134, 0.02, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_mync3")
@@ -24,7 +24,7 @@ omni_attenuation = 0.466517
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.19704, 13.1196)
 light_color = Color(0.894118, 0.901961, 0.827451, 1)
-light_energy = 16.0
+light_energy = 4.0
 omni_range = 10.224
 omni_attenuation = 0.659755
 
@@ -38,12 +38,11 @@ fov = 35.0
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.5, 0.75, -0.433013, 1.49012e-08, 0.5, 0.866025, 0.866025, 0.433013, -0.25, -10.325, 11.9861, -8.74714)
 light_color = Color(0.878431, 0.862745, 0.788235, 1)
-light_energy = 1.609
+light_energy = 3.0
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.524519, -0.664061, 0.532825, 0.353553, 0.739199, 0.573223, -0.774519, -0.112285, 0.622505, 15.712, 11.9861, 5.79846)
 light_color = Color(0.72549, 0.858824, 0.886275, 1)
-light_energy = 1.104
 
 [node name="Plateau" parent="." instance=ExtResource("2_8jvwn")]
 

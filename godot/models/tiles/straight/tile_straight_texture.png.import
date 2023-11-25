@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dshjtlnot07y1"
-path="res://.godot/imported/tile_corner_Material Base Color.png-3aff34d7ccccc006b514458111730879.ctex"
+uid="uid://b8g5qch7onvmx"
+path="res://.godot/imported/tile_straight_texture.png-78e7af71a471c825123045cc68e056f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/tiles/corner/tile_corner_Material Base Color.png"
-dest_files=["res://.godot/imported/tile_corner_Material Base Color.png-3aff34d7ccccc006b514458111730879.ctex"]
+source_file="res://models/tiles/straight/tile_straight_texture.png"
+dest_files=["res://.godot/imported/tile_straight_texture.png-78e7af71a471c825123045cc68e056f8.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
