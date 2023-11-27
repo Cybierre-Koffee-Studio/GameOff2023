@@ -34,7 +34,8 @@ func deal_hand(nb_tiles):
         if (GlobalVars.debug):
             tile.init(Tile.TYPE.CENTER, false)
         else:
-            tile.init(possible_tiles.pick_random(), false)
+            tile.init(pick_tile_model(), false)
+#            tile.init(possible_tiles.pick_random(), false)
         tile.connect("select_tile", on_select_tile)
         tile.position = Vector3(marker.position.x, marker.position.y, marker.position.z)
         tile.position.z += 30
@@ -78,3 +79,12 @@ func on_tile_placed(tile):
     current_hand.erase(tile)
     discard_hand()
     deal_hand(GlobalVars.hand_size)
+
+func pick_tile_model():
+    var alea = randi_range(1, 100)
+    if alea > 80 :
+        return Tile.TYPE.CENTER
+    elif alea > 65 :
+        return Tile.TYPE.STRAIGHT
+    else :
+        return [Tile.TYPE.CORNER, Tile.TYPE.CORRIDOR].pick_random()

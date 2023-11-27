@@ -30,10 +30,10 @@ const opening_data_by_type_and_rotation = {
         270: 0b1111
     },
     TYPE.CORRIDOR: {
-        0:   0b0101,
-        90:  0b1010,
-        180: 0b0101,
-        270: 0b1010
+        0:   0b1010,
+        90:  0b0101,
+        180: 0b1010,
+        270: 0b0101
     },
     TYPE.STRAIGHT: {
         0:   0b0111,

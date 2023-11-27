@@ -141,7 +141,7 @@ func place_key_tile(key_tile_zone):
     var key_tile = tile_scene.instantiate()
     var key_tile_x = randi_range(zones[key_tile_zone][0].x, zones[key_tile_zone][1].x)
     var key_tile_y = randi_range(zones[key_tile_zone][0].y, zones[key_tile_zone][1].y)
-    key_tile.init(possible_tiles.pick_random(), true)
+    key_tile.init(Tile.TYPE.CENTER, true)
     key_tile.position = Vector3(
         key_tile_x - GRID_SIZE/2,
         BOARD_THICKNESS,
@@ -167,7 +167,7 @@ func place_exit_tile(exit_tile_zone):
     var exit_tile = tile_scene.instantiate()
     var exit_tile_x = randi_range(zones[exit_tile_zone][0].x , zones[exit_tile_zone][1].x)
     var exit_tile_y = randi_range(zones[exit_tile_zone][0].y, zones[exit_tile_zone][1].y)
-    exit_tile.init(possible_tiles.pick_random(), true)
+    exit_tile.init(Tile.TYPE.CENTER, true)
     exit_tile.position = Vector3(
         exit_tile_x - GRID_SIZE/2,
         BOARD_THICKNESS,
