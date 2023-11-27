@@ -9,6 +9,7 @@ func _input(event):
         if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and cliquable and !opened :
             opened = true
             $AnimationPlayer.play("open")
+            $MeshInstance3D/Area3D.input_ray_pickable = false
             var rand_int = randi_range(1, 2)
             match rand_int :
                 1 :

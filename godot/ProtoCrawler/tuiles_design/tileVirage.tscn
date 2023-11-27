@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://lhikqtyxh8rl"]
+[gd_scene load_steps=11 format=3 uid="uid://lhikqtyxh8rl"]
 
 [ext_resource type="Texture2D" uid="uid://k7psx7dwefhv" path="res://models/tiles/corner/tile_corner_texture_corner.png" id="2_lcus1"]
 
@@ -51,6 +51,12 @@ height = 0.6
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qh1me"]
 radius = 0.3
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_j3mfn"]
+points = PackedVector3Array(0.95801, 0.2, 0.95801, -1.01587, -0.0158513, -1.01587, -1.01587, -0.0158513, 1.01587, 1.01587, -0.0158513, -1.01587, -0.95801, 0.2, -0.95801, 1.01587, -0.0158513, 1.01587, -0.95801, 0.2, 0.95801, 0.95801, 0.2, -0.95801)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7m10l"]
+points = PackedVector3Array(0.95801, 0.2, 0.95801, -1.01587, -0.0158513, -1.01587, -1.01587, -0.0158513, 1.01587, 1.01587, -0.0158513, -1.01587, -0.95801, 0.2, -0.95801, 1.01587, -0.0158513, 1.01587, -0.95801, 0.2, 0.95801, 0.95801, 0.2, -0.95801)
 
 [node name="TileModel" type="StaticBody3D"]
 transform = Transform3D(0.96, 0, 0, 0, 0.96, 0, 0, 0, 0.96, 0, 0, 0)
@@ -117,3 +123,16 @@ input_ray_pickable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="tileZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("SphereShape3D_qh1me")
+
+[node name="hitbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 2
+input_ray_pickable = false
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="hitbox"]
+transform = Transform3D(-2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0, 0, 0.5, 0.435937, 0.598365, 0)
+shape = SubResource("ConvexPolygonShape3D_j3mfn")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="hitbox"]
+transform = Transform3D(9.55343e-16, -2.18557e-08, 0.5, -0.5, -2.18557e-08, 0, 2.18557e-08, -0.5, -2.18557e-08, 0.0145406, 0.598366, -0.435418)
+shape = SubResource("ConvexPolygonShape3D_7m10l")

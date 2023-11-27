@@ -43,21 +43,25 @@ cull_mask = 1048574
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 target_position = Vector3(-1, 0, 0)
 collision_mask = 8
+collide_with_areas = true
 
 [node name="RayCastRightMonster" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 target_position = Vector3(0, 0, 1)
 collision_mask = 8
+collide_with_areas = true
 
 [node name="RayCastLeftMonster" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 target_position = Vector3(0, 0, -1)
 collision_mask = 8
+collide_with_areas = true
 
 [node name="RayCastForwardMonster" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 target_position = Vector3(1, 0, 0)
 collision_mask = 8
+collide_with_areas = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_lfesl")
