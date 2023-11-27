@@ -7,7 +7,7 @@ const game_over_scene = preload("res://HUD/GameOverScreen/game_over.tscn")
 
 var board_size = 5
 var position_tuile_centrale = null
-@onready var hand : Hand = $Hand
+@onready var hand : Hand = $Camera3D/Hand
 @onready var board : Board = $Plateau
 @onready var hud = $GameHUD
 
@@ -103,7 +103,7 @@ func can_start_explo():
         tween2.tween_property($CanvasLayer/ColorRect, "color", Color(0, 0, 0, 1), 1.2)
         await get_tree().create_timer(1.5).timeout
         board.set_flat()
-        $Hand.discard_hand()
+        hand.discard_hand()
         $joueur.set_cam_current()
         var tween3 = get_tree().create_tween()
         tween3.tween_property($CanvasLayer/ColorRect, "color", Color(0, 0, 0, 0), 0.7)

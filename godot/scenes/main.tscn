@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://4tdtu246g70a"]
+[gd_scene load_steps=8 format=3 uid="uid://4tdtu246g70a"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_mync3"]
 [ext_resource type="PackedScene" uid="uid://dcwawxg5537wa" path="res://scenes/board/board.tscn" id="2_8jvwn"]
 [ext_resource type="PackedScene" uid="uid://0737woac8q3q" path="res://scenes/hand/hand.tscn" id="2_cdqrf"]
+[ext_resource type="Script" path="res://scenes/board/free_look_camera.gd" id="2_q5p1p"]
 [ext_resource type="PackedScene" uid="uid://b747blytdeucf" path="res://HUD/GameHUD/game_hud.tscn" id="4_muk8p"]
 [ext_resource type="PackedScene" uid="uid://cj6w2grctcokj" path="res://ProtoCrawler/joueur.tscn" id="5_31lb7"]
 
@@ -12,6 +13,17 @@ background_color = Color(0.0134, 0.0134, 0.02, 1)
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_mync3")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 19, 13.1331)
+cull_mask = 1048063
+environment = SubResource("Environment_vyuhg")
+current = true
+fov = 35.0
+script = ExtResource("2_q5p1p")
+
+[node name="Hand" parent="Camera3D" instance=ExtResource("2_cdqrf")]
+transform = Transform3D(0.3, 0, 0, 0, 0.0261466, -0.298858, 0, 0.298858, 0.0261466, 0, -2.61197, -7.62728)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -39,13 +51,6 @@ light_energy = 4.0
 omni_range = 10.224
 omni_attenuation = 0.659755
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, 0, 19, 16)
-cull_mask = 1048063
-environment = SubResource("Environment_vyuhg")
-current = true
-fov = 35.0
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.5, 0.75, -0.433013, 1.49012e-08, 0.5, 0.866025, 0.866025, 0.433013, -0.25, -10.325, 11.9861, -8.74714)
 light_color = Color(0.878431, 0.862745, 0.788235, 1)
@@ -56,9 +61,6 @@ transform = Transform3D(0.524519, -0.664061, 0.532825, 0.353553, 0.739199, 0.573
 light_color = Color(0.72549, 0.858824, 0.886275, 1)
 
 [node name="Plateau" parent="." instance=ExtResource("2_8jvwn")]
-
-[node name="Hand" parent="." instance=ExtResource("2_cdqrf")]
-transform = Transform3D(0.8, 0, 0, 0, 0.69282, -0.4, 0, 0.4, 0.69282, 0, 0, 11)
 
 [node name="GameHUD" parent="." instance=ExtResource("4_muk8p")]
 
