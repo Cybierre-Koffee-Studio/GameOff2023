@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://4tdtu246g70a"]
+[gd_scene load_steps=8 format=3 uid="uid://4tdtu246g70a"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_mync3"]
 [ext_resource type="PackedScene" uid="uid://dcwawxg5537wa" path="res://scenes/board/board.tscn" id="2_8jvwn"]
 [ext_resource type="PackedScene" uid="uid://0737woac8q3q" path="res://scenes/hand/hand.tscn" id="2_cdqrf"]
+[ext_resource type="Script" path="res://scenes/Camera3D.gd" id="2_ya77h"]
 [ext_resource type="PackedScene" uid="uid://b747blytdeucf" path="res://HUD/GameHUD/game_hud.tscn" id="4_muk8p"]
 [ext_resource type="PackedScene" uid="uid://cj6w2grctcokj" path="res://ProtoCrawler/joueur.tscn" id="5_31lb7"]
 
@@ -45,6 +46,7 @@ cull_mask = 1048063
 environment = SubResource("Environment_vyuhg")
 current = true
 fov = 35.0
+script = ExtResource("2_ya77h")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.5, 0.75, -0.433013, 1.49012e-08, 0.5, 0.866025, 0.866025, 0.433013, -0.25, -10.325, 11.9861, -8.74714)

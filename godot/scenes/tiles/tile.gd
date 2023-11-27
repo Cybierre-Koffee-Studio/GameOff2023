@@ -2,7 +2,6 @@ extends Node
 class_name Tile
 
 enum TYPE {CENTER, CORRIDOR, STRAIGHT, CORNER}
-#const COLORS = [Color.RED, Color.BLUE, Color.GREEN]
 
 var valeur_cluster_max = 1
 
@@ -85,13 +84,12 @@ func init(type : TYPE, obj : bool):
         TYPE.CORNER:
             base_material_copy.albedo_texture = corner_texture
             ajout_model_physique(corner)
-    #base_material_copy.albedo_color = COLORS.pick_random()
     $rotile/mesh.set_surface_override_material(0, base_material_copy)
     if !obj :
         add_item()
-#        var proba_item = randi_range(0,100)
-#        if proba_item >= 50:
-#            add_item()
+        var proba_item = randi_range(0,100)
+        if proba_item >= 50:
+            add_item()
 
 func ajout_model_physique(model):
     var le_model = model.instantiate()

@@ -129,11 +129,6 @@ func place_starting_tile():
     start_coordinates = Vector2i(GRID_SIZE*3/2, GRID_SIZE*3/2)
     map_tile(GRID_SIZE/2, GRID_SIZE/2, [0b1111,0b0000])
     add_child(start_tile)
-    # avec le marqueur de perso dessus
-#    character_token = exit_tokenScene.instantiate()
-#    character_token.add_to_group("player")
-#    character_token.position = Vector3(start_tile.position.x, start_tile.position.y + 0.1, start_tile.position.z)
-#    add_child(character_token)
     get_parent().position_tuile_centrale = start_tile.position
 
 func place_key_tile(key_tile_zone):
@@ -174,7 +169,6 @@ func place_exit_tile(exit_tile_zone):
         exit_tile_y - GRID_SIZE/2
     )
     var exit_tile_rotation = rotations.pick_random()
-#    exit_tile.rotation.y = deg_to_rad(exit_tile_rotation)
     exit_tile.rotate_subtile(exit_tile_rotation)
     add_child(exit_tile)
     exit_coordinates = Vector2i(exit_tile_x*3+1, exit_tile_y*3+1)
@@ -187,6 +181,7 @@ func place_exit_tile(exit_tile_zone):
     var la_trappe = preload("res://ProtoCrawler/trappe.tscn").instantiate()
     la_trappe.position = Vector3(exit_tile.position.x, exit_tile.position.y + 0.1, exit_tile.position.z)
     add_child(la_trappe)
+    
 # permet de mettre à jour les données des emplacements voisins dans GRID_MAP lors du placement d'une nouvelle tuile
 func map_tile(x, y, tile_data):
     # on supprime le tile_slot à l'emplacement où la tuile est posée
@@ -262,25 +257,17 @@ func add_tile(_tile_copy):
     add_child(tile)
     var tile_x = tile.position.x + GRID_SIZE/2
     var tile_y = tile.position.z + GRID_SIZE/2
-#    tile.get_neighbour_tile_color()
     var tween = create_tween()
     tween.tween_property(tile, "position:y", BOARD_THICKNESS, 0.8).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
     tween.tween_callback(map_tile.bind(tile_x, tile_y, tile.get_tile_data()))
-#    tip(tile.position.x*0.8)
     tip(tile.position.x*(tile.poids/2))
     GlobalVars.add_score(tile.poids)
 
 func check_paths():
     if is_path_start_key(): # && !GlobalVars.got_key:
         emit_signal("has_path_start_key")
-#        GlobalVars.got_key = true
-#        move_token(get_start_key_path())
-#        await mouvement_finished
     if is_path_key_exit(): # && GlobalVars.got_key && !GlobalVars.at_exit:
         emit_signal("has_path_key_exit")
-#        GlobalVars.at_exit = true
-#        move_token(get_key_exit_path())
-#        await mouvement_finished
 
 func get_start_key_path():
     var path_start_key = pathfinding_service.get_path_a_to_b(start_coordinates, key_coordinates)
@@ -298,16 +285,6 @@ func get_key_exit_path():
             path_key_exit.erase(copy[i])
     return path_key_exit.map(func(a: Vector2i): return a/3)
 
-
-#func move_token(path: Array):
-#    if !path.is_empty():
-#        var new_pos = Vector3(path[0].x - GRID_SIZE/2, 0.2, path[0].y - GRID_SIZE/2)
-#        var tween = create_tween()
-#        tween.tween_property(character_token, "position", new_pos, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-#        tween.tween_callback(move_token.bind(path.slice(1)))
-#    else:
-#        emit_signal("mouvement_finished")
-
 func tip(angle):
     var tween = create_tween()
     var new_angle = snapped(rotation_degrees.z - angle,0.01)
@@ -324,17 +301,14 @@ func tip(angle):
 
 func set_flat():
     rotation_degrees.z = 0
-    print("ta mère la pute")
 
 func on_tile_selected(tile: Tile):
-#    GlobalVars.selected_tile_rotation = tile.rotation.y
     GlobalVars.selected_tile_rotation = tile.get_rota_degrees()
     if selected_tile_copy != null:
         remove_child(selected_tile_copy)
     selected_tile_copy = tile.duplicate()
     selected_tile_copy.poids = tile.poids
     selected_tile_copy.instance_type = tile.instance_type
-#    selected_tile_copy.rotation = GlobalVars.selected_tile.rotation
     selected_tile_copy.rotate_subtile(GlobalVars.selected_tile_rotation)
     selected_tile_copy.scale = Vector3(1,1,1)
     selected_tile_copy.visible = false
@@ -350,17 +324,6 @@ func on_tile_selected(tile: Tile):
                 slot.set_unavailable()
                 if slot_compatible(x, y, selected_tile_copy):
                     slot.set_available()
-
-#func rotate_tile():
-#    selected_tile_copy.can_rotate = false
-#    GlobalVars.selected_tile.can_rotate = false
-#    GlobalVars.selected_tile_rotation += deg_to_rad(90.0)
-#    var tween_selected_tile = create_tween()
-#    tween_selected_tile.tween_property(GlobalVars.selected_tile, "rotation:y", GlobalVars.selected_tile_rotation, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
-#    var tween_selected_tile_copy = create_tween()
-#    tween_selected_tile_copy.tween_property(selected_tile_copy, "rotation:y", GlobalVars.selected_tile_rotation, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
-#    selected_tile_copy.can_rotate = true
-#    GlobalVars.selected_tile.can_rotate = true
 
 func is_path_start_key() -> bool :
     return pathfinding_service.is_path_a_to_b(start_coordinates, key_coordinates)
