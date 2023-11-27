@@ -1,0 +1,277 @@
+[gd_scene load_steps=15 format=3 uid="uid://cbmhmve6we5g2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_81gib"]
+albedo_color = Color(0.341176, 0.207843, 0.0392157, 1)
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_uykwg"]
+material = SubResource("StandardMaterial3D_81gib")
+bottom_radius = 0.4
+height = 0.6
+radial_segments = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5s800"]
+albedo_color = Color(0.541176, 0.541176, 0.541176, 1)
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_n5fym"]
+material = SubResource("StandardMaterial3D_5s800")
+top_radius = 0.45
+bottom_radius = 0.4
+height = 0.2
+radial_segments = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uspt4"]
+albedo_color = Color(0.890196, 0.788235, 0.611765, 1)
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8dd17"]
+material = SubResource("StandardMaterial3D_uspt4")
+top_radius = 0.0
+bottom_radius = 0.05
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3kbk"]
+albedo_color = Color(0.552941, 0.317647, 0.498039, 1)
+roughness = 0.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2n28a"]
+material = SubResource("StandardMaterial3D_r3kbk")
+radius = 0.25
+height = 0.75
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7ve2x"]
+material = SubResource("StandardMaterial3D_r3kbk")
+radius = 0.2
+height = 0.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cke6u"]
+material = SubResource("StandardMaterial3D_r3kbk")
+radius = 0.15
+height = 0.4
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_j14a1"]
+material = SubResource("StandardMaterial3D_r3kbk")
+radius = 0.1
+height = 0.3
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_x2vk5"]
+material = SubResource("StandardMaterial3D_r3kbk")
+radius = 0.065
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uhkqf"]
+albedo_color = Color(0.294118, 0.294118, 0.294118, 1)
+roughness = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_q2u8a"]
+material = SubResource("StandardMaterial3D_uhkqf")
+radius = 1.0
+height = 0.2
+is_hemisphere = true
+
+[node name="mimic" type="Node3D"]
+transform = Transform3D(0.3, 0, 5.24537e-08, 0, 0.3, 0, -5.24537e-08, 0, 0.3, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.443816, 0)
+layers = 512
+mesh = SubResource("CylinderMesh_uykwg")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.226264, 0)
+layers = 512
+mesh = SubResource("CylinderMesh_n5fym")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.866025, -0.5, 0, 0.5, -0.866025, 0, 1.19669, -0.219758)
+layers = 512
+mesh = SubResource("CylinderMesh_uykwg")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.190502, 1.66542e-08)
+layers = 512
+mesh = SubResource("CylinderMesh_n5fym")
+skeleton = NodePath("../..")
+
+[node name="dents" type="Node3D" parent="."]
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42263, 0.796814, 0)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.390995, 0.796814, 0.105029)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32939, 0.796814, 0.220071)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.256467, 0.796814, 0.321093)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.154339, 0.796814, 0.37025)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.045518, 0.796814, 0.420352)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0559804, 0.796814, 0.420352)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.167567, 0.796814, 0.358343)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28559, 0.796814, 0.303096)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.352181, 0.796814, 0.212347)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.393583, 0.796814, 0.104453)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.435819, 0.796814, 0.00542372)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.388394, 0.796814, -0.124026)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.358987, 0.796814, -0.124026)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, -0.866025, -0.5, 0, 0.5, -0.866025, -0.0409248, 1.10733, 0.304927)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D18" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, -0.866025, -0.5, 0, 0.5, -0.866025, -0.137702, 1.09119, 0.280399)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D19" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, -0.866025, -0.5, 0, 0.5, -0.866025, 0.0786016, 1.08352, 0.296799)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D24" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, -0.866025, -0.5, 0, 0.5, -0.866025, -0.241414, 1.07441, 0.238666)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D25" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, -0.866025, -0.5, 0, 0.5, -0.866025, -0.329469, 1.01111, 0.160577)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D26" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, -0.866025, -0.5, 0, 0.5, -0.866025, -0.386931, 0.944973, 0.0366683)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D21" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, -0.866025, -0.5, 0, 0.5, -0.866025, 0.304651, 1.04394, 0.19453)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D20" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, -0.866025, -0.5, 0, 0.5, -0.866025, 0.212266, 1.07487, 0.259348)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D22" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, -0.866025, -0.5, 0, 0.5, -0.866025, 0.356857, 0.997858, 0.131835)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D23" type="MeshInstance3D" parent="dents"]
+transform = Transform3D(1, 0, 0, 0, -0.866025, -0.5, 0, 0.5, -0.866025, 0.39633, 0.938278, 0.0177241)
+layers = 512
+mesh = SubResource("CylinderMesh_8dd17")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.556738, 0)
+layers = 512
+mesh = SubResource("CapsuleMesh_2n28a")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.708579, 0.162891)
+layers = 512
+mesh = SubResource("CapsuleMesh_2n28a")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.676259, 0.736664, 0, -0.736664, 0.676259, 0, 0.620194, 0.43086)
+layers = 512
+mesh = SubResource("CapsuleMesh_7ve2x")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0385971, 0.999255, 0, -0.999255, 0.0385971, 0, 0.500652, 0.598339)
+layers = 512
+mesh = SubResource("CapsuleMesh_cke6u")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.680452, 0.732792, 0, -0.732792, -0.680452, 0, 0.500652, 0.76797)
+layers = 512
+mesh = SubResource("CapsuleMesh_j14a1")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.998181, 0.060282, 0, -0.060282, -0.998181, 0, 0.599276, 0.853227)
+layers = 512
+mesh = SubResource("CapsuleMesh_x2vk5")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0296478, 0)
+layers = 512
+mesh = SubResource("SphereMesh_q2u8a")

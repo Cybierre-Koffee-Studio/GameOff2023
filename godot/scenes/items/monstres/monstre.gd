@@ -4,7 +4,18 @@ var cliquable = false
 var niveau = 0
 
 func _ready():
-    niveau = randi_range(1,3)
+    pass
+#    niveau = randi_range(1,3)
+#    match niveau :
+#        1:
+#            var chovsouris = preload("res://ProtoCrawler/enemy_model/chovsouris.tscn").instantiate()
+#            add_child(chovsouris)
+#        2:
+#            var mimic = preload("res://ProtoCrawler/enemy_model/mimic.tscn").instantiate()
+#            add_child(mimic)
+#        3:
+#            var fantom = preload("res://ProtoCrawler/enemy_model/fantom.tscn").instantiate()
+#            add_child(fantom)
 
 func _input(event):
     if event is InputEventMouseButton:
@@ -22,3 +33,17 @@ func _on_area_3d_mouse_exited():
 
 func activate():
     $Area3D.input_ray_pickable = true
+    niveau = randi_range(1,3)
+    match niveau :
+        1:
+            var chovsouris = preload("res://ProtoCrawler/enemy_model/chovsouris.tscn").instantiate()
+            add_child(chovsouris)
+#            chovsouris.look_at(Vector3(0,0,0))
+        2:
+            var mimic = preload("res://ProtoCrawler/enemy_model/mimic.tscn").instantiate()
+            add_child(mimic)
+#            mimic.look_at(Vector3(0,0,0))
+        3:
+            var fantom = preload("res://ProtoCrawler/enemy_model/fantom.tscn").instantiate()
+            add_child(fantom)
+#            fantom.look_at(Vector3(0,0,0))
