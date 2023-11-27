@@ -54,7 +54,7 @@ func discard_hand():
 
 func reroll():
     if GlobalVars.reroll_number > 0:
-        GlobalVars.reroll_number -= 1
+        GlobalVars.change_reroll(-1)
         discard_hand()
         deal_hand(GlobalVars.hand_size)
 

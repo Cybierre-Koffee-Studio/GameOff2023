@@ -33,3 +33,6 @@ func update_score():
 
 func update_cave():
     $Crawler/LabelCave.text = "Cave level : " + str(GlobalVars.cave_level)
+
+func reroll_refresh():
+    $Reroll/LabelRerollCount.text = str(GlobalVars.reroll_number)

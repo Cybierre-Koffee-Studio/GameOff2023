@@ -55,3 +55,5 @@ offset_top = 463.0
 offset_right = 1075.0
 offset_bottom = 546.0
 text = "Credits"
+
+[connection signal="pressed" from="ButtonPlay" to="." method="_on_button_play_pressed"]

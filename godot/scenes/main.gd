@@ -37,6 +37,8 @@ func init():
         GlobalVars.connect("score_changed", hud.update_score)
     if !GlobalVars.is_connected("cave_level_changed", hud.update_cave):
         GlobalVars.connect("cave_level_changed", hud.update_cave)
+    if !GlobalVars.is_connected("reroll_count_changed", hud.reroll_refresh):
+        GlobalVars.connect("reroll_count_changed", hud.reroll_refresh)
     await get_tree().create_timer(1).timeout
     $joueur.position = position_tuile_centrale
 
@@ -94,11 +96,18 @@ func can_start_explo():
     if GlobalVars.fin_reliee and GlobalVars.key_reliee :
         get_tree().call_group("MONSTRE_COFFRE", "activate")
         get_tree().call_group("TILE", "check_murs_vides")
-
-        $joueur.set_cam_current()
+        var cam_pos = $Camera3D.position
+        var tween1 = get_tree().create_tween()
+        tween1.tween_property($Camera3D, "position", Vector3(0,0,0), 1.3)
+        var tween2 = get_tree().create_tween()
+        tween2.tween_property($CanvasLayer/ColorRect, "color", Color(0, 0, 0, 1), 1.2)
         await get_tree().create_timer(1.5).timeout
         board.set_flat()
         $Hand.discard_hand()
+        $joueur.set_cam_current()
+        var tween3 = get_tree().create_tween()
+        tween3.tween_property($CanvasLayer/ColorRect, "color", Color(0, 0, 0, 0), 0.7)
+        $Camera3D.position = cam_pos
 
 func on_exit_reached():
     game_over()

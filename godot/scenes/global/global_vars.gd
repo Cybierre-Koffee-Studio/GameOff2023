@@ -5,6 +5,7 @@ signal player_power_up
 signal blesser_joueur
 signal score_changed
 signal cave_level_changed
+signal reroll_count_changed
 
 var selected_tile : Tile
 var selected_tile_rotation
@@ -54,3 +55,7 @@ func add_score(value):
 func level_ended():
     cave_level += 1
     emit_signal("cave_level_changed")
+
+func change_reroll(value):
+    reroll_number += value
+    emit_signal("reroll_count_changed")

@@ -13,6 +13,17 @@ background_color = Color(0.0134, 0.0134, 0.02, 1)
 [node name="Main" type="Node3D"]
 script = ExtResource("1_mync3")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0)
+
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.50238, 5.64203, -4.53729)
 visible = false

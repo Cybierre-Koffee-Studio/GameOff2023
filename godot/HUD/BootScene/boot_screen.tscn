@@ -40,66 +40,66 @@ color = Color(1, 1, 0.909804, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 393.0
-offset_top = 182.0
-offset_right = 568.0
-offset_bottom = 252.0
+offset_left = 476.0
+offset_top = 214.0
+offset_right = 651.0
+offset_bottom = 284.0
 rotation = 0.0698132
 scale = Vector2(2, 2)
 color = Color(0.956863, 0.921569, 0.815686, 1)
 
 [node name="ColorRect3" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 467.0
-offset_top = 385.859
-offset_right = 552.0
-offset_bottom = 419.859
+offset_left = 550.0
+offset_top = 417.859
+offset_right = 635.0
+offset_bottom = 451.859
 rotation = -0.0698132
 scale = Vector2(2, 2)
 color = Color(0.956863, 0.921569, 0.815686, 1)
 
 [node name="LogoCks2" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.0352941)
-position = Vector2(562, 267)
+position = Vector2(645, 299)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_oa666")
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0
-offset_left = 473.0
-offset_top = 275.0
-offset_right = 647.0
-offset_bottom = 323.0
+offset_left = 556.0
+offset_top = 307.0
+offset_right = 730.0
+offset_bottom = 355.0
 text = "Studio"
 label_settings = SubResource("LabelSettings_0rita")
 horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 405.0
-offset_top = 215.0
-offset_right = 577.0
-offset_bottom = 276.0
+offset_left = 488.0
+offset_top = 247.0
+offset_right = 660.0
+offset_bottom = 308.0
 theme_override_font_sizes/font_size = 16
 text = "Cybierre"
 label_settings = SubResource("LabelSettings_kywds")
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 587.0
-offset_top = 215.0
-offset_right = 719.0
-offset_bottom = 276.0
+offset_left = 670.0
+offset_top = 247.0
+offset_right = 802.0
+offset_bottom = 308.0
 theme_override_font_sizes/font_size = 16
 text = "Koffee"
 label_settings = SubResource("LabelSettings_w7051")
 
 [node name="Label4" type="Label" parent="."]
 layout_mode = 0
-offset_left = 397.0
-offset_top = 388.0
-offset_right = 717.0
-offset_bottom = 436.0
+offset_left = 480.0
+offset_top = 420.0
+offset_right = 800.0
+offset_bottom = 468.0
 text = "presents"
 label_settings = SubResource("LabelSettings_45kas")
 horizontal_alignment = 1
