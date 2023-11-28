@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://lhikqtyxh8rl"]
+[gd_scene load_steps=15 format=3 uid="uid://lhikqtyxh8rl"]
 
+[ext_resource type="Script" path="res://ProtoCrawler/tuiles_design/tileScript.gd" id="1_rjt7x"]
 [ext_resource type="Texture2D" uid="uid://k7psx7dwefhv" path="res://models/tiles/corner/tile_corner_texture_corner.png" id="2_lcus1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c00xg"]
@@ -58,12 +59,27 @@ points = PackedVector3Array(0.95801, 0.2, 0.95801, -1.01587, -0.0158513, -1.0158
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7m10l"]
 points = PackedVector3Array(0.95801, 0.2, 0.95801, -1.01587, -0.0158513, -1.01587, -1.01587, -0.0158513, 1.01587, 1.01587, -0.0158513, -1.01587, -0.95801, 0.2, -0.95801, 1.01587, -0.0158513, 1.01587, -0.95801, 0.2, 0.95801, 0.95801, 0.2, -0.95801)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vgxpk"]
+albedo_color = Color(0.698039, 0.368627, 0.270588, 1)
+roughness = 0.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xlv71"]
+material = SubResource("StandardMaterial3D_vgxpk")
+top_radius = 0.02
+bottom_radius = 0.01
+height = 0.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_6xeaj"]
+size = Vector3(1.05, 0.1, 1.05)
+
 [node name="TileModel" type="StaticBody3D"]
 transform = Transform3D(0.96, 0, 0, 0, 0.96, 0, 0, 0, 0.96, 0, 0, 0)
 collision_layer = 0
+script = ExtResource("1_rjt7x")
 
 [node name="mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
 layers = 512
 mesh = SubResource("ArrayMesh_bnvsw")
 skeleton = NodePath("")
@@ -76,6 +92,7 @@ shape = SubResource("ConvexPolygonShape3D_ac6jx")
 
 [node name="mesh2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.66236, 0)
+visible = false
 layers = 512
 mesh = SubResource("ArrayMesh_bnvsw")
 skeleton = NodePath("")
@@ -83,6 +100,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_24exy")
 
 [node name="mesh3" type="MeshInstance3D" parent="."]
 transform = Transform3D(-2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0, 0, 0.5, 0.435937, 0.598365, 0)
+visible = false
 layers = 512
 mesh = SubResource("ArrayMesh_bnvsw")
 skeleton = NodePath("")
@@ -90,6 +108,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_24exy")
 
 [node name="mesh4" type="MeshInstance3D" parent="."]
 transform = Transform3D(9.55343e-16, -2.18557e-08, 0.5, -0.5, -2.18557e-08, 0, 2.18557e-08, -0.5, -2.18557e-08, 0.0145406, 0.598366, -0.435418)
+visible = false
 layers = 512
 mesh = SubResource("ArrayMesh_bnvsw")
 skeleton = NodePath("")
@@ -97,21 +116,25 @@ surface_material_override/0 = SubResource("StandardMaterial3D_24exy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.494469, 0.375247, 0.497549)
+visible = false
 layers = 512
 mesh = SubResource("CylinderMesh_2dmn6")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.494469, 0.375247, -0.487402)
+visible = false
 layers = 512
 mesh = SubResource("CylinderMesh_2dmn6")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472203, 0.375247, 0.497549)
+visible = false
 layers = 512
 mesh = SubResource("CylinderMesh_2dmn6")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472203, 0.375247, -0.487403)
+visible = false
 layers = 512
 mesh = SubResource("CylinderMesh_2dmn6")
 
@@ -136,3 +159,33 @@ shape = SubResource("ConvexPolygonShape3D_j3mfn")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="hitbox"]
 transform = Transform3D(9.55343e-16, -2.18557e-08, 0.5, -0.5, -2.18557e-08, 0, 2.18557e-08, -0.5, -2.18557e-08, 0.0145406, 0.598366, -0.435418)
 shape = SubResource("ConvexPolygonShape3D_7m10l")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.0572773, 0.0187388, -0.998183, -0.310942, 0.950429, -1.23495e-08, 0.948702, 0.310377, 0.0602646, -0.0757747, 0.352506, -0.422347)
+layers = 512
+mesh = SubResource("CylinderMesh_xlv71")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D5"]
+transform = Transform3D(1.04167, -2.98023e-08, 0, 2.98023e-08, 1.04167, 0, 0, 0, 1.04167, -0.00137538, 0.129913, 0)
+layers = 512
+light_color = Color(0.886275, 0.419608, 0, 1)
+shadow_enabled = true
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+layers = 512
+mesh = SubResource("BoxMesh_6xeaj")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.710667, 0)
+layers = 512
+mesh = SubResource("BoxMesh_6xeaj")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, -0.5)
+layers = 512
+mesh = SubResource("BoxMesh_6xeaj")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0.5, 0.5, 0)
+layers = 512
+mesh = SubResource("BoxMesh_6xeaj")

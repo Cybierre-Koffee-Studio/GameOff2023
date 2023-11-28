@@ -86,7 +86,7 @@ func init(type : TYPE, obj : bool):
             ajout_model_physique(corner)
     $rotile/mesh.set_surface_override_material(0, base_material_copy)
     if !obj :
-        add_item()
+#        add_item()
         var proba_item = randi_range(0,100)
         if proba_item >= 50:
             add_item()

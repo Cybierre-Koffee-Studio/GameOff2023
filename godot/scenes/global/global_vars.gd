@@ -2,6 +2,7 @@ extends Node
 
 signal heal_player
 signal player_power_up
+signal player_potion_up
 signal blesser_joueur
 signal score_changed
 signal cave_level_changed
@@ -16,14 +17,15 @@ var key_reliee = false
 var got_key
 var at_exit
 var debug
-var reroll_number
+var reroll_number = 0
 var can_player_move = false
 var score = 0
 var cave_level = 1
 var player_power = 0
+var player_potion = 0
 
 func _init():
-    score = 0
+#    score = 0
     cave_level = 1
     started = false
     hand_size = 5
@@ -32,7 +34,9 @@ func _init():
     got_key = false
     at_exit = false
     debug = false
-    reroll_number = 0
+#    reroll_number = 0
+#    player_power = 0
+#    player_potion = 0
     fin_reliee = false
     key_reliee = false
     started = false
@@ -43,7 +47,12 @@ func soigner_joueur():
 
 func power_up(valeur):
     player_power += valeur
-    emit_signal("player_power_up", player_power)
+    player_power_up.emit()
+#    emit_signal("player_power_up")
+
+func potion_up(valeur):
+    player_potion += valeur
+    emit_signal("player_potion_up")
 
 func blesser_le_joueur():
     emit_signal("blesser_joueur")

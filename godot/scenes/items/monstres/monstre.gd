@@ -22,6 +22,9 @@ func _input(event):
         if event.button_index == MOUSE_BUTTON_LEFT and event.pressed and cliquable :
             if GlobalVars.player_power < niveau :
                 GlobalVars.blesser_le_joueur()
+            else :
+                GlobalVars.power_up(-1)
+
             queue_free()
             GlobalVars.add_score(niveau)
 

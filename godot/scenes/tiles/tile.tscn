@@ -53,7 +53,7 @@ size = Vector3(1, 0.1, 1)
 size = Vector3(0.759675, 0.472864, 0.750755)
 
 [sub_resource type="BoxMesh" id="BoxMesh_i4d1u"]
-size = Vector3(0.05, 1, 1)
+size = Vector3(0.1, 1.05, 1.05)
 
 [node name="tile_center" type="Node3D" groups=["TILE"]]
 transform = Transform3D(0.96, 0, 0, 0, 0.96, 0, 0, 0, 0.96, 0, 0, 0)
@@ -91,7 +91,7 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="mur1" type="MeshInstance3D" parent="rotile/Raycasts/RayCast1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.518, 0.9, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.478, 0.9, 0)
 visible = false
 layers = 512
 mesh = SubResource("BoxMesh_i4d1u")
@@ -103,7 +103,7 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="mur2" type="MeshInstance3D" parent="rotile/Raycasts/RayCast2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.503, 0.9, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.478, 0.9, 0)
 visible = false
 layers = 512
 mesh = SubResource("BoxMesh_i4d1u")
@@ -116,7 +116,7 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="mur3" type="MeshInstance3D" parent="rotile/Raycasts/RayCast3"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.017, 0.9, 0.511)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.9, 0.478)
 visible = false
 layers = 512
 mesh = SubResource("BoxMesh_i4d1u")
@@ -129,7 +129,7 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="mur4" type="MeshInstance3D" parent="rotile/Raycasts/RayCast4"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.017, 0.9, -0.503)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.9, -0.478)
 visible = false
 layers = 512
 mesh = SubResource("BoxMesh_i4d1u")

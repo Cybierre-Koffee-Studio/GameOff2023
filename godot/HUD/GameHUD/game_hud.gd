@@ -19,8 +19,8 @@ func heal_player():
     $Crawler/LifeBar.value = $Crawler/LifeBar.max_value
     $Crawler/LifeBar/Label.text = str($Crawler/LifeBar.value) + " / " + str($Crawler/LifeBar.max_value)
 
-func player_power_up(valeur):
-    $Crawler/Label.text = "Power : " + str(valeur)
+func player_power_up():
+    $Crawler/Label.text = "Power : " + str(GlobalVars.player_power)
 
 func blesser_le_joueur():
     $Crawler/LifeBar.value -= 1
@@ -36,3 +36,10 @@ func update_cave():
 
 func reroll_refresh():
     $Reroll/LabelRerollCount.text = str(GlobalVars.reroll_number)
+
+func player_potion_up():
+    $Potion/LabelPotion.text = str(GlobalVars.player_potion)
+
+func switch_reroll_potion():
+    $Potion.visible = !$Potion.visible
+    $Reroll.visible = !$Reroll.visible

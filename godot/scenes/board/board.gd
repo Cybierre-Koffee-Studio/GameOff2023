@@ -181,7 +181,7 @@ func place_exit_tile(exit_tile_zone):
     var la_trappe = preload("res://ProtoCrawler/trappe.tscn").instantiate()
     la_trappe.position = Vector3(exit_tile.position.x, exit_tile.position.y + 0.1, exit_tile.position.z)
     add_child(la_trappe)
-    
+
 # permet de mettre à jour les données des emplacements voisins dans GRID_MAP lors du placement d'une nouvelle tuile
 func map_tile(x, y, tile_data):
     # on supprime le tile_slot à l'emplacement où la tuile est posée

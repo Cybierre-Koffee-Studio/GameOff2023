@@ -31,6 +31,8 @@ func init():
         GlobalVars.connect("heal_player", hud.heal_player)
     if !GlobalVars.is_connected("player_power_up", hud.player_power_up):
         GlobalVars.connect("player_power_up", hud.player_power_up)
+    if !GlobalVars.is_connected("player_potion_up", hud.player_potion_up):
+        GlobalVars.connect("player_potion_up", hud.player_potion_up)
     if !GlobalVars.is_connected("blesser_joueur", hud.blesser_le_joueur):
         GlobalVars.connect("blesser_joueur", hud.blesser_le_joueur)
     if !GlobalVars.is_connected("score_changed", hud.update_score):
@@ -43,6 +45,7 @@ func init():
     $joueur.position = position_tuile_centrale
 
 func on_replay(game_over_screen):
+    board_size = 5
     game_over_screen.queue_free()
     board.queue_free()
     hud.queue_free()
@@ -73,6 +76,7 @@ func next_level():
     hand.discard_hand()
     hand.deal_hand(GlobalVars.hand_size)
     GlobalVars.level_ended()
+    hud.switch_reroll_potion()
     init()
 
 func game_over():
@@ -102,6 +106,7 @@ func can_start_explo():
         var tween2 = get_tree().create_tween()
         tween2.tween_property($CanvasLayer/ColorRect, "color", Color(0, 0, 0, 1), 1.2)
         await get_tree().create_timer(1.5).timeout
+        hud.switch_reroll_potion()
         board.set_flat()
         hand.discard_hand()
         $joueur.set_cam_current()

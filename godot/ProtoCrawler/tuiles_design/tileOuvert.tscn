@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://djql4pic5x2mw"]
+[gd_scene load_steps=11 format=3 uid="uid://djql4pic5x2mw"]
 
 [ext_resource type="Texture2D" uid="uid://k7psx7dwefhv" path="res://models/tiles/corner/tile_corner_texture_corner.png" id="1_cg8k2"]
 [ext_resource type="Texture2D" uid="uid://ccgjo2ptkk3qj" path="res://models/tiles/center/tile_center_texture_center.png" id="2_ago1l"]
@@ -53,12 +53,16 @@ height = 0.6
 [sub_resource type="SphereShape3D" id="SphereShape3D_qc54n"]
 radius = 0.3
 
+[sub_resource type="BoxMesh" id="BoxMesh_8ggld"]
+size = Vector3(1.05, 0.1, 1.05)
+
 [node name="TileModel" type="StaticBody3D"]
 transform = Transform3D(0.96, 0, 0, 0, 0.96, 0, 0, 0, 0.96, 0, 0, 0)
 collision_layer = 0
 
 [node name="mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
 layers = 512
 mesh = SubResource("ArrayMesh_bnvsw")
 skeleton = NodePath("")
@@ -71,6 +75,7 @@ shape = SubResource("ConvexPolygonShape3D_n0flx")
 
 [node name="mesh2" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.633837, 0)
+visible = false
 layers = 512
 mesh = SubResource("ArrayMesh_bnvsw")
 skeleton = NodePath("")
@@ -78,21 +83,25 @@ surface_material_override/0 = SubResource("StandardMaterial3D_24exy")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.494469, 0.355781, 0.497549)
+visible = false
 layers = 512
 mesh = SubResource("CylinderMesh_2dmn6")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.494469, 0.355781, -0.487402)
+visible = false
 layers = 512
 mesh = SubResource("CylinderMesh_2dmn6")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472203, 0.355781, 0.497549)
+visible = false
 layers = 512
 mesh = SubResource("CylinderMesh_2dmn6")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472203, 0.355781, -0.487403)
+visible = false
 layers = 512
 mesh = SubResource("CylinderMesh_2dmn6")
 
@@ -104,3 +113,12 @@ input_ray_pickable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="tileZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("SphereShape3D_qc54n")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+layers = 512
+mesh = SubResource("BoxMesh_8ggld")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.685533, 0)
+layers = 512
+mesh = SubResource("BoxMesh_8ggld")

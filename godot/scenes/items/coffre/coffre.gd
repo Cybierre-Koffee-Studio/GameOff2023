@@ -17,7 +17,7 @@ func _input(event):
                     GlobalVars.power_up(1)
                 2 :
                     print("Soins reçus")
-                    GlobalVars.soigner_joueur()
+                    GlobalVars.potion_up(1)
 
 
 func _on_area_3d_mouse_entered():
