@@ -4,6 +4,8 @@ class_name Board
 signal tile_placed
 signal has_path_start_key
 signal has_path_key_exit
+signal path_key_exit_impossible
+signal path_start_key_impossible
 signal board_full
 signal board_toppled
 signal board_tipped(new_angle)
@@ -268,6 +270,10 @@ func check_paths():
         emit_signal("has_path_start_key")
     if is_path_key_exit(): # && GlobalVars.got_key && !GlobalVars.at_exit:
         emit_signal("has_path_key_exit")
+    if is_path_start_key_impossible():
+        emit_signal("path_start_key_impossible")
+    if is_path_key_exit_impossible():
+        emit_signal("path_key_exit_impossible")
 
 func get_start_key_path():
     var path_start_key = pathfinding_service.get_path_a_to_b(start_coordinates, key_coordinates)
@@ -330,3 +336,9 @@ func is_path_start_key() -> bool :
 
 func is_path_key_exit() -> bool :
     return pathfinding_service.is_path_a_to_b(key_coordinates, exit_coordinates)
+
+func is_path_key_exit_impossible() -> bool :
+    return pathfinding_service.is_path_a_to_b_inverse(key_coordinates, exit_coordinates)
+
+func is_path_start_key_impossible() -> bool :
+    return pathfinding_service.is_path_a_to_b_inverse(key_coordinates, exit_coordinates)

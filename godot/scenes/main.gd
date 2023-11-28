@@ -21,6 +21,8 @@ func init():
     board.connect("has_path_start_key", _on_plateau_has_path_start_key)
     board.connect("has_path_key_exit", _on_plateau_has_path_key_exit)
     board.connect("has_path_key_exit", hud.on_has_key_exit_path)
+    board.connect("path_start_key_impossible", on_board_toppled)
+    board.connect("path_key_exit_impossible", on_board_toppled)
     board.connect("board_tipped", hud.on_board_tipped)
     board.connect("board_toppled", hud.on_board_toppled)
     board.connect("board_toppled", on_board_toppled)
