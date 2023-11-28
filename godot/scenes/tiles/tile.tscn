@@ -1,13 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtbaspjkepue5"]
+[gd_scene load_steps=9 format=3 uid="uid://dtbaspjkepue5"]
 
 [ext_resource type="Script" path="res://scenes/tiles/tile.gd" id="1_6q3ss"]
-[ext_resource type="Texture2D" uid="uid://hifsgnimo652" path="res://models/tiles/corner/tile_corner_texture.png" id="2_7dc2a"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c00xg"]
-resource_name = "Material.008"
-cull_mode = 2
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_7dc2a")
+[ext_resource type="Texture2D" uid="uid://hifsgnimo652" path="res://models/tiles/corner/tile_corner_texture.png" id="2_gi83r"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_j7xtf"]
 _surfaces = [{
@@ -30,7 +24,6 @@ _surfaces = [{
 "format": 4119,
 "index_count": 36,
 "index_data": PackedByteArray(0, 0, 9, 0, 3, 0, 0, 0, 6, 0, 9, 0, 8, 0, 21, 0, 10, 0, 8, 0, 19, 0, 21, 0, 20, 0, 17, 0, 23, 0, 20, 0, 14, 0, 17, 0, 13, 0, 4, 0, 15, 0, 13, 0, 2, 0, 4, 0, 7, 0, 12, 0, 18, 0, 7, 0, 1, 0, 12, 0, 22, 0, 5, 0, 11, 0, 22, 0, 16, 0, 5, 0),
-"material": SubResource("StandardMaterial3D_c00xg"),
 "name": "Material.008",
 "primitive": 3,
 "vertex_count": 24,
@@ -44,7 +37,7 @@ shading_mode = 2
 diffuse_mode = 2
 specular_mode = 1
 disable_ambient_light = true
-albedo_texture = ExtResource("2_7dc2a")
+albedo_texture = ExtResource("2_gi83r")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_o0mh7"]
 size = Vector3(1, 0.1, 1)
