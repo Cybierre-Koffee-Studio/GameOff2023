@@ -15,7 +15,7 @@ var _bas = false
 var _gauche = false
 var _droite = false
 
-func _input(event):    
+func _unhandled_key_input(event):
     if event.is_action("MoveCamHaut"):
         _haut = event.pressed
     if event.is_action("MoveCamBas"):

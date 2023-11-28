@@ -6,49 +6,48 @@ const JUMP_VELOCITY = 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var is_moving = false
-var cam_is_rotating = false
+var can_move = true
+var can_rotate = true
 
 func _physics_process(_delta):
     if !GlobalVars.can_player_move : return
-
-    if Input.is_action_just_pressed("rotaCamDroite") and !cam_is_rotating:
-        cam_is_rotating = true
-        turn_cam(Vector3(0, -90, 0))
-    if Input.is_action_just_pressed("rotaCamGauche") and !cam_is_rotating:
-        cam_is_rotating = true
-        turn_cam(Vector3(0, 90, 0))
-    if Input.is_action_just_pressed("Avancer") :
-        if $RayCastForward.is_colliding() and !is_moving and !$RayCastForwardMonster.is_colliding():
-            is_moving = true
-            move($RayCastForward.get_collider().global_position)
-    if Input.is_action_just_pressed("Reculer") :
-        if $RayCastBack.is_colliding() and !is_moving and !$RayCastBackMonster.is_colliding():
-            is_moving = true
-            move($RayCastBack.get_collider().global_position)
-    if Input.is_action_just_pressed("AllerADroite") :
-        if $RayCastRight.is_colliding() and !is_moving and !$RayCastRightMonster.is_colliding():
-            is_moving = true
-            move($RayCastRight.get_collider().global_position)
-    if Input.is_action_just_pressed("AllerAGauche") :
-        if $RayCastLeft.is_colliding() and !is_moving and !$RayCastLeftMonster.is_colliding():
-            is_moving = true
-            move($RayCastLeft.get_collider().global_position)
-
     move_and_slide()
 
+func _unhandled_key_input(event):
+    if event.is_action_pressed("rotaCamDroite"):
+        turn_cam(Vector3(0, -90, 0))
+    if event.is_action_pressed("rotaCamGauche"):
+        turn_cam(Vector3(0, 90, 0))
+    if event.is_action_pressed("Avancer"):
+        if $RayCastForward.is_colliding() && !$RayCastForwardMonster.is_colliding():
+            move($RayCastForward.get_collider().global_position)
+    if event.is_action_pressed("Reculer"):
+        if $RayCastBack.is_colliding() && !$RayCastBackMonster.is_colliding():
+            move($RayCastBack.get_collider().global_position)
+    if event.is_action_pressed("AllerADroite"):
+        if $RayCastRight.is_colliding() && !$RayCastRightMonster.is_colliding():
+            move($RayCastRight.get_collider().global_position)
+    if event.is_action_pressed("AllerAGauche"):
+        if $RayCastLeft.is_colliding() && !$RayCastLeftMonster.is_colliding():
+            move($RayCastLeft.get_collider().global_position)
+            
+
 func move(target_pos):
-    var tween = get_tree().create_tween()
-    tween.tween_property($".", "global_position", target_pos, 0.25)
-    await get_tree().create_timer(0.25).timeout
-    is_moving = false
+    if can_move:
+        can_move = false
+        var tween = get_tree().create_tween()
+        tween.tween_property($".", "global_position", target_pos, 0.25)
+        await get_tree().create_timer(0.25).timeout
+    can_move = true
 
 func turn_cam(deg):
-    var tween = get_tree().create_tween()
-    var target_deg = rotation_degrees + deg
-    tween.tween_property($".", "rotation_degrees", target_deg, 0.25)
-    await get_tree().create_timer(0.25).timeout
-    cam_is_rotating = false
+    if can_rotate:
+        can_rotate = false
+        var tween = get_tree().create_tween()
+        var target_deg = rotation_degrees + deg
+        tween.tween_property($".", "rotation_degrees", target_deg, 0.25)
+        await tween.finished
+    can_rotate = true
 
 func set_cam_current():
     GlobalVars.can_player_move = true
