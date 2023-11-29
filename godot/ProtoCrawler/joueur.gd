@@ -10,8 +10,7 @@ var can_move = true
 var can_rotate = true
 
 func _physics_process(_delta):
-    if !GlobalVars.can_player_move : return
-    move_and_slide()
+    pass
 
 func _unhandled_key_input(event):
     if event.is_action_pressed("rotaCamDroite"):
@@ -33,7 +32,7 @@ func _unhandled_key_input(event):
             
 
 func move(target_pos):
-    if can_move:
+    if can_move and GlobalVars.can_player_move:
         can_move = false
         var tween = get_tree().create_tween()
         tween.tween_property($".", "global_position", target_pos, 0.25)
@@ -41,7 +40,7 @@ func move(target_pos):
     can_move = true
 
 func turn_cam(deg):
-    if can_rotate:
+    if can_rotate and GlobalVars.can_player_move:
         can_rotate = false
         var tween = get_tree().create_tween()
         var target_deg = rotation_degrees + deg
