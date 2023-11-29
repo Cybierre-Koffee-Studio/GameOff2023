@@ -61,7 +61,6 @@ var exit_coordinates : Vector2i
 var selected_tile_copy : Tile
 var current_inclination
 
-var character_token : Node3D
 var key_token : Node3D
 var exit_token : Node3D
 
@@ -145,7 +144,6 @@ func place_key_tile(key_tile_zone):
         key_tile_y - GRID_SIZE/2
     )
     var key_tile_rotation = rotations.pick_random()
-#    key_tile.rotation.y = deg_to_rad(key_tile_rotation)
     key_tile.rotate_subtile(key_tile_rotation)
     add_child(key_tile)
     key_coordinates = Vector2i(key_tile_x*3+1, key_tile_y*3+1)
