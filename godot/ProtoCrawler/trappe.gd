@@ -40,3 +40,7 @@ func _on_area_3d_body_entered(_body):
         var lecran = game_end_scene.instantiate()
         get_parent().add_child(lecran)
         GlobalVars.can_player_move = false
+
+func look_at_player(posi):
+    var target_pos = Vector3(posi.x, global_transform.origin.y+0.01 , posi.z)
+    look_at(target_pos, Vector3.UP, true)

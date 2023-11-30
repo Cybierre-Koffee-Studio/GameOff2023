@@ -1,7 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://djql4pic5x2mw"]
+[gd_scene load_steps=19 format=3 uid="uid://djql4pic5x2mw"]
 
 [ext_resource type="Texture2D" uid="uid://k7psx7dwefhv" path="res://models/tiles/corner/tile_corner_texture_corner.png" id="1_cg8k2"]
 [ext_resource type="Texture2D" uid="uid://ccgjo2ptkk3qj" path="res://models/tiles/center/tile_center_texture_center.png" id="2_ago1l"]
+[ext_resource type="Material" uid="uid://bv8kin0v3pcbx" path="res://ProtoCrawler/tuiles_design/sol.tres" id="3_iuham"]
+[ext_resource type="Material" uid="uid://ct108dw2gmtvh" path="res://ProtoCrawler/tuiles_design/plafond.tres" id="4_gft6q"]
+[ext_resource type="Material" uid="uid://dbd7wvbvx3wtv" path="res://ProtoCrawler/tuiles_design/poto.tres" id="5_najtn"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c00xg"]
 resource_name = "Material.008"
@@ -134,29 +137,35 @@ shape = SubResource("SphereShape3D_qc54n")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
 layers = 512
+material_override = ExtResource("3_iuham")
 mesh = SubResource("BoxMesh_nl8lt")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 layers = 512
+material_override = ExtResource("4_gft6q")
 mesh = SubResource("BoxMesh_8ggld")
 
 [node name="MeshInstance3D10" type="MeshInstance3D" parent="MeshInstance3D7"]
 transform = Transform3D(1, 0, 0, 0, -4.37115e-08, 1, 0, -1, -4.37115e-08, -0.467959, -0.320947, -0.519646)
 layers = 512
+material_override = ExtResource("5_najtn")
 mesh = SubResource("BoxMesh_pqa4l")
 
 [node name="MeshInstance3D11" type="MeshInstance3D" parent="MeshInstance3D7"]
 transform = Transform3D(1, 0, 0, 0, -4.37115e-08, 1, 0, -1, -4.37115e-08, 0.463197, -0.320947, -0.518721)
 layers = 512
+material_override = ExtResource("5_najtn")
 mesh = SubResource("BoxMesh_pqa4l")
 
 [node name="MeshInstance3D12" type="MeshInstance3D" parent="MeshInstance3D7"]
 transform = Transform3D(1, 0, 0, 0, -4.37115e-08, 1, 0, -1, -4.37115e-08, 0.448884, -0.320947, 0.525471)
 layers = 512
+material_override = ExtResource("5_najtn")
 mesh = SubResource("BoxMesh_pqa4l")
 
 [node name="MeshInstance3D13" type="MeshInstance3D" parent="MeshInstance3D7"]
 transform = Transform3D(1, 0, 0, 0, -4.37115e-08, 1, 0, -1, -4.37115e-08, -0.47099, -0.320947, 0.529058)
 layers = 512
+material_override = ExtResource("5_najtn")
 mesh = SubResource("BoxMesh_pqa4l")

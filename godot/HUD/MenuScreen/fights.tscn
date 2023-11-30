@@ -41,7 +41,7 @@ offset_bottom = 474.0
 text = "You can encounter 3 types of monster :
 - Bats :  these are the weakest monsters, it requires 1 power to defeat them without being hit
      - Killing one of them increases your score by 1
-- Mimics : there are the medium monsters, i requires 2 power to defeat them without being hit
+- Mimics : these are the medium monsters, it requires 2 power to defeat them without being hit
      - Killing one of them increases your score by 2
 - Ghosts : these are the strongest monsters, it require 3 power to defeat them without being hit
      - Killing one of them increases your score by 3

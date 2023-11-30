@@ -13,11 +13,9 @@ func _input(event):
             var rand_int = randi_range(1, 2)
             match rand_int :
                 1 :
-                    print("Puissance obtenue")
                     GlobalVars.power_up(1)
                     $AnimationPlayer2.play("power")
                 2 :
-                    print("Potion reçue")
                     GlobalVars.potion_up(1)
                     $AnimationPlayer2.play("potion")
 

@@ -248,7 +248,6 @@ func add_tile(_tile_copy):
     var tile = selected_tile_copy
     remove_child(selected_tile_copy)
     tile.poids = selected_tile_copy.poids
-    print(tile.poids)
     tile.position = selected_tile_copy.position
     selected_tile_copy.disconnect("select_tile", add_tile)
     selected_tile_copy = null
@@ -260,7 +259,8 @@ func add_tile(_tile_copy):
     var tween = create_tween()
     tween.tween_property(tile, "position:y", BOARD_THICKNESS, 0.8).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
     tween.tween_callback(map_tile.bind(tile_x, tile_y, tile.get_tile_data()))
-    tip(tile.position.x*(tile.poids/2))
+#    tip(tile.position.x*(tile.poids/2))
+    tip(tile.position.x*tile.poids)
     GlobalVars.add_score(tile.poids)
 
 func check_paths():
@@ -292,7 +292,7 @@ func get_key_exit_path():
 func tip(angle):
     var tween = create_tween()
     var new_angle = snapped(rotation_degrees.z - angle,0.01)
-    if abs(new_angle) > GRID_SIZE*4/5 :
+    if abs(new_angle) > GRID_SIZE*4/2 :
         if rotation_degrees.z > 0:
             new_angle = 180
         else:

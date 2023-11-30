@@ -1,6 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://lhikqtyxh8rl"]
+[gd_scene load_steps=22 format=3 uid="uid://lhikqtyxh8rl"]
 
 [ext_resource type="Script" path="res://ProtoCrawler/tuiles_design/tileScript.gd" id="1_rjt7x"]
+[ext_resource type="Material" uid="uid://bv8kin0v3pcbx" path="res://ProtoCrawler/tuiles_design/sol.tres" id="2_m34vq"]
+[ext_resource type="Material" uid="uid://ct108dw2gmtvh" path="res://ProtoCrawler/tuiles_design/plafond.tres" id="3_r8wsn"]
+[ext_resource type="Material" uid="uid://c282h7hrf5nt7" path="res://ProtoCrawler/tuiles_design/mur.tres" id="4_twi5j"]
+[ext_resource type="Material" uid="uid://dbd7wvbvx3wtv" path="res://ProtoCrawler/tuiles_design/poto.tres" id="5_1fhul"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ac6jx"]
 points = PackedVector3Array(0.95801, 0.2, 0.95801, -1.01587, -0.0158513, -1.01587, -1.01587, -0.0158513, 1.01587, 1.01587, -0.0158513, -1.01587, -0.95801, 0.2, -0.95801, 1.01587, -0.0158513, 1.01587, -0.95801, 0.2, 0.95801, 0.95801, 0.2, -0.95801)
@@ -106,31 +110,37 @@ omni_range = 0.859398
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
 layers = 512
+material_override = ExtResource("2_m34vq")
 mesh = SubResource("BoxMesh_egal6")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 layers = 512
+material_override = ExtResource("3_r8wsn")
 mesh = SubResource("BoxMesh_ods1l")
 
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, -0.5)
 layers = 512
+material_override = ExtResource("4_twi5j")
 mesh = SubResource("BoxMesh_6xeaj")
 
 [node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0.5, 0.5, 0)
 layers = 512
+material_override = ExtResource("4_twi5j")
 mesh = SubResource("BoxMesh_6xeaj")
 
 [node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.525036, 0.5, -0.45794)
 layers = 512
+material_override = ExtResource("5_1fhul")
 mesh = SubResource("BoxMesh_riaty")
 
 [node name="MeshInstance3D11" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37115e-08, 1, 0, -1, -4.37115e-08, 0.477079, 0.5, 0.525499)
 layers = 512
+material_override = ExtResource("5_1fhul")
 mesh = SubResource("BoxMesh_riaty")
 
 [node name="MeshInstance3D12" type="MeshInstance3D" parent="."]
@@ -141,9 +151,11 @@ mesh = SubResource("BoxMesh_xjkgv")
 [node name="MeshInstance3D14" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37115e-08, 1, 0, -1, -4.37115e-08, 0.448884, 0.5, 0.525471)
 layers = 512
+material_override = ExtResource("5_1fhul")
 mesh = SubResource("BoxMesh_xjkgv")
 
 [node name="MeshInstance3D15" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37115e-08, 1, 0, -1, -4.37115e-08, -0.47099, 0.5, 0.529058)
 layers = 512
+material_override = ExtResource("5_1fhul")
 mesh = SubResource("BoxMesh_xjkgv")

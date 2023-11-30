@@ -44,14 +44,6 @@ offset_right = 105.0
 offset_bottom = 53.0
 text = "Key => Exit : Nope"
 
-[node name="BoardAngleLabel" type="Label" parent="."]
-visible = false
-layout_mode = 0
-offset_top = 56.0
-offset_right = 115.0
-offset_bottom = 82.0
-text = "Board angle : 0"
-
 [node name="BoardToppledLabel" type="Label" parent="."]
 visible = false
 layout_mode = 0
@@ -206,5 +198,43 @@ offset_right = 1235.0
 offset_bottom = 686.0
 text = "0"
 label_settings = SubResource("LabelSettings_r7ruw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Balance" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -393.0
+offset_top = -40.0
+offset_right = 438.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="Balance"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -185.5
+offset_top = -40.0
+offset_right = 188.5
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 0.352941)
+
+[node name="BoardAngleLabel" type="Label" parent="Balance"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Board angle : Perfectly balanced"
 horizontal_alignment = 1
 vertical_alignment = 1

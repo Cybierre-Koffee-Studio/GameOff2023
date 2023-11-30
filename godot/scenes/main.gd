@@ -48,6 +48,9 @@ func init():
 
 func on_replay(game_over_screen):
     board_size = 5
+    $DirectionalLight3D.visible = true
+    $DirectionalLight3D2.visible = true
+    $OmniLight3D2.visible = true
     game_over_screen.queue_free()
     board.queue_free()
     hud.queue_free()
@@ -68,6 +71,7 @@ func next_level():
     $DirectionalLight3D2.visible = true
     $OmniLight3D2.visible = true
     board_size += 2
+    hud.hide_show_balance()
 #    game_over_screen.queue_free()
     board.queue_free()
 #    hud.queue_free()
@@ -120,6 +124,7 @@ func can_start_explo():
         $joueur.set_cam_current()
         var tween3 = get_tree().create_tween()
         tween3.tween_property($CanvasLayer/ColorRect, "color", Color(0, 0, 0, 0), 0.7)
+        hud.hide_show_balance()
         $Camera3D.position = cam_pos
 
 func on_exit_reached():

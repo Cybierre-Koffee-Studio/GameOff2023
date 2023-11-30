@@ -23,7 +23,7 @@ size = Vector3(0.8, 0.05, 0.8)
 [sub_resource type="SphereShape3D" id="SphereShape3D_agygl"]
 radius = 0.283672
 
-[node name="trappe" type="StaticBody3D" groups=["TRAPPE"]]
+[node name="trappe" type="StaticBody3D" groups=["ENTITY", "TRAPPE"]]
 script = ExtResource("1_pjnka")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

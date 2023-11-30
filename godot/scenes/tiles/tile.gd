@@ -60,12 +60,6 @@ signal rotate_tile
 var item : Item = null
 var poids = 0
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-#    poids = randi_range(1,3)
-#    $Label3D.text = str(poids)
-    pass
-
 func init(type : TYPE, obj : bool):
     poids = randi_range(1,3)
     $Label3D.text = str(poids)
@@ -86,7 +80,6 @@ func init(type : TYPE, obj : bool):
             ajout_model_physique(corner)
     $rotile/mesh.set_surface_override_material(0, base_material_copy)
     if !obj :
-#        add_item()
         var proba_item = randi_range(0,100)
         if proba_item >= 50:
             add_item()
@@ -99,13 +92,11 @@ func ajout_model_physique(model):
 #  0 : les ouvertures (haut, droite, bas, gauche), exemple pour un couloir horizontal : 0b0101
 #  1 : les murs (haut, droite, bas, gauche), l'inverse des ouvertures en fait, exemple pour un couloir horizontal : 0b1010
 func get_tile_data():
-#    var rota_degrees : int = self.rotation_degrees.y
     var rota_degrees : int = $rotile.rotation_degrees.y
     var opening_data = opening_data_by_type_and_rotation[instance_type][rota_degrees%360]
     return [opening_data, opening_data^0b1111]
 
 func add_item():
-#    var new_item = reroll_item_scene.instantiate()
     var new_item = items_list.pick_random().instantiate()
     new_item.place_on_tile(self)
     item = new_item
@@ -113,10 +104,6 @@ func add_item():
 
 func has_item():
     return item != null
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-    pass
 
 func _on_area_3d_mouse_entered():
     pass
@@ -135,18 +122,6 @@ func rotate_subtile(degr):
 func get_rota_degrees():
     return $rotile.rotation_degrees.y
 
-#func get_neighbour_tile_color():
-#    var valeur_tampon = 0
-#    for i in range(1,5) :
-#        var un_raycast:RayCast3D = find_child("RayCast" + str(i))
-#        if un_raycast.is_colliding() :
-#            if un_raycast.get_collider().get_parent().get_tile_color() == get_tile_color() :
-#                if un_raycast.get_collider().get_parent().valeur_cluster_max < valeur_tampon :
-#                    valeur_cluster_max = un_raycast.get_collider().get_parent().valeur_cluster_max
-#                print("C LA MEME")
-
-#func get_tile_color():
-#    return $mesh.get_surface_override_material(0).albedo_color
 func check_murs_vides():
     for i in range(1,5) :
         var un_raycast:RayCast3D = find_child("RayCast" + str(i))

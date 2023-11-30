@@ -1,8 +1,12 @@
-[gd_scene load_steps=22 format=3 uid="uid://diaqrdgeblurt"]
+[gd_scene load_steps=24 format=3 uid="uid://diaqrdgeblurt"]
 
 [ext_resource type="Script" path="res://ProtoCrawler/tuiles_design/tileScript.gd" id="1_4g3xk"]
 [ext_resource type="Texture2D" uid="uid://k7psx7dwefhv" path="res://models/tiles/corner/tile_corner_texture_corner.png" id="2_53jq0"]
 [ext_resource type="Texture2D" uid="uid://cpxigyigugih8" path="res://models/tiles/straight/tile_straight_texture_t.png" id="3_x22wo"]
+[ext_resource type="Material" uid="uid://bv8kin0v3pcbx" path="res://ProtoCrawler/tuiles_design/sol.tres" id="4_2r2ql"]
+[ext_resource type="Material" uid="uid://c282h7hrf5nt7" path="res://ProtoCrawler/tuiles_design/mur.tres" id="5_kieq2"]
+[ext_resource type="Material" uid="uid://dbd7wvbvx3wtv" path="res://ProtoCrawler/tuiles_design/poto.tres" id="6_k6iwk"]
+[ext_resource type="Material" uid="uid://ct108dw2gmtvh" path="res://ProtoCrawler/tuiles_design/plafond.tres" id="6_volso"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c00xg"]
 resource_name = "Material.008"
@@ -74,11 +78,8 @@ albedo_color = Color(0.333333, 0.282353, 0.243137, 1)
 material = SubResource("StandardMaterial3D_2nv8p")
 size = Vector3(1.06, 0.1, 1.06)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tnfy8"]
-albedo_color = Color(0.403922, 0.313726, 0.231373, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_mi8vl"]
-material = SubResource("StandardMaterial3D_tnfy8")
+material = ExtResource("5_kieq2")
 size = Vector3(1.05, 0.1, 1.05)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y44rq"]
@@ -88,11 +89,8 @@ albedo_color = Color(0.478431, 0.27451, 0.160784, 1)
 material = SubResource("StandardMaterial3D_y44rq")
 size = Vector3(0.1, 0.1, 1.1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b5a83"]
-albedo_color = Color(0.298039, 0.231373, 0.164706, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_jjm3d"]
-material = SubResource("StandardMaterial3D_b5a83")
+material = ExtResource("6_volso")
 size = Vector3(1.05, 0.1, 1.05)
 
 [node name="TileModel" type="StaticBody3D"]
@@ -186,16 +184,19 @@ omni_range = 1.10225
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
 layers = 512
+material_override = ExtResource("4_2r2ql")
 mesh = SubResource("BoxMesh_m8al3")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.5, -0.5)
 layers = 512
+material_override = ExtResource("5_kieq2")
 mesh = SubResource("BoxMesh_mi8vl")
 
 [node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.521693, 0.5, -0.45794)
 layers = 512
+material_override = ExtResource("6_k6iwk")
 mesh = SubResource("BoxMesh_0qyll")
 
 [node name="MeshInstance3D10" type="MeshInstance3D" parent="."]

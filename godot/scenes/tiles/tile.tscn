@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtbaspjkepue5"]
+[gd_scene load_steps=11 format=3 uid="uid://dtbaspjkepue5"]
 
 [ext_resource type="Script" path="res://scenes/tiles/tile.gd" id="1_6q3ss"]
 [ext_resource type="Texture2D" uid="uid://hifsgnimo652" path="res://models/tiles/corner/tile_corner_texture.png" id="2_gi83r"]
+[ext_resource type="Material" uid="uid://c282h7hrf5nt7" path="res://ProtoCrawler/tuiles_design/mur.tres" id="3_3htfo"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_j7xtf"]
 _surfaces = [{
@@ -91,6 +92,7 @@ collide_with_bodies = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.478, 0.9, 0)
 visible = false
 layers = 512
+material_override = ExtResource("3_3htfo")
 mesh = SubResource("BoxMesh_i4d1u")
 
 [node name="RayCast2" type="RayCast3D" parent="rotile/Raycasts"]
@@ -103,6 +105,7 @@ collide_with_bodies = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.478, 0.9, 0)
 visible = false
 layers = 512
+material_override = ExtResource("3_3htfo")
 mesh = SubResource("BoxMesh_i4d1u")
 skeleton = NodePath("../../RayCast1")
 
@@ -116,6 +119,7 @@ collide_with_bodies = false
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.9, 0.478)
 visible = false
 layers = 512
+material_override = ExtResource("3_3htfo")
 mesh = SubResource("BoxMesh_i4d1u")
 skeleton = NodePath("../../RayCast1")
 
@@ -129,6 +133,7 @@ collide_with_bodies = false
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.9, -0.478)
 visible = false
 layers = 512
+material_override = ExtResource("3_3htfo")
 mesh = SubResource("BoxMesh_i4d1u")
 skeleton = NodePath("../../RayCast1")
 

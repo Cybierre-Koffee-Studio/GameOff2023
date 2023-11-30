@@ -10,7 +10,12 @@ func on_has_key_exit_path():
     $KeyExitLabel.text = "Key => Exit : OK"
 
 func on_board_tipped(new_angle):
-    $BoardAngleLabel.text = "Board angle : " + str(new_angle)
+    if new_angle == 0 :
+        $Balance/BoardAngleLabel.text = "Board angle : Perfectly balanced"
+    elif (new_angle > 0 and new_angle < 8) or (new_angle < 0 and new_angle > -8) :
+        $Balance/BoardAngleLabel.text = "Board angle : Fine"
+    elif new_angle >= 8 or new_angle <= -8 :
+        $Balance/BoardAngleLabel.text = "Board angle : Dangerous"
 
 func on_board_toppled():
     $BoardToppledLabel.text = "Board toppled : true"
@@ -43,3 +48,7 @@ func player_potion_up():
 func switch_reroll_potion():
     $Potion.visible = !$Potion.visible
     $Reroll.visible = !$Reroll.visible
+
+func hide_show_balance():
+    $Balance.visible = !$Balance.visible
+    $Balance/BoardAngleLabel.text = "Board angle : Perfectly balanced"

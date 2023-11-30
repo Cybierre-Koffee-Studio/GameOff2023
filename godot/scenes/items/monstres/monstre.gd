@@ -41,12 +41,9 @@ func activate():
         1:
             var chovsouris = preload("res://ProtoCrawler/enemy_model/chovsouris.tscn").instantiate()
             add_child(chovsouris)
-#            chovsouris.look_at(Vector3(0,0,0))
         2:
             var mimic = preload("res://ProtoCrawler/enemy_model/mimic.tscn").instantiate()
             add_child(mimic)
-#            mimic.look_at(Vector3(0,0,0))
         3:
             var fantom = preload("res://ProtoCrawler/enemy_model/fantom.tscn").instantiate()
             add_child(fantom)
-#            fantom.look_at(Vector3(0,0,0))

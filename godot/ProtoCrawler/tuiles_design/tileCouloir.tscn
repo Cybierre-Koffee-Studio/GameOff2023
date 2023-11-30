@@ -1,8 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://b6mq1xyx5miqc"]
+[gd_scene load_steps=25 format=3 uid="uid://b6mq1xyx5miqc"]
 
 [ext_resource type="Script" path="res://ProtoCrawler/tuiles_design/tileScript.gd" id="1_l57dk"]
 [ext_resource type="Texture2D" uid="uid://k7psx7dwefhv" path="res://models/tiles/corner/tile_corner_texture_corner.png" id="2_fjlgs"]
 [ext_resource type="Texture2D" uid="uid://d1agt4orktolr" path="res://models/tiles/corridor/tile_corridor_texture_corridor.png" id="3_ciaxk"]
+[ext_resource type="Material" uid="uid://bv8kin0v3pcbx" path="res://ProtoCrawler/tuiles_design/sol.tres" id="4_33qxs"]
+[ext_resource type="Material" uid="uid://c282h7hrf5nt7" path="res://ProtoCrawler/tuiles_design/mur.tres" id="5_d2bth"]
+[ext_resource type="Material" uid="uid://ct108dw2gmtvh" path="res://ProtoCrawler/tuiles_design/plafond.tres" id="6_iab6r"]
+[ext_resource type="Material" uid="uid://dbd7wvbvx3wtv" path="res://ProtoCrawler/tuiles_design/poto.tres" id="7_rdx43"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ni52t"]
 points = PackedVector3Array(0.95801, 0.2, 0.95801, -1.01587, -0.0158513, -1.01587, -1.01587, -0.0158513, 1.01587, 1.01587, -0.0158513, -1.01587, -0.95801, 0.2, -0.95801, 1.01587, -0.0158513, 1.01587, -0.95801, 0.2, 0.95801, 0.95801, 0.2, -0.95801)
@@ -70,17 +74,16 @@ top_radius = 0.02
 bottom_radius = 0.01
 height = 0.2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1q10b"]
-albedo_color = Color(0.403922, 0.313726, 0.231373, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_kq3h5"]
-material = SubResource("StandardMaterial3D_1q10b")
+lightmap_size_hint = Vector2i(14, 12)
+material = ExtResource("4_33qxs")
 size = Vector3(1.06, 0.1, 1.06)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_45gm2"]
 albedo_color = Color(0.333333, 0.282353, 0.243137, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3873c"]
+lightmap_size_hint = Vector2i(14, 12)
 material = SubResource("StandardMaterial3D_45gm2")
 size = Vector3(1.05, 0.1, 1.05)
 
@@ -91,11 +94,8 @@ albedo_color = Color(0.298039, 0.231373, 0.164706, 1)
 material = SubResource("StandardMaterial3D_oekdq")
 size = Vector3(1.05, 0.1, 1.05)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uypar"]
-albedo_color = Color(0.478431, 0.27451, 0.160784, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_gvijl"]
-material = SubResource("StandardMaterial3D_uypar")
+material = ExtResource("7_rdx43")
 size = Vector3(0.1, 0.1, 1.1)
 
 [node name="TileModel" type="StaticBody3D"]
@@ -207,16 +207,19 @@ mesh = SubResource("BoxMesh_kq3h5")
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.5, 0.5, 0)
 layers = 512
+material_override = ExtResource("5_d2bth")
 mesh = SubResource("BoxMesh_3873c")
 
 [node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0.7, 0)
 layers = 512
+material_override = ExtResource("6_iab6r")
 mesh = SubResource("BoxMesh_lylld")
 
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.5, 0.5, 0)
 layers = 512
+material_override = ExtResource("5_d2bth")
 mesh = SubResource("BoxMesh_3873c")
 
 [node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
