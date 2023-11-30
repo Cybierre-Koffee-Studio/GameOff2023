@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://desgepcduxa0w"]
+
+[ext_resource type="Script" path="res://HUD/MenuScreen/fights.gd" id="1_fd21a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m60jy"]
+font_size = 75
+
+[node name="Fights" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fd21a")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.823529)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_right = 1279.0
+offset_bottom = 106.0
+text = "Fights"
+label_settings = SubResource("LabelSettings_m60jy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 136.0
+offset_right = 1163.0
+offset_bottom = 474.0
+text = "You can encounter 3 types of monster :
+- Bats :  these are the weakest monsters, it requires 1 power to defeat them without being hit
+     - Killing one of them increases your score by 1
+- Mimics : there are the medium monsters, i requires 2 power to defeat them without being hit
+     - Killing one of them increases your score by 2
+- Ghosts : these are the strongest monsters, it require 3 power to defeat them without being hit
+     - Killing one of them increases your score by 3
+
+You just have to click on a monster to fight it, the monster will die no matter what power you have
+If you do not have enough power to defeat a monster, you will lose 1HP
+If you have enough power to defeat a monster, you will only lose 1 Power
+
+The monster difficulty is random"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 606.0
+offset_top = 575.0
+offset_right = 728.0
+offset_bottom = 643.0
+text = "Got it"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

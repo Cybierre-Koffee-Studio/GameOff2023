@@ -17,8 +17,8 @@ script = ExtResource("1_k3es7")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -139.0
-offset_top = -58.0
+offset_left = -152.0
+offset_top = -66.0
 offset_right = 1379.0
 offset_bottom = 893.0
 texture = ExtResource("2_50ycu")
@@ -71,3 +71,4 @@ offset_bottom = 583.0
 text = "Credits"
 
 [connection signal="pressed" from="ButtonPlay" to="." method="_on_button_play_pressed"]
+[connection signal="pressed" from="ButtonInfos" to="." method="_on_button_infos_pressed"]
