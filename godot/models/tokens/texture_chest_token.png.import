@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://gbdb225m0nu4"
-path="res://.godot/imported/texture_chest_token.png-2adf976052c74cdb9f7073b60ba439af.ctex"
+path.s3tc="res://.godot/imported/texture_chest_token.png-2adf976052c74cdb9f7073b60ba439af.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://models/tokens/texture_chest_token.png"
-dest_files=["res://.godot/imported/texture_chest_token.png-2adf976052c74cdb9f7073b60ba439af.ctex"]
+dest_files=["res://.godot/imported/texture_chest_token.png-2adf976052c74cdb9f7073b60ba439af.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
