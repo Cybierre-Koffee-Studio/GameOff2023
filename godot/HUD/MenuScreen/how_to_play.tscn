@@ -61,15 +61,15 @@ offset_top = 210.0
 offset_right = 603.0
 offset_bottom = 600.0
 text = "Here you need to create a path between the middle tile, the key tile and the exit tile.
-Those tiles a present on the board by default
+Those tiles are present on the board by default
 You can choose among 5 tiles in your \"hand\" to place
-You can't place tiles freely, the must connect to another tile (available placements are highlighted)
+You can't place tiles freely, they must connect to another tile (available placements are highlighted)
 A number between 1 and 3 is visible on each tile, it represents the score it will give you and also the weight of the tile
-Beware, the board is not stable, if you put to much weight on one of the sides, it is game over
+Beware, the board is not stable, if you put too much weight on one of the sides, it is game over
 Once every starting tiles are joined, the second phase starts automatically 
 Additionaly, some tiles have effects that resolve immediatly (like the reroll) or in the second phase (like monsters and chests)
 
-In this mode, press R when you have a reroll charge to redraw a new hand
+In this mode, press R when you have a reroll charge to draw a new hand
 You can use the arrow keys to move the camera, too"
 autowrap_mode = 2
 
