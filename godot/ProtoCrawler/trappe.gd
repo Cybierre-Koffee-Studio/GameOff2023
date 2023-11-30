@@ -43,4 +43,5 @@ func _on_area_3d_body_entered(_body):
 
 func look_at_player(posi):
     var target_pos = Vector3(posi.x, global_transform.origin.y+0.01 , posi.z)
-    look_at(target_pos, Vector3.UP, true)
+    if position.direction_to(target_pos) != Vector3.UP:
+        look_at(target_pos, Vector3.UP, true)

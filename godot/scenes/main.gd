@@ -28,6 +28,7 @@ func init():
     board.connect("board_toppled", on_board_toppled)
     board.connect("tile_placed", hand.on_tile_placed)
     board.exit_token.connect("exit_reached", on_exit_reached)
+    hand.connect("reroll_used", board.on_reroll)
     hand.connect("tile_selected", board.on_tile_selected)
     if !GlobalVars.is_connected("heal_player", hud.heal_player):
         GlobalVars.connect("heal_player", hud.heal_player)
@@ -92,7 +93,7 @@ func game_over():
     var game_over_instance = game_over_scene.instantiate()
     game_over_instance.connect("replay", on_replay)
     add_child(game_over_instance)
-    GlobalVars.can_player_move = false
+    GlobalVars.game_over()
 
 func on_board_toppled():
     game_over()

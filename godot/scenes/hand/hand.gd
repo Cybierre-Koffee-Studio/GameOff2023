@@ -2,6 +2,7 @@ extends Node3D
 class_name Hand
 
 signal tile_selected
+signal reroll_used
 
 const tile_scene = preload("res://scenes/tiles/tile.tscn")
 const possible_tiles : Array[Tile.TYPE] = [Tile.TYPE.CENTER, Tile.TYPE.CORNER, Tile.TYPE.CORRIDOR, Tile.TYPE.STRAIGHT]
@@ -16,8 +17,6 @@ var current_hand : Array[Tile]  = []
 func _unhandled_input(event):
     if event.is_action_pressed("reroll") and !GlobalVars.can_player_move:
         reroll()
-    elif event.is_action_pressed("reroll") and GlobalVars.can_player_move and GlobalVars.player_potion > 0:
-        GlobalVars.soigner_joueur()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -53,12 +52,14 @@ func discard_hand():
     for t in current_hand :
         t.queue_free()
     current_hand = []
+    GlobalVars.selected_tile = null
 
 func reroll():
     if GlobalVars.reroll_number > 0:
         GlobalVars.change_reroll(-1)
         discard_hand()
         deal_hand(GlobalVars.hand_size)
+        emit_signal("reroll_used")
 
 func on_select_tile(tile):
     if GlobalVars.selected_tile != null && tile.can_move:

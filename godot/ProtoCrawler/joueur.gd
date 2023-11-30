@@ -29,6 +29,8 @@ func _unhandled_key_input(event):
     if event.is_action_pressed("AllerAGauche"):
         if $RayCastLeft.is_colliding() && !$RayCastLeftMonster.is_colliding():
             move($RayCastLeft.get_collider().global_position)
+    if event.is_action_pressed("reroll") and GlobalVars.can_player_move and GlobalVars.player_potion > 0:
+        GlobalVars.soigner_joueur()
 
 
 func move(target_pos):
@@ -36,7 +38,7 @@ func move(target_pos):
         can_move = false
         var tween = get_tree().create_tween()
         tween.tween_property($".", "global_position", target_pos, 0.25)
-        await get_tree().create_timer(0.25).timeout
+        await tween.finished
         get_tree().call_group("ENTITY", "look_at_player", position)
     can_move = true
 

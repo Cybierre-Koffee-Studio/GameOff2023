@@ -310,6 +310,9 @@ func on_tile_selected(tile: Tile):
     GlobalVars.selected_tile_rotation = tile.get_rota_degrees()
     if selected_tile_copy != null:
         remove_child(selected_tile_copy)
+        if selected_tile_copy.has_item():
+            disconnect("tile_placed", selected_tile_copy.item.on_tile_placed)
+            selected_tile_copy.item = null
     selected_tile_copy = tile.duplicate()
     selected_tile_copy.poids = tile.poids
     selected_tile_copy.instance_type = tile.instance_type
@@ -340,3 +343,13 @@ func is_path_key_exit_impossible() -> bool :
 
 func is_path_start_key_impossible() -> bool :
     return pathfinding_service.is_path_a_to_b_inverse(key_coordinates, exit_coordinates)
+
+func on_reroll():
+    if selected_tile_copy != null:
+        remove_child(selected_tile_copy)
+    selected_tile_copy = null
+    for x in GRID_SIZE:
+        for y in GRID_SIZE:
+            var slot = GRID_MAP[x][y][0]
+            if slot != null:
+                slot.set_unavailable()
