@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b8g5qch7onvmx"
-path="res://.godot/imported/tile_straight_texture.png-78e7af71a471c825123045cc68e056f8.ctex"
+path.s3tc="res://.godot/imported/tile_straight_texture.png-78e7af71a471c825123045cc68e056f8.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://models/tiles/straight/tile_straight_texture.png"
-dest_files=["res://.godot/imported/tile_straight_texture.png-78e7af71a471c825123045cc68e056f8.ctex"]
+dest_files=["res://.godot/imported/tile_straight_texture.png-78e7af71a471c825123045cc68e056f8.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

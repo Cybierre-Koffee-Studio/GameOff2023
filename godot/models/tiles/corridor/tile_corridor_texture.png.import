@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://weg0iehydue7"
-path="res://.godot/imported/tile_corridor_texture.png-6f35073b365c158a3c8b258b9f26d886.ctex"
+path.s3tc="res://.godot/imported/tile_corridor_texture.png-6f35073b365c158a3c8b258b9f26d886.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://models/tiles/corridor/tile_corridor_texture.png"
-dest_files=["res://.godot/imported/tile_corridor_texture.png-6f35073b365c158a3c8b258b9f26d886.ctex"]
+dest_files=["res://.godot/imported/tile_corridor_texture.png-6f35073b365c158a3c8b258b9f26d886.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
