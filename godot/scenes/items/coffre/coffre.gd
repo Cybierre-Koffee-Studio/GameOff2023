@@ -21,7 +21,9 @@ func _input(event):
 
 
 func _on_area_3d_mouse_entered():
-    cliquable = true
+    var player = get_tree().root.get_node("/root/Main/joueur")
+    if (snapped(global_position.distance_to(player.global_position),  0.1) <= 1):
+        cliquable = true
 
 func _on_area_3d_mouse_exited():
     cliquable = false
