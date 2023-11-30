@@ -43,6 +43,7 @@ func _init():
     can_player_move = false
 
 func soigner_joueur():
+    potion_up(-1)
     emit_signal("heal_player")
 
 func power_up(valeur):

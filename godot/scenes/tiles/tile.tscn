@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtbaspjkepue5"]
+[gd_scene load_steps=10 format=3 uid="uid://dtbaspjkepue5"]
 
 [ext_resource type="Script" path="res://scenes/tiles/tile.gd" id="1_6q3ss"]
 [ext_resource type="Texture2D" uid="uid://hifsgnimo652" path="res://models/tiles/corner/tile_corner_texture.png" id="2_gi83r"]
@@ -45,7 +45,11 @@ size = Vector3(1, 0.1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_g5q4l"]
 size = Vector3(0.759675, 0.472864, 0.750755)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kxdgu"]
+albedo_color = Color(0.333333, 0.282353, 0.243137, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_i4d1u"]
+material = SubResource("StandardMaterial3D_kxdgu")
 size = Vector3(0.1, 1.05, 1.05)
 
 [node name="tile_center" type="Node3D" groups=["TILE"]]
@@ -130,7 +134,8 @@ skeleton = NodePath("../../RayCast1")
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, -4.37114e-08, -4.37114e-08, 4.37115e-08, 1.5522e-08, 1, -4.37114e-08, -1, 1.5522e-08, 0.28584, 0.318005, 0.215821)
-modulate = Color(0.333333, 0.376471, 0.447059, 1)
+modulate = Color(0.694118, 0, 0, 1)
+outline_modulate = Color(0.658824, 0.623529, 0.607843, 1)
 text = "1"
 font_size = 75
 

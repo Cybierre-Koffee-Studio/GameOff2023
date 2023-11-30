@@ -1,4 +1,4 @@
-extends StaticBody3D
+extends Node3D
 
 #------------------------------------------
 # Signaux
@@ -20,8 +20,8 @@ extends StaticBody3D
 # Fonctions Godot redéfinies
 #------------------------------------------
 
-func _ready():
-    $MeshInstance3D5.visible = randi_range(1,100) >= 20
+func _physics_process(_delta:float):
+    rotate_y(0.075)
 
 #------------------------------------------
 # Fonctions publiques

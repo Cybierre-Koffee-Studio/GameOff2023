@@ -64,6 +64,9 @@ func on_replay(game_over_screen):
     init()
 
 func next_level():
+    $DirectionalLight3D.visible = true
+    $DirectionalLight3D2.visible = true
+    $OmniLight3D2.visible = true
     board_size += 2
 #    game_over_screen.queue_free()
     board.queue_free()
@@ -110,6 +113,9 @@ func can_start_explo():
         await get_tree().create_timer(1.5).timeout
         hud.switch_reroll_potion()
         board.set_flat()
+        $DirectionalLight3D.visible = false
+        $DirectionalLight3D2.visible = false
+        $OmniLight3D2.visible = false
         hand.discard_hand()
         $joueur.set_cam_current()
         var tween3 = get_tree().create_tween()

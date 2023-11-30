@@ -30,12 +30,14 @@ mouse_filter = 2
 script = ExtResource("1_hwsf3")
 
 [node name="StartKeyLabel" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Start => Key : Nope"
 
 [node name="KeyExitLabel" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_top = 27.0
 offset_right = 105.0
@@ -43,6 +45,7 @@ offset_bottom = 53.0
 text = "Key => Exit : Nope"
 
 [node name="BoardAngleLabel" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_top = 56.0
 offset_right = 115.0
@@ -50,6 +53,7 @@ offset_bottom = 82.0
 text = "Board angle : 0"
 
 [node name="BoardToppledLabel" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_top = 80.0
 offset_right = 115.0
@@ -80,7 +84,7 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
+offset_left = 64.0
 offset_top = -46.0
 offset_right = 217.0
 offset_bottom = -19.0
@@ -93,7 +97,8 @@ show_percentage = false
 
 [node name="Label" type="Label" parent="Crawler/LifeBar"]
 layout_mode = 0
-offset_right = 202.0
+offset_left = 1.0
+offset_right = 153.0
 offset_bottom = 27.0
 text = "3 / 3"
 label_settings = SubResource("LabelSettings_t35qw")
@@ -103,17 +108,25 @@ vertical_alignment = 1
 [node name="Label" type="Label" parent="Crawler"]
 layout_mode = 0
 offset_left = 19.0
-offset_top = 632.0
-offset_right = 68.0
-offset_bottom = 658.0
+offset_top = 636.0
+offset_right = 90.0
+offset_bottom = 662.0
 text = "Power : 0"
+
+[node name="LabelVie" type="Label" parent="Crawler"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 675.0
+offset_right = 90.0
+offset_bottom = 701.0
+text = "Life :"
 
 [node name="LabelScore" type="Label" parent="Crawler"]
 layout_mode = 0
 offset_left = 19.0
-offset_top = 600.0
+offset_top = 602.0
 offset_right = 84.0
-offset_bottom = 626.0
+offset_bottom = 628.0
 text = "Score : 0"
 
 [node name="LabelCave" type="Label" parent="Crawler"]
@@ -151,20 +164,22 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1107.0
+offset_top = 554.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Reroll"]
-position = Vector2(1184, 642)
+position = Vector2(77.6555, 80.5001)
 scale = Vector2(0.300532, 0.300532)
 texture = ExtResource("2_jpyuw")
 
 [node name="LabelRerollCount" type="Label" parent="Reroll"]
 layout_mode = 0
-offset_left = 1173.0
-offset_top = 612.0
-offset_right = 1208.0
-offset_bottom = 670.0
+offset_left = 66.6555
+offset_top = 50.5
+offset_right = 101.656
+offset_bottom = 108.5
 text = "0"
 label_settings = SubResource("LabelSettings_r7ruw")
 

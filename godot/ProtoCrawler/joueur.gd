@@ -29,7 +29,7 @@ func _unhandled_key_input(event):
     if event.is_action_pressed("AllerAGauche"):
         if $RayCastLeft.is_colliding() && !$RayCastLeftMonster.is_colliding():
             move($RayCastLeft.get_collider().global_position)
-            
+
 
 func move(target_pos):
     if can_move and GlobalVars.can_player_move:

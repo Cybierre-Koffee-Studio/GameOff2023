@@ -14,8 +14,10 @@ const selected_tile_position_shift = 0.6
 var current_hand : Array[Tile]  = []
 
 func _unhandled_input(event):
-    if event.is_action_pressed("reroll"):
+    if event.is_action_pressed("reroll") and !GlobalVars.can_player_move:
         reroll()
+    elif event.is_action_pressed("reroll") and GlobalVars.can_player_move and GlobalVars.player_potion > 0:
+        GlobalVars.soigner_joueur()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

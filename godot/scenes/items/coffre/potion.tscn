@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://c1as05yy22sb5"]
+
+[ext_resource type="Script" path="res://scenes/items/coffre/potion.gd" id="1_b6r8i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tr52i"]
+albedo_color = Color(0.772549, 0, 0, 1)
+metallic_specular = 1.0
+roughness = 0.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_d50aq"]
+material = SubResource("StandardMaterial3D_tr52i")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g8a45"]
+albedo_color = Color(0.772549, 0, 0, 1)
+roughness = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vkpeq"]
+material = SubResource("StandardMaterial3D_g8a45")
+top_radius = 0.2
+bottom_radius = 0.2
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vny6d"]
+albedo_color = Color(0.772549, 0, 0, 1)
+roughness = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_x1uuy"]
+material = SubResource("StandardMaterial3D_vny6d")
+top_radius = 0.25
+bottom_radius = 0.25
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4qtk8"]
+albedo_color = Color(0.447059, 0.329412, 0.196078, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_e408i"]
+material = SubResource("StandardMaterial3D_4qtk8")
+top_radius = 0.2
+bottom_radius = 0.15
+height = 0.3
+
+[node name="Potion" type="Node3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.0866025, 0.05, 0, -0.05, 0.0866025, 0, 0, 0)
+visible = false
+script = ExtResource("1_b6r8i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 5.96046e-08, 0, -5.96046e-08, 1, 0, -0.167896, 0.290805)
+layers = 512
+mesh = SubResource("SphereMesh_d50aq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.642319, 0)
+layers = 512
+mesh = SubResource("CylinderMesh_vkpeq")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11602, 0)
+layers = 512
+mesh = SubResource("CylinderMesh_x1uuy")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27677, 0)
+layers = 512
+mesh = SubResource("CylinderMesh_e408i")

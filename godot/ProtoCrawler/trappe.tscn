@@ -50,11 +50,24 @@ layers = 512
 mesh = SubResource("BoxMesh_tj4i1")
 skeleton = NodePath("../..")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D/MeshInstance3D3"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.401932, -0.15068)
+layers = 512
+light_color = Color(1, 0.72549, 0.572549, 1)
+omni_range = 0.315539
+
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.258839, 0)
 collision_layer = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_agygl")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.455456, 0)
+layers = 512
+light_color = Color(1, 0.72549, 0.572549, 1)
+spot_range = 0.761752
+spot_angle = 52.8356
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

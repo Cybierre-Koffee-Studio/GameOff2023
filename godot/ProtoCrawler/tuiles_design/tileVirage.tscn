@@ -1,54 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://lhikqtyxh8rl"]
+[gd_scene load_steps=18 format=3 uid="uid://lhikqtyxh8rl"]
 
 [ext_resource type="Script" path="res://ProtoCrawler/tuiles_design/tileScript.gd" id="1_rjt7x"]
-[ext_resource type="Texture2D" uid="uid://k7psx7dwefhv" path="res://models/tiles/corner/tile_corner_texture_corner.png" id="2_lcus1"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c00xg"]
-resource_name = "Material.008"
-cull_mode = 2
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_lcus1")
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_j7xtf"]
-_surfaces = [{
-"aabb": AABB(-1, 0, -1, 2, 0.2, 2.00001),
-"format": 4097,
-"index_count": 36,
-"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0, 2, 0, 7, 0, 3, 0, 2, 0, 6, 0, 7, 0, 6, 0, 5, 0, 7, 0, 6, 0, 4, 0, 5, 0, 4, 0, 1, 0, 5, 0, 4, 0, 0, 0, 1, 0, 2, 0, 4, 0, 6, 0, 2, 0, 0, 0, 4, 0, 7, 0, 1, 0, 3, 0, 7, 0, 5, 0, 1, 0),
-"name": "Material.008",
-"primitive": 3,
-"vertex_count": 8,
-"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 191, 204, 204, 76, 62, 0, 0, 128, 63, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 128, 191, 204, 204, 76, 62, 0, 0, 128, 191, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 128, 63, 204, 204, 76, 62, 0, 0, 128, 63, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 128, 63, 204, 204, 76, 62, 0, 0, 128, 191)
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_bnvsw"]
-resource_name = "tile_corner_Cube_010"
-_surfaces = [{
-"aabb": AABB(-1, 0, -1, 2, 0.2, 2.00001),
-"attribute_data": PackedByteArray(55, 240, 15, 63, 68, 236, 3, 63, 119, 39, 248, 62, 187, 19, 124, 63, 171, 133, 75, 63, 187, 19, 124, 63, 69, 236, 3, 63, 68, 236, 3, 63, 185, 129, 63, 63, 187, 19, 124, 63, 52, 17, 123, 60, 118, 39, 248, 62, 55, 240, 15, 63, 187, 19, 124, 63, 119, 39, 248, 62, 68, 236, 3, 63, 179, 204, 35, 63, 68, 236, 3, 63, 69, 236, 3, 63, 187, 19, 124, 63, 193, 200, 23, 63, 68, 236, 3, 63, 52, 17, 123, 60, 0, 17, 123, 60, 52, 17, 123, 60, 187, 19, 124, 63, 171, 133, 75, 63, 69, 236, 3, 63, 47, 169, 55, 63, 187, 19, 124, 63, 185, 129, 63, 63, 69, 236, 3, 63, 119, 39, 248, 62, 118, 39, 248, 62, 61, 165, 43, 63, 187, 19, 124, 63, 52, 17, 123, 60, 68, 236, 3, 63, 179, 204, 35, 63, 187, 19, 124, 63, 47, 169, 55, 63, 69, 236, 3, 63, 193, 200, 23, 63, 187, 19, 124, 63, 119, 39, 248, 62, 0, 17, 123, 60, 61, 165, 43, 63, 68, 236, 3, 63),
-"format": 4119,
-"index_count": 36,
-"index_data": PackedByteArray(0, 0, 9, 0, 3, 0, 0, 0, 6, 0, 9, 0, 8, 0, 21, 0, 10, 0, 8, 0, 19, 0, 21, 0, 20, 0, 17, 0, 23, 0, 20, 0, 14, 0, 17, 0, 13, 0, 4, 0, 15, 0, 13, 0, 2, 0, 4, 0, 7, 0, 12, 0, 18, 0, 7, 0, 1, 0, 12, 0, 22, 0, 5, 0, 11, 0, 22, 0, 16, 0, 5, 0),
-"material": SubResource("StandardMaterial3D_c00xg"),
-"name": "Material.008",
-"primitive": 3,
-"vertex_count": 24,
-"vertex_data": PackedByteArray(0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 255, 127, 255, 127, 0, 128, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 63, 255, 127, 0, 0, 0, 0, 255, 191, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 63, 255, 127, 255, 127, 255, 127, 0, 128, 0, 0, 128, 191, 204, 204, 76, 62, 0, 0, 128, 63, 0, 0, 255, 127, 255, 127, 0, 128, 0, 0, 128, 191, 204, 204, 76, 62, 0, 0, 128, 63, 255, 127, 255, 127, 255, 127, 0, 128, 0, 0, 128, 191, 204, 204, 76, 62, 0, 0, 128, 63, 255, 127, 255, 255, 255, 255, 255, 191, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 191, 0, 0, 255, 127, 255, 127, 0, 128, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 191, 255, 127, 0, 0, 0, 0, 255, 191, 0, 0, 128, 191, 0, 0, 0, 0, 0, 0, 128, 191, 255, 255, 255, 255, 255, 127, 0, 128, 0, 0, 128, 191, 204, 204, 76, 62, 0, 0, 128, 191, 0, 0, 255, 127, 255, 127, 0, 128, 0, 0, 128, 191, 204, 204, 76, 62, 0, 0, 128, 191, 255, 255, 255, 255, 255, 127, 0, 128, 0, 0, 128, 191, 204, 204, 76, 62, 0, 0, 128, 191, 255, 127, 255, 255, 255, 255, 255, 191, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 255, 127, 0, 0, 0, 0, 255, 191, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 255, 127, 255, 127, 255, 127, 0, 128, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 255, 255, 255, 127, 255, 127, 0, 128, 0, 0, 128, 63, 204, 204, 76, 62, 0, 0, 128, 63, 255, 127, 255, 127, 255, 127, 0, 128, 0, 0, 128, 63, 204, 204, 76, 62, 0, 0, 128, 63, 255, 127, 255, 255, 255, 255, 255, 191, 0, 0, 128, 63, 204, 204, 76, 62, 0, 0, 128, 63, 255, 255, 255, 127, 255, 127, 0, 128, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 191, 255, 127, 0, 0, 0, 0, 255, 191, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 191, 255, 255, 255, 255, 255, 127, 0, 128, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 191, 255, 255, 255, 127, 255, 127, 0, 128, 0, 0, 128, 63, 204, 204, 76, 62, 0, 0, 128, 191, 255, 255, 255, 255, 255, 127, 0, 128, 0, 0, 128, 63, 204, 204, 76, 62, 0, 0, 128, 191, 255, 127, 255, 255, 255, 255, 255, 191, 0, 0, 128, 63, 204, 204, 76, 62, 0, 0, 128, 191, 255, 255, 255, 127, 255, 127, 0, 128)
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_j7xtf")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24exy"]
-albedo_texture = ExtResource("2_lcus1")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ac6jx"]
 points = PackedVector3Array(0.95801, 0.2, 0.95801, -1.01587, -0.0158513, -1.01587, -1.01587, -0.0158513, 1.01587, 1.01587, -0.0158513, -1.01587, -0.95801, 0.2, -0.95801, 1.01587, -0.0158513, 1.01587, -0.95801, 0.2, 0.95801, 0.95801, 0.2, -0.95801)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_2dmn6"]
-top_radius = 0.1
-bottom_radius = 0.1
-height = 0.6
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qh1me"]
 radius = 0.3
@@ -69,74 +24,50 @@ top_radius = 0.02
 bottom_radius = 0.01
 height = 0.2
 
-[sub_resource type="BoxMesh" id="BoxMesh_6xeaj"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kn1e"]
+albedo_color = Color(0.403922, 0.313726, 0.231373, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_egal6"]
+material = SubResource("StandardMaterial3D_2kn1e")
+size = Vector3(1.06, 0.1, 1.06)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tcx11"]
+albedo_color = Color(0.298039, 0.231373, 0.164706, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ods1l"]
+material = SubResource("StandardMaterial3D_tcx11")
 size = Vector3(1.05, 0.1, 1.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_feo0m"]
+albedo_color = Color(0.333333, 0.282353, 0.243137, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6xeaj"]
+material = SubResource("StandardMaterial3D_feo0m")
+size = Vector3(1.05, 0.1, 1.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rs8h3"]
+albedo_color = Color(0.478431, 0.27451, 0.160784, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_riaty"]
+material = SubResource("StandardMaterial3D_rs8h3")
+size = Vector3(0.1, 0.1, 1.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ge3s"]
+albedo_color = Color(0.478431, 0.27451, 0.160784, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xjkgv"]
+material = SubResource("StandardMaterial3D_2ge3s")
+size = Vector3(0.1, 0.1, 1.1)
 
 [node name="TileModel" type="StaticBody3D"]
 transform = Transform3D(0.96, 0, 0, 0, 0.96, 0, 0, 0, 0.96, 0, 0, 0)
 collision_layer = 0
 script = ExtResource("1_rjt7x")
 
-[node name="mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-visible = false
-layers = 512
-mesh = SubResource("ArrayMesh_bnvsw")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_24exy")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 visible = false
 shape = SubResource("ConvexPolygonShape3D_ac6jx")
-
-[node name="mesh2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.66236, 0)
-visible = false
-layers = 512
-mesh = SubResource("ArrayMesh_bnvsw")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_24exy")
-
-[node name="mesh3" type="MeshInstance3D" parent="."]
-transform = Transform3D(-2.18557e-08, 0.5, 0, -0.5, -2.18557e-08, 0, 0, 0, 0.5, 0.435937, 0.598365, 0)
-visible = false
-layers = 512
-mesh = SubResource("ArrayMesh_bnvsw")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_24exy")
-
-[node name="mesh4" type="MeshInstance3D" parent="."]
-transform = Transform3D(9.55343e-16, -2.18557e-08, 0.5, -0.5, -2.18557e-08, 0, 2.18557e-08, -0.5, -2.18557e-08, 0.0145406, 0.598366, -0.435418)
-visible = false
-layers = 512
-mesh = SubResource("ArrayMesh_bnvsw")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("StandardMaterial3D_24exy")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.494469, 0.375247, 0.497549)
-visible = false
-layers = 512
-mesh = SubResource("CylinderMesh_2dmn6")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.494469, 0.375247, -0.487402)
-visible = false
-layers = 512
-mesh = SubResource("CylinderMesh_2dmn6")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472203, 0.375247, 0.497549)
-visible = false
-layers = 512
-mesh = SubResource("CylinderMesh_2dmn6")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.472203, 0.375247, -0.487403)
-visible = false
-layers = 512
-mesh = SubResource("CylinderMesh_2dmn6")
 
 [node name="tileZone" type="Area3D" parent="." groups=["TILE_ZONE"]]
 collision_layer = 4
@@ -168,17 +99,19 @@ mesh = SubResource("CylinderMesh_xlv71")
 [node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D5"]
 transform = Transform3D(1.04167, -2.98023e-08, 0, 2.98023e-08, 1.04167, 0, 0, 0, 1.04167, -0.00137538, 0.129913, 0)
 layers = 512
-light_color = Color(0.886275, 0.419608, 0, 1)
-shadow_enabled = true
+light_color = Color(1, 0.72549, 0.572549, 1)
+light_size = 0.1
+light_bake_mode = 1
+omni_range = 0.859398
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
 layers = 512
-mesh = SubResource("BoxMesh_6xeaj")
+mesh = SubResource("BoxMesh_egal6")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.710667, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 layers = 512
-mesh = SubResource("BoxMesh_6xeaj")
+mesh = SubResource("BoxMesh_ods1l")
 
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, -0.5)
@@ -189,3 +122,28 @@ mesh = SubResource("BoxMesh_6xeaj")
 transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0.5, 0.5, 0)
 layers = 512
 mesh = SubResource("BoxMesh_6xeaj")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.525036, 0.5, -0.45794)
+layers = 512
+mesh = SubResource("BoxMesh_riaty")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37115e-08, 1, 0, -1, -4.37115e-08, 0.477079, 0.5, 0.525499)
+layers = 512
+mesh = SubResource("BoxMesh_riaty")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37115e-08, 1, 0, -1, -4.37115e-08, -0.525622, 0.5, -0.519646)
+layers = 512
+mesh = SubResource("BoxMesh_xjkgv")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37115e-08, 1, 0, -1, -4.37115e-08, 0.448884, 0.5, 0.525471)
+layers = 512
+mesh = SubResource("BoxMesh_xjkgv")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37115e-08, 1, 0, -1, -4.37115e-08, -0.47099, 0.5, 0.529058)
+layers = 512
+mesh = SubResource("BoxMesh_xjkgv")

@@ -13,7 +13,7 @@ func init_astar_grid():
     astar_grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
     astar_grid.region = Rect2i(0, 0, size, size)
     astar_grid.update()
-    
+
     # L'AStarGrid inverse va permettre de savoir quand le start et la clé OU
     # la clé est l'exit ne peuvent plus être reliés
     astar_grid_inverse = AStarGrid2D.new()
@@ -28,7 +28,7 @@ func init_astar_grid():
     for i in range(0, size):
         for j in range(0, size):
             astar_grid.set_point_solid(Vector2i(j, i), true)
-    
+
     # Pour l'AStarGrid inverse, au début tout est possible
     for i in range(0, size):
         for j in range(0, size):

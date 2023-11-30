@@ -1,8 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://by32aipxjix1q"]
+[gd_scene load_steps=30 format=3 uid="uid://by32aipxjix1q"]
 
 [ext_resource type="Script" path="res://scenes/items/coffre/coffre.gd" id="1_d1nub"]
 [ext_resource type="Texture2D" uid="uid://ruhsvg0cmhye" path="res://models/tokens/chest_token_chest_token_texture.png" id="2_ao1bt"]
 [ext_resource type="Texture2D" uid="uid://d3tn3n3i45tv8" path="res://models/tokens/chest_token_texture.png" id="3_8e6rb"]
+[ext_resource type="PackedScene" uid="uid://c1as05yy22sb5" path="res://scenes/items/coffre/potion.tscn" id="4_d0pjh"]
+[ext_resource type="PackedScene" uid="uid://5ycrfgprhoul" path="res://scenes/items/coffre/power.tscn" id="5_y22d6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eqwy8"]
 resource_local_to_scene = true
@@ -61,15 +63,6 @@ albedo_color = Color(0, 0, 0, 1)
 material = SubResource("StandardMaterial3D_mvrdd")
 size = Vector3(0.01, 0.01, 0.01)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gl7f1"]
-albedo_color = Color(0.835294, 0.576471, 0, 1)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_rber7"]
-material = SubResource("StandardMaterial3D_gl7f1")
-top_radius = 0.2
-bottom_radius = 0.2
-height = 0.1
-
 [sub_resource type="Animation" id="Animation_xgl7u"]
 length = 0.001
 tracks/0/type = "value"
@@ -96,6 +89,185 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(1.3027e-15, 2.98023e-08, -1.5708)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D/MeshInstance3D2:quaternion")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Quaternion(-0.00642581, -0.00575098, -0.711951, 0.702176)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MeshInstance3D/Potion:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MeshInstance3D/Potion:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.205292, 0.16167, -0.11551)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MeshInstance3D/power:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MeshInstance3D/power:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.222499, 0.216997, -0.130365)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("MeshInstance3D/DirectionalLight3D:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_n8jb1"]
+resource_name = "potion"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D/Potion:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.000147641, -0.00568158, 0.014251), Vector3(0.0213641, 0.189627, 0.00842135)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D/Potion:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D/DirectionalLight3D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_8l22s"]
+resource_name = "power"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D/power:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.0097135, -0.0584245, -0.00359301), Vector3(0, 0.3, -0.016)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D/power:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D/DirectionalLight3D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_vlcvm"]
+resource_name = "open2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D/MeshInstance3D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.13036, 0), Vector3(-0.00654212, 0.256824, -0.187536)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D/MeshInstance3D2:quaternion")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Quaternion(-0.00642581, -0.00575098, -0.711951, 0.702176), Quaternion(0.501252, 0.520107, 0.480968, -0.496895)]
+}
 
 [sub_resource type="Animation" id="Animation_mc7bv"]
 resource_name = "open"
@@ -107,10 +279,10 @@ tracks/0/path = NodePath("MeshInstance3D/MeshInstance3D2:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0.13036, 0), Vector3(0.00208104, 0.240743, -0.0879188)]
+"values": [Vector3(0, 0.13036, 0), Vector3(0.00205342, 0.240743, -0.206203)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -119,16 +291,19 @@ tracks/1/path = NodePath("MeshInstance3D/MeshInstance3D2:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(1.3027e-15, 2.98023e-08, -1.5708), Vector3(-0.925055, -0.023096, -1.52448)]
+"values": [Vector3(1.3027e-15, 2.98023e-08, -1.5708), Vector3(-1.44185, 3.10314, 1.61375)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_imhe2"]
 _data = {
 "RESET": SubResource("Animation_xgl7u"),
-"open": SubResource("Animation_mc7bv")
+"open": SubResource("Animation_mc7bv"),
+"open2": SubResource("Animation_vlcvm"),
+"potion": SubResource("Animation_n8jb1"),
+"power": SubResource("Animation_8l22s")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iaat8"]
@@ -179,33 +354,38 @@ albedo_texture = ExtResource("3_8e6rb")
 script = ExtResource("1_d1nub")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.618052, 0, 0.328652, 0, 0.7, 0, -0.328652, 0, 0.618052, -0.213335, 0.0142592, -0.11073)
+transform = Transform3D(0.38837, 0, 0.314911, 0, 0.5, 0, -0.314911, 0, 0.38837, -0.268069, 0.0142592, -0.192641)
 layers = 512
 mesh = SubResource("BoxMesh_2lo42")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(-3.61999e-06, 1, 2.98023e-08, -0.999999, -3.61999e-06, -1.3027e-15, 1.06581e-13, -2.98023e-08, 1, 0, 0.13036, 0)
+transform = Transform3D(-0.0138101, 1.00032, 0.0010733, -0.999356, -0.0138379, 0.0172124, 0.0172192, -0.000835617, 0.99982, 0, 0.13036, 0)
+rotation_edit_mode = 1
 layers = 512
 mesh = SubResource("BoxMesh_4q0fv")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D/MeshInstance3D2"]
 transform = Transform3D(-3.61999e-06, -1, 1.13687e-13, 1, -3.61999e-06, -2.98023e-08, 2.98023e-08, 1.16007e-13, 1, -0.00411429, -0.177446, 0.128307)
+layers = 512
 mesh = SubResource("BoxMesh_1ep3h")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="MeshInstance3D/MeshInstance3D2"]
 transform = Transform3D(-3.61999e-06, -1, 1.13687e-13, 1, -3.61999e-06, -2.98023e-08, 2.98023e-08, 1.16007e-13, 1, -0.00411557, 0.175583, 0.128173)
+layers = 512
 mesh = SubResource("BoxMesh_1ep3h")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="MeshInstance3D/MeshInstance3D2"]
 transform = Transform3D(-3.61999e-06, -1, 1.13687e-13, 1, -3.61999e-06, -2.98023e-08, 2.98023e-08, 1.16007e-13, 1, -0.00411558, 0.181405, -0.132626)
+layers = 512
 mesh = SubResource("BoxMesh_1ep3h")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D9" type="MeshInstance3D" parent="MeshInstance3D/MeshInstance3D2"]
 transform = Transform3D(-3.61999e-06, -1, 1.13687e-13, 1, -3.61999e-06, -2.98023e-08, 2.98023e-08, 1.16007e-13, 1, -0.00411426, -0.183016, -0.125236)
+layers = 512
 mesh = SubResource("BoxMesh_1ep3h")
 skeleton = NodePath("../..")
 
@@ -221,38 +401,59 @@ shape = SubResource("BoxShape3D_bthk8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.177446, -0.00291801, 0.128307)
+layers = 512
 mesh = SubResource("BoxMesh_5y0u4")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00605382, 0.0741258, 0.125077)
+layers = 512
 mesh = SubResource("BoxMesh_ej6by")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D/MeshInstance3D3"]
 transform = Transform3D(0.880814, -0.0195237, 0.47306, 0.471103, -0.0634954, -0.87979, 0.0472138, 0.997791, -0.0467299, -0.0113269, 0, 0.0171659)
+layers = 512
 mesh = SubResource("CylinderMesh_ujyy1")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D/MeshInstance3D3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0108502, -0.0122617, 0.0219559)
+layers = 512
 mesh = SubResource("PrismMesh_gdq32")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.175583, -0.0020577, 0.128173)
+layers = 512
 mesh = SubResource("BoxMesh_5y0u4")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.181405, -0.00272767, -0.132626)
+layers = 512
 mesh = SubResource("BoxMesh_5y0u4")
 
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.183016, -0.00381925, -0.125236)
+layers = 512
 mesh = SubResource("BoxMesh_5y0u4")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45428, 0, -0.377796)
+[node name="Potion" parent="MeshInstance3D" instance=ExtResource("4_d0pjh")]
+transform = Transform3D(0.0049806, 0.071385, -0.123643, 0, 0.123718, 0.0714285, 0.14277, -0.0024903, 0.00431332, -0.205292, 0.16167, -0.11551)
+
+[node name="power" parent="MeshInstance3D" instance=ExtResource("5_y22d6")]
+transform = Transform3D(0.00149418, 0, -0.0428311, 0, 0.042857, 0, 0.0428311, 0, 0.00149418, -0.222499, 0.216997, -0.130365)
+
+[node name="DirectionalLight3D" type="SpotLight3D" parent="MeshInstance3D"]
+transform = Transform3D(1.4277, -0.0498061, 6.53129e-09, 0, 1.87334e-07, 1.42857, -0.0498061, -1.4277, 1.87221e-07, 0.0048219, 0.434613, 0.0118729)
 visible = false
-mesh = SubResource("CylinderMesh_rber7")
+layers = 512
+light_color = Color(1, 1, 0.392157, 1)
+spot_range = 0.329396
+spot_angle = 35.1563
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_imhe2")
+}
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_imhe2")
 }

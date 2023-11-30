@@ -64,4 +64,32 @@ collision_layer = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_kc0j5")
 
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.521944, 0)
+layers = 512
+light_color = Color(1, 0.72549, 0.572549, 1)
+spot_range = 0.743941
+spot_angle = 38.305
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(0.870905, 0.422728, -0.25065, -0.000139626, -0.509807, -0.860289, -0.491451, 0.749265, -0.443935, -0.234545, -0.118029, -0.253762)
+layers = 512
+light_color = Color(1, 0.72549, 0.572549, 1)
+spot_range = 0.743941
+spot_angle = 38.305
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="."]
+transform = Transform3D(0.199488, -0.843011, 0.499537, -0.000139586, -0.509808, -0.860289, 0.9799, 0.171547, -0.101818, 0.221962, -0.112297, -0.00381541)
+layers = 512
+light_color = Color(1, 0.72549, 0.572549, 1)
+spot_range = 0.743941
+spot_angle = 38.305
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.668625, 0.639758, -0.379013, -0.000139592, -0.509808, -0.860289, -0.7436, -0.575157, 0.340959, -0.196122, -0.112297, 0.340837)
+layers = 512
+light_color = Color(1, 0.72549, 0.572549, 1)
+spot_range = 0.743941
+spot_angle = 38.305
+
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

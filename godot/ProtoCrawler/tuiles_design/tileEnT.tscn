@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://diaqrdgeblurt"]
+[gd_scene load_steps=22 format=3 uid="uid://diaqrdgeblurt"]
 
 [ext_resource type="Script" path="res://ProtoCrawler/tuiles_design/tileScript.gd" id="1_4g3xk"]
 [ext_resource type="Texture2D" uid="uid://k7psx7dwefhv" path="res://models/tiles/corner/tile_corner_texture_corner.png" id="2_53jq0"]
@@ -67,7 +67,32 @@ top_radius = 0.02
 bottom_radius = 0.01
 height = 0.2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2nv8p"]
+albedo_color = Color(0.333333, 0.282353, 0.243137, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m8al3"]
+material = SubResource("StandardMaterial3D_2nv8p")
+size = Vector3(1.06, 0.1, 1.06)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tnfy8"]
+albedo_color = Color(0.403922, 0.313726, 0.231373, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_mi8vl"]
+material = SubResource("StandardMaterial3D_tnfy8")
+size = Vector3(1.05, 0.1, 1.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y44rq"]
+albedo_color = Color(0.478431, 0.27451, 0.160784, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0qyll"]
+material = SubResource("StandardMaterial3D_y44rq")
+size = Vector3(0.1, 0.1, 1.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b5a83"]
+albedo_color = Color(0.298039, 0.231373, 0.164706, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jjm3d"]
+material = SubResource("StandardMaterial3D_b5a83")
 size = Vector3(1.05, 0.1, 1.05)
 
 [node name="TileModel" type="StaticBody3D"]
@@ -154,19 +179,31 @@ mesh = SubResource("CylinderMesh_jk03n")
 [node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D5"]
 transform = Transform3D(1.04167, -2.98023e-08, 0, 2.98023e-08, 1.04167, 0, 0, 0, 1.04167, -0.00137538, 0.129913, 0)
 layers = 512
-light_color = Color(0.886275, 0.419608, 0, 1)
-shadow_enabled = true
+light_color = Color(1, 0.72549, 0.572549, 1)
+light_size = 0.1
+light_bake_mode = 1
+omni_range = 1.10225
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
 layers = 512
-mesh = SubResource("BoxMesh_mi8vl")
+mesh = SubResource("BoxMesh_m8al3")
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.5, -0.5)
 layers = 512
 mesh = SubResource("BoxMesh_mi8vl")
 
-[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0.69581, 0.00840826)
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.521693, 0.5, -0.45794)
 layers = 512
-mesh = SubResource("BoxMesh_mi8vl")
+mesh = SubResource("BoxMesh_0qyll")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.521738, 0.5, -0.45794)
+layers = 512
+mesh = SubResource("BoxMesh_0qyll")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0.7, 0)
+layers = 512
+mesh = SubResource("BoxMesh_jjm3d")

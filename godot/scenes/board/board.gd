@@ -126,7 +126,7 @@ func place_starting_tile():
     # placement de la tuile de départ
     var start_tile = tile_scene.instantiate()
     start_tile.init(Tile.TYPE.CENTER, true)
-    start_tile.position = Vector3(0, BOARD_THICKNESS, 0)
+    start_tile.position = Vector3(0, BOARD_THICKNESS+0.003, 0)
     start_coordinates = Vector2i(GRID_SIZE*3/2, GRID_SIZE*3/2)
     map_tile(GRID_SIZE/2, GRID_SIZE/2, [0b1111,0b0000])
     add_child(start_tile)
@@ -140,7 +140,7 @@ func place_key_tile(key_tile_zone):
     key_tile.init(Tile.TYPE.CENTER, true)
     key_tile.position = Vector3(
         key_tile_x - GRID_SIZE/2,
-        BOARD_THICKNESS,
+        BOARD_THICKNESS+0.003,
         key_tile_y - GRID_SIZE/2
     )
     var key_tile_rotation = rotations.pick_random()
@@ -165,7 +165,7 @@ func place_exit_tile(exit_tile_zone):
     exit_tile.init(Tile.TYPE.CENTER, true)
     exit_tile.position = Vector3(
         exit_tile_x - GRID_SIZE/2,
-        BOARD_THICKNESS,
+        BOARD_THICKNESS+0.003,
         exit_tile_y - GRID_SIZE/2
     )
     var exit_tile_rotation = rotations.pick_random()
