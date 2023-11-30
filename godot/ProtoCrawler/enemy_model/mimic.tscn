@@ -1,4 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://cbmhmve6we5g2"]
+[gd_scene load_steps=16 format=3 uid="uid://cbmhmve6we5g2"]
+
+[ext_resource type="Script" path="res://ProtoCrawler/enemy_model/mimic.gd" id="1_i704r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_81gib"]
 albedo_color = Color(0.341176, 0.207843, 0.0392157, 1)
@@ -70,8 +72,9 @@ radius = 1.0
 height = 0.2
 is_hemisphere = true
 
-[node name="mimic" type="Node3D"]
+[node name="mimic" type="Node3D" groups=["ENTITY"]]
 transform = Transform3D(0.3, 0, 5.24537e-08, 0, 0.3, 0, -5.24537e-08, 0, 0.3, 0, 0, 0)
+script = ExtResource("1_i704r")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.443816, 0)

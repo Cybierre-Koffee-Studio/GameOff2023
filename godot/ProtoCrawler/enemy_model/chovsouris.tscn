@@ -1,5 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://iuh8xmn8b2fe"]
+[gd_scene load_steps=21 format=3 uid="uid://iuh8xmn8b2fe"]
 
+[ext_resource type="Script" path="res://ProtoCrawler/enemy_model/mimic.gd" id="1_owvdd"]
 [ext_resource type="Material" uid="uid://dixrn8xq4l60i" path="res://ProtoCrawler/enemy_model/ailechovsouris.tres" id="1_px8x3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q8bnm"]
@@ -83,8 +84,9 @@ top_radius = 0.1
 bottom_radius = 0.1
 height = 1.0
 
-[node name="chovsouris" type="Node3D"]
+[node name="chovsouris" type="Node3D" groups=["ENTITY"]]
 transform = Transform3D(-0.2, 0, -1.74846e-08, 0, 0.2, 0, 1.74846e-08, 0, -0.2, 0, 0, 0)
+script = ExtResource("1_owvdd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.43626, 0)

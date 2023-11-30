@@ -350,7 +350,7 @@ specular_mode = 1
 disable_ambient_light = true
 albedo_texture = ExtResource("3_8e6rb")
 
-[node name="coffre" type="Node3D" groups=["MONSTRE_COFFRE"]]
+[node name="coffre" type="Node3D" groups=["ENTITY", "MONSTRE_COFFRE"]]
 script = ExtResource("1_d1nub")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

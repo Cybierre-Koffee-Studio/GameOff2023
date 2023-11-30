@@ -30,3 +30,7 @@ func _on_area_3d_mouse_exited():
 
 func activate():
     $MeshInstance3D/Area3D.input_ray_pickable = true
+
+func look_at_player(posi):
+    var target_pos = Vector3(posi.x, global_transform.origin.y , posi.z)
+    $MeshInstance3D.look_at(target_pos, Vector3.UP, true)

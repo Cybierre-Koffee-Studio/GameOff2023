@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://bb6qbl48rq70n"]
+[gd_scene load_steps=15 format=3 uid="uid://bb6qbl48rq70n"]
 
+[ext_resource type="Script" path="res://ProtoCrawler/enemy_model/mimic.gd" id="1_68lbw"]
 [ext_resource type="Material" uid="uid://bal1j0rhm3ndc" path="res://ProtoCrawler/enemy_model/fantom.tres" id="1_tvtcs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4svgr"]
@@ -58,8 +59,9 @@ material = SubResource("StandardMaterial3D_7ifcq")
 radius = 0.1
 height = 0.2
 
-[node name="fantom" type="Node3D"]
+[node name="fantom" type="Node3D" groups=["ENTITY"]]
 transform = Transform3D(-0.15, 0, -1.31134e-08, 0, 0.15, 0, 1.31134e-08, 0, -0.15, 0, 0, 0)
+script = ExtResource("1_68lbw")
 
 [node name="base" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0296478, 0)

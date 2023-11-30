@@ -37,6 +37,7 @@ func move(target_pos):
         var tween = get_tree().create_tween()
         tween.tween_property($".", "global_position", target_pos, 0.25)
         await get_tree().create_timer(0.25).timeout
+        get_tree().call_group("ENTITY", "look_at_player", position)
     can_move = true
 
 func turn_cam(deg):
@@ -49,5 +50,6 @@ func turn_cam(deg):
     can_rotate = true
 
 func set_cam_current():
+    get_tree().call_group("ENTITY", "look_at_player", position)
     GlobalVars.can_player_move = true
     $Camera3D.current = true
