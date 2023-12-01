@@ -13,6 +13,9 @@ const musics = {
     13: preload("res://audio/tiles-5.mp3")
 }
 
+const game_over_music = preload("res://audio/gameover.mp3");
+const gg_music = preload("res://audio/gg.mp3");
+
 var board_size = 5
 var position_tuile_centrale = null
 @onready var hand : Hand = $Camera3D/Hand
@@ -38,7 +41,6 @@ func init():
     board.connect("board_toppled", hud.on_board_toppled)
     board.connect("board_toppled", on_board_toppled)
     board.connect("tile_placed", hand.on_tile_placed)
-    board.exit_token.connect("exit_reached", on_exit_reached)
     hand.connect("reroll_used", board.on_reroll)
     hand.connect("tile_selected", board.on_tile_selected)
     if !GlobalVars.is_connected("heal_player", hud.heal_player):
@@ -99,6 +101,9 @@ func game_over():
     game_over_instance.connect("replay", on_replay)
     add_child(game_over_instance)
     GlobalVars.game_over()
+    $music.stop()
+    $music.set_stream(game_over_music)
+    $music.play()
 
 func on_board_toppled():
     game_over()
@@ -133,5 +138,7 @@ func can_start_explo():
         hud.hide_show_balance()
         $Camera3D.position = cam_pos
 
-func on_exit_reached():
-    game_over()
+func on_game_end():
+    $music.stop()
+    $music.set_stream(gg_music)
+    $music.play()
