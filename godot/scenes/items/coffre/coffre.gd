@@ -1,7 +1,7 @@
 extends ClickableItem
 
 var opened = false
-                    
+
 func execute_action():
     if !opened:
         opened = true

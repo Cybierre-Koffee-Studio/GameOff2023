@@ -69,7 +69,7 @@ func level_ended():
 func change_reroll(value):
     reroll_number += value
     emit_signal("reroll_count_changed")
-    
+
 func game_over():
     reroll_number = 0
     player_power = 0

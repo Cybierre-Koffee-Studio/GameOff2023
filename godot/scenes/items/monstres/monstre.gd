@@ -1,7 +1,7 @@
 extends ClickableItem
 
 
-var niveau = 0          
+var niveau = 0
 
 func execute_action():
     if GlobalVars.player_power < niveau :

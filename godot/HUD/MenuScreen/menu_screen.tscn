@@ -63,6 +63,7 @@ offset_bottom = 481.0
 text = "Infos"
 
 [node name="ButtonCredits" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 1023.0
 offset_top = 500.0
