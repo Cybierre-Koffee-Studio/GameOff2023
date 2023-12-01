@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://co2iio2iuk517"]
+[gd_scene load_steps=10 format=3 uid="uid://co2iio2iuk517"]
 
 [ext_resource type="PackedScene" uid="uid://dfg5cslxxcqua" path="res://ProtoCrawler/tile.tscn" id="1_fjgk8"]
-[ext_resource type="Script" path="res://ProtoCrawler/joueur.gd" id="2_305lg"]
+[ext_resource type="PackedScene" uid="uid://cj6w2grctcokj" path="res://ProtoCrawler/joueur.tscn" id="2_0mx2q"]
 [ext_resource type="PackedScene" uid="uid://by32aipxjix1q" path="res://ProtoCrawler/coffre.tscn" id="3_3i0ud"]
 [ext_resource type="PackedScene" uid="uid://b5o47hkwlbute" path="res://ProtoCrawler/torche.tscn" id="4_kgcqp"]
 
@@ -16,13 +16,6 @@ sky_material = SubResource("ProceduralSkyMaterial_755xj")
 background_mode = 2
 sky = SubResource("Sky_uhgcy")
 tonemap_mode = 2
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_goy86"]
-radius = 0.25
-height = 1.0
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7omxb"]
-points = PackedVector3Array(-0.0626015, -0.266393, -0.240247, 0.0113916, 0.238035, 0.249442, 0.0848621, 0.279592, 0.232102, 0.115522, -0.401785, 0.160223, 0.203685, 0.325489, -0.121749, -0.241412, 0.297443, 0.0411093, -0.181422, -0.341134, 0.144839, 0.234523, -0.327267, -0.0331359, -0.0637235, 0.421361, -0.169056, -0.196702, -0.341945, -0.122349, 0.219114, 0.311636, 0.100419, 0.0420738, 0.488726, 0.0573973, -0.0341012, -0.48823, -0.0646353, 0.0997428, -0.294785, -0.224458, -0.0927739, 0.297759, -0.226763, -0.13668, 0.296132, 0.203875, -0.00346824, -0.238412, 0.24983, 0.18791, -0.294307, 0.158478, 0.0557924, 0.281545, -0.240602, -0.208646, 0.263958, -0.135262, -0.242278, -0.298492, -0.0332556, -0.139874, 0.454283, 0.0266681, -0.125092, -0.440333, 0.102654, 0.131824, -0.451389, -0.0636977, 0.186715, -0.263172, -0.164131, 0.146689, 0.435778, -0.0786007, 0.249831, 0.238321, -0.00344428, 0.0265531, 0.437506, 0.162353, -0.0772764, -0.295446, 0.232954, -0.193856, -0.249126, 0.15785, -0.0486367, -0.391155, -0.199082, -0.15034, -0.293997, -0.19445)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_06nwg"]
 albedo_color = Color(0.0980392, 0.0980392, 0.0980392, 1)
@@ -71,47 +64,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 3)
 [node name="Tile10" parent="tiles" instance=ExtResource("1_fjgk8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -3)
 
-[node name="joueur" type="CharacterBody3D" parent="."]
-script = ExtResource("2_305lg")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="joueur"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.557087, 0)
-mesh = SubResource("CapsuleMesh_goy86")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="joueur"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.557087, 0)
-shape = SubResource("ConvexPolygonShape3D_7omxb")
-
-[node name="RayCastBack" type="RayCast3D" parent="joueur"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56188, 0)
-target_position = Vector3(-3, 0, 0)
-collision_mask = 4
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="RayCastRight" type="RayCast3D" parent="joueur"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56188, 0)
-target_position = Vector3(0, 0, 3)
-collision_mask = 4
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="RayCastLeft" type="RayCast3D" parent="joueur"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56188, 0)
-target_position = Vector3(0, 0, -3)
-collision_mask = 4
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="RayCastForward" type="RayCast3D" parent="joueur"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56188, 0)
-target_position = Vector3(3, 0, 0)
-collision_mask = 4
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="Camera3D" type="Camera3D" parent="joueur"]
-transform = Transform3D(-4.37114e-08, -5.96047e-08, -1, -5.31282e-14, 1, -5.96047e-08, 1, 5.05228e-14, -4.37114e-08, 0, 0.765409, 0)
+[node name="joueur" parent="." instance=ExtResource("2_0mx2q")]
 
 [node name="coffre" parent="." instance=ExtResource("3_3i0ud")]
 transform = Transform3D(0.756767, 0, -0.653685, 0, 1, 0, 0.653685, 0, 0.756767, 9.89668, 0.05, -7.06791)

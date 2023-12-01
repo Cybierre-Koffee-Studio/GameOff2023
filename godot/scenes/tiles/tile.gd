@@ -2,14 +2,24 @@ extends Node
 class_name Tile
 
 enum TYPE {CENTER, CORRIDOR, STRAIGHT, CORNER}
-const COLORS = [Color.RED, Color.BLUE, Color.GREEN]
 
 var valeur_cluster_max = 1
 
-const center_texture = preload("res://models/tiles/center/tile_center_texture_center.png")
-const corridor_texture = preload("res://models/tiles/corridor/tile_corridor_texture_corridor.png")
-const straight_texture = preload("res://models/tiles/straight/tile_straight_texture_t.png")
-const corner_texture = preload("res://models/tiles/corner/tile_corner_texture_corner.png")
+const center_texture = preload("res://models/tiles/center/tile_center_texture.png")
+const corridor_texture = preload("res://models/tiles/corridor/tile_corridor_texture.png")
+const straight_texture = preload("res://models/tiles/straight/tile_straight_texture.png")
+const corner_texture = preload("res://models/tiles/corner/tile_corner_texture.png")
+
+const center = preload("res://ProtoCrawler/tuiles_design/tileOuvert.tscn")
+const corridor = preload("res://ProtoCrawler/tuiles_design/tileCouloir.tscn")
+const straight = preload("res://ProtoCrawler/tuiles_design/tileEnT.tscn")
+const corner = preload("res://ProtoCrawler/tuiles_design/tileVirage.tscn")
+
+const reroll_item_scene = preload("res://scenes/items/reroll/reroll.tscn")
+const monster_item_scene = preload("res://scenes/items/monstres/monstre.tscn")
+const chest_item_scene = preload("res://scenes/items/coffre/coffre.tscn")
+
+const items_list = [reroll_item_scene, monster_item_scene, chest_item_scene]
 
 const opening_data_by_type_and_rotation = {
     TYPE.CENTER: {
@@ -39,6 +49,7 @@ const opening_data_by_type_and_rotation = {
 }
 
 var instance_type
+@onready var rota_tuile = $rotile.rotation_degrees.y
 
 signal select_tile
 signal rotate_tile
@@ -46,36 +57,53 @@ signal rotate_tile
 @export var can_rotate : bool = true
 @export var can_move : bool = true
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-    pass # Replace with function body.
+var item : Item = null
+var poids = 0
 
-func init(type : TYPE):
+func init(type : TYPE, obj : bool):
+    poids = randi_range(1,3)
+    $Label3D.text = str(poids)
     instance_type = type
-    var base_material_copy = $mesh.get_surface_override_material(0).duplicate()
+    var base_material_copy = $rotile/mesh.get_surface_override_material(0).duplicate()
     match type:
         TYPE.CENTER:
             base_material_copy.albedo_texture = center_texture
+            ajout_model_physique(center)
         TYPE.CORRIDOR:
             base_material_copy.albedo_texture = corridor_texture
+            ajout_model_physique(corridor)
         TYPE.STRAIGHT:
             base_material_copy.albedo_texture = straight_texture
+            ajout_model_physique(straight)
         TYPE.CORNER:
             base_material_copy.albedo_texture = corner_texture
-    #base_material_copy.albedo_color = COLORS.pick_random()
-    $mesh.set_surface_override_material(0, base_material_copy)
+            ajout_model_physique(corner)
+    $rotile/mesh.set_surface_override_material(0, base_material_copy)
+    if !obj :
+        var proba_item = randi_range(0,100)
+        if proba_item >= 50:
+            add_item()
+
+func ajout_model_physique(model):
+    var le_model = model.instantiate()
+    $rotile.add_child(le_model)
 
 # renvoie les données sur les bords de la tuile sous forme d'un tableau de binaires :
 #  0 : les ouvertures (haut, droite, bas, gauche), exemple pour un couloir horizontal : 0b0101
 #  1 : les murs (haut, droite, bas, gauche), l'inverse des ouvertures en fait, exemple pour un couloir horizontal : 0b1010
 func get_tile_data():
-    var rotation_degrees : int = floor(rad_to_deg(self.rotation.y))
-    var opening_data = opening_data_by_type_and_rotation[instance_type][rotation_degrees%360]
+    var rota_degrees : int = $rotile.rotation_degrees.y
+    var opening_data = opening_data_by_type_and_rotation[instance_type][rota_degrees%360]
     return [opening_data, opening_data^0b1111]
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-    pass
+func add_item():
+    var new_item = items_list.pick_random().instantiate()
+    new_item.place_on_tile(self)
+    item = new_item
+    add_child(new_item)
+
+func has_item():
+    return item != null
 
 func _on_area_3d_mouse_entered():
     pass
@@ -88,15 +116,16 @@ func _on_area_3d_input_event(_camera, event, _position, _normal, _shape_idx):
         if event.button_index == MOUSE_BUTTON_LEFT and event.pressed == true:
             select_tile.emit(self)
 
-func get_neighbour_tile_color():
-    var valeur_tampon = 0
+func rotate_subtile(degr):
+    $rotile.rotation_degrees.y = degr
+
+func get_rota_degrees():
+    return $rotile.rotation_degrees.y
+
+func check_murs_vides():
     for i in range(1,5) :
         var un_raycast:RayCast3D = find_child("RayCast" + str(i))
-        if un_raycast.is_colliding() :
-            if un_raycast.get_collider().get_parent().get_tile_color() == get_tile_color() :
-                if un_raycast.get_collider().get_parent().valeur_cluster_max < valeur_tampon :
-                    valeur_cluster_max = un_raycast.get_collider().get_parent().valeur_cluster_max
-                print("C LA MEME")
+        if !un_raycast.is_colliding() :
+            var un_mur = find_child("mur" + str(i))
+            un_mur.visible = true
 
-func get_tile_color():
-    return $mesh.get_surface_override_material(0).albedo_color

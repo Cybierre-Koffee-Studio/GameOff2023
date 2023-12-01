@@ -1,0 +1,95 @@
+[gd_scene load_steps=10 format=3 uid="uid://dbau1hjw0klkj"]
+
+[ext_resource type="Script" path="res://ProtoCrawler/key.gd" id="1_ipljv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ewkun"]
+albedo_color = Color(1, 0.752941, 0, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_318x1"]
+material = SubResource("StandardMaterial3D_ewkun")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lb8ug"]
+albedo_color = Color(1, 0.752941, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_mxoje"]
+material = SubResource("StandardMaterial3D_lb8ug")
+top_radius = 0.3
+bottom_radius = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5dxrs"]
+albedo_color = Color(1, 0.752941, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_osd8e"]
+material = SubResource("StandardMaterial3D_5dxrs")
+top_radius = 0.25
+bottom_radius = 0.2
+height = 0.7
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qceik"]
+material = SubResource("StandardMaterial3D_5dxrs")
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kc0j5"]
+radius = 0.283672
+
+[node name="key" type="StaticBody3D"]
+script = ExtResource("1_ipljv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-09, 0.1, 0, -0.0866025, -3.78552e-09, 0.05, 0.05, 2.18557e-09, 0.0866025, 0, 0.304637, 0)
+layers = 512
+mesh = SubResource("TorusMesh_318x1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 1.6411, 7.17349e-08, 0)
+layers = 512
+mesh = SubResource("CylinderMesh_mxoje")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(4.1034e-08, 0.0306258, 0.999531, -1, -8.60841e-08, 4.36909e-08, 8.73818e-08, -0.999531, 0.0306258, 2.40378, 0.0288025, -0.482127)
+layers = 512
+mesh = SubResource("CylinderMesh_osd8e")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D"]
+transform = Transform3D(4.1034e-08, 0.0306258, 0.999531, -1, -8.60841e-08, 4.36909e-08, 8.73818e-08, -0.999531, 0.0306258, 1.85174, 0.0288025, -0.482127)
+layers = 512
+mesh = SubResource("CylinderMesh_qceik")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.258839, 0)
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_kc0j5")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.521944, 0)
+layers = 512
+light_color = Color(1, 0.72549, 0.572549, 1)
+spot_range = 0.743941
+spot_angle = 38.305
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(0.870905, 0.422728, -0.25065, -0.000139626, -0.509807, -0.860289, -0.491451, 0.749265, -0.443935, -0.234545, -0.118029, -0.253762)
+layers = 512
+light_color = Color(1, 0.72549, 0.572549, 1)
+spot_range = 0.743941
+spot_angle = 38.305
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="."]
+transform = Transform3D(0.199488, -0.843011, 0.499537, -0.000139586, -0.509808, -0.860289, 0.9799, 0.171547, -0.101818, 0.221962, -0.112297, -0.00381541)
+layers = 512
+light_color = Color(1, 0.72549, 0.572549, 1)
+spot_range = 0.743941
+spot_angle = 38.305
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.668625, 0.639758, -0.379013, -0.000139592, -0.509808, -0.860289, -0.7436, -0.575157, 0.340959, -0.196122, -0.112297, 0.340837)
+layers = 512
+light_color = Color(1, 0.72549, 0.572549, 1)
+spot_range = 0.743941
+spot_angle = 38.305
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

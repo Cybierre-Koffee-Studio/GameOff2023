@@ -2,6 +2,7 @@ extends Node3D
 class_name Hand
 
 signal tile_selected
+signal reroll_used
 
 const tile_scene = preload("res://scenes/tiles/tile.tscn")
 const possible_tiles : Array[Tile.TYPE] = [Tile.TYPE.CENTER, Tile.TYPE.CORNER, Tile.TYPE.CORRIDOR, Tile.TYPE.STRAIGHT]
@@ -12,6 +13,10 @@ const selected_tile_position_shift = 0.6
 @onready var tile_markers : Array[Node3D] = [$Tile1, $Tile2, $Tile3, $Tile4, $Tile5]
 
 var current_hand : Array[Tile]  = []
+
+func _unhandled_input(event):
+    if event.is_action_pressed("reroll") and !GlobalVars.can_player_move:
+        reroll()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,11 +32,16 @@ func deal_hand(nb_tiles):
     for t in range(nb_tiles):
         var marker = tile_markers[t]
         var tile = tile_scene.instantiate()
-        tile.init(possible_tiles.pick_random())
+        if (GlobalVars.debug):
+            tile.init(Tile.TYPE.CENTER, false)
+        else:
+            tile.init(pick_tile_model(), false)
+#            tile.init(possible_tiles.pick_random(), false)
         tile.connect("select_tile", on_select_tile)
         tile.position = Vector3(marker.position.x, marker.position.y, marker.position.z)
         tile.position.z += 30
-        tile.rotation.y = deg_to_rad(rotations.pick_random())
+#        tile.rotation_degrees.y = rotations.pick_random()
+        tile.rotate_subtile(rotations.pick_random())
         tile.scale = Vector3(2,2,2)
         current_hand.append(tile)
         add_child(tile)
@@ -42,6 +52,14 @@ func discard_hand():
     for t in current_hand :
         t.queue_free()
     current_hand = []
+    GlobalVars.selected_tile = null
+
+func reroll():
+    if GlobalVars.reroll_number > 0:
+        GlobalVars.change_reroll(-1)
+        discard_hand()
+        deal_hand(GlobalVars.hand_size)
+        emit_signal("reroll_used")
 
 func on_select_tile(tile):
     if GlobalVars.selected_tile != null && tile.can_move:
@@ -64,3 +82,12 @@ func on_tile_placed(tile):
     current_hand.erase(tile)
     discard_hand()
     deal_hand(GlobalVars.hand_size)
+
+func pick_tile_model():
+    var alea = randi_range(1, 100)
+    if alea > 80 :
+        return Tile.TYPE.CENTER
+    elif alea > 65 :
+        return Tile.TYPE.STRAIGHT
+    else :
+        return [Tile.TYPE.CORNER, Tile.TYPE.CORRIDOR].pick_random()

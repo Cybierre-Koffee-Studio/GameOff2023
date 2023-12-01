@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj6w2grctcokj"]
+
+[ext_resource type="Script" path="res://ProtoCrawler/joueur.gd" id="1_pbn7f"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lfesl"]
+
+[node name="joueur" type="CharacterBody3D"]
+script = ExtResource("1_pbn7f")
+
+[node name="RayCastBack" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+target_position = Vector3(-1, 0, 0)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCastRight" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+target_position = Vector3(0, 0, 1)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCastLeft" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+target_position = Vector3(0, 0, -1)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCastForward" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+target_position = Vector3(1, 0, 0)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.2222e-08, 0.258819, -0.965926, 1.13133e-08, 0.965926, 0.258819, 1, 4.61853e-14, -4.37114e-08, -0.199631, 0.383878, 0)
+cull_mask = 1048574
+
+[node name="RayCastBackMonster" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(-1, 0, 0)
+collision_mask = 8
+collide_with_areas = true
+
+[node name="RayCastRightMonster" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, 0, 1)
+collision_mask = 8
+collide_with_areas = true
+
+[node name="RayCastLeftMonster" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, 0, -1)
+collision_mask = 8
+collide_with_areas = true
+
+[node name="RayCastForwardMonster" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(1, 0, 0)
+collision_mask = 8
+collide_with_areas = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_lfesl")

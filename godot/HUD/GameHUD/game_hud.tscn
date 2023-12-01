@@ -1,6 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://b747blytdeucf"]
+[gd_scene load_steps=9 format=3 uid="uid://b747blytdeucf"]
 
 [ext_resource type="Script" path="res://HUD/GameHUD/game_hud.gd" id="1_hwsf3"]
+[ext_resource type="Texture2D" uid="uid://csvdgmfudmv3q" path="res://HUD/GameHUD/rerollIcon.png" id="2_jpyuw"]
+[ext_resource type="Texture2D" uid="uid://blgv7hfnvctkj" path="res://scenes/items/coffre/lapotion.png" id="3_r0urk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0b8mf"]
+bg_color = Color(0.764706, 0.764706, 0.764706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2j4ew"]
+bg_color = Color(0.729412, 1, 0.721569, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_t35qw"]
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_borid"]
+font_size = 44
+
+[sub_resource type="LabelSettings" id="LabelSettings_r7ruw"]
+font_size = 40
 
 [node name="GameHUD" type="Control"]
 layout_mode = 3
@@ -13,28 +30,211 @@ mouse_filter = 2
 script = ExtResource("1_hwsf3")
 
 [node name="StartKeyLabel" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Start => Key : Nope"
 
 [node name="KeyExitLabel" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_top = 27.0
 offset_right = 105.0
 offset_bottom = 53.0
 text = "Key => Exit : Nope"
 
-[node name="BoardAngle" type="Label" parent="."]
-layout_mode = 0
-offset_top = 56.0
-offset_right = 115.0
-offset_bottom = 82.0
-text = "Board angle : 0"
-
-[node name="BoardToppled" type="Label" parent="."]
+[node name="BoardToppledLabel" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_top = 80.0
 offset_right = 115.0
 offset_bottom = 106.0
 text = "Board toppled : false"
+
+[node name="Crawler" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="Crawler"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -165.0
+offset_right = 243.0
+grow_vertical = 0
+color = Color(0, 0, 0, 0.352941)
+
+[node name="LifeBar" type="ProgressBar" parent="Crawler"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -46.0
+offset_right = 217.0
+offset_bottom = -19.0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_0b8mf")
+theme_override_styles/fill = SubResource("StyleBoxFlat_2j4ew")
+max_value = 3.0
+value = 3.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="Crawler/LifeBar"]
+layout_mode = 0
+offset_left = 1.0
+offset_right = 153.0
+offset_bottom = 27.0
+text = "3 / 3"
+label_settings = SubResource("LabelSettings_t35qw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="Crawler"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 636.0
+offset_right = 90.0
+offset_bottom = 662.0
+text = "Power : 0"
+
+[node name="LabelVie" type="Label" parent="Crawler"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 675.0
+offset_right = 90.0
+offset_bottom = 701.0
+text = "Life :"
+
+[node name="LabelScore" type="Label" parent="Crawler"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 602.0
+offset_right = 84.0
+offset_bottom = 628.0
+text = "Score : 0"
+
+[node name="LabelCave" type="Label" parent="Crawler"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 567.0
+offset_right = 84.0
+offset_bottom = 593.0
+text = "Cave level : 1"
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -172.0
+offset_top = -165.0
+grow_horizontal = 0
+grow_vertical = 0
+color = Color(0, 0, 0, 0.352941)
+
+[node name="LabelRerollCount2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1240.0
+offset_top = 554.0
+offset_right = 1284.0
+offset_bottom = 618.0
+text = "R"
+label_settings = SubResource("LabelSettings_borid")
+
+[node name="Reroll" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1107.0
+offset_top = 554.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Reroll"]
+position = Vector2(77.6555, 80.5001)
+scale = Vector2(0.300532, 0.300532)
+texture = ExtResource("2_jpyuw")
+
+[node name="LabelRerollCount" type="Label" parent="Reroll"]
+layout_mode = 0
+offset_left = 66.6555
+offset_top = 50.5
+offset_right = 101.656
+offset_bottom = 108.5
+text = "0"
+label_settings = SubResource("LabelSettings_r7ruw")
+
+[node name="Potion" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Potion"]
+position = Vector2(1185.67, 632.594)
+scale = Vector2(0.151688, 0.151688)
+texture = ExtResource("3_r0urk")
+flip_h = true
+
+[node name="LabelPotion" type="Label" parent="Potion"]
+layout_mode = 0
+offset_left = 1189.0
+offset_top = 628.0
+offset_right = 1235.0
+offset_bottom = 686.0
+text = "0"
+label_settings = SubResource("LabelSettings_r7ruw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Balance" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -393.0
+offset_top = -40.0
+offset_right = 438.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="Balance"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -185.5
+offset_top = -40.0
+offset_right = 188.5
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 0.352941)
+
+[node name="BoardAngleLabel" type="Label" parent="Balance"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Board angle : Perfectly balanced"
+horizontal_alignment = 1
+vertical_alignment = 1

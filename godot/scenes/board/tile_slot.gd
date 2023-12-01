@@ -37,12 +37,13 @@ func _on_area_3d_mouse_entered():
             board.selected_tile_copy.position = self.position
         else:
             board.selected_tile_copy.visible = false
-        
-func emit_add_tile(tile):
-    add_tile.emit(self)
 
-#func _on_area_3d_mouse_exited():
-#    if board != null && board.selected_tile_copy != null:
-#        board.selected_tile_copy.visible = false
-#        if available:
-#            material.albedo_color = COLOR_FOCUS
+func emit_add_tile(_tile):
+    add_tile.emit(self)
+    set_available()
+
+func _on_area_3d_mouse_exited():
+    if board != null && board.selected_tile_copy != null:
+        board.selected_tile_copy.visible = false
+        if available:
+            material.albedo_color = COLOR_FOCUS
