@@ -5,6 +5,14 @@ const hud_scene = preload("res://HUD/GameHUD/game_hud.tscn")
 const hand_scene = preload("res://scenes/hand/hand.tscn")
 const game_over_scene = preload("res://HUD/GameOverScreen/game_over.tscn")
 
+const musics = {
+    5: preload("res://audio/tiles-1.mp3"),
+    7: preload("res://audio/tiles-2.mp3"),
+    9: preload("res://audio/tiles-3.mp3"),
+    11: preload("res://audio/tiles-4.mp3"),
+    13: preload("res://audio/tiles-5.mp3")
+}
+
 var board_size = 5
 var position_tuile_centrale = null
 @onready var hand : Hand = $Camera3D/Hand
@@ -16,6 +24,9 @@ func _ready():
     init()
 
 func init():
+    $music.stop()
+    $music.set_stream(musics[(min(board_size, 13))])
+    $music.play()
     board._init_board(board_size)
     board.connect("has_path_start_key", hud.on_has_start_key_path)
     board.connect("has_path_start_key", _on_plateau_has_path_start_key)
