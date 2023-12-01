@@ -347,6 +347,7 @@ func is_path_start_key_impossible() -> bool :
 func on_reroll():
     if selected_tile_copy != null:
         remove_child(selected_tile_copy)
+        disconnect("tile_placed", selected_tile_copy.item.on_tile_placed)
     selected_tile_copy = null
     for x in GRID_SIZE:
         for y in GRID_SIZE:
