@@ -71,7 +71,6 @@ func on_replay(game_over_screen):
     $joueur.position = Vector3(0, 0, 0)
     board = board_scene.instantiate()
     add_child(board)
-#    board._init_board(board_size)
     hud = hud_scene.instantiate()
     add_child(hud)
     hand.discard_hand()
@@ -84,16 +83,11 @@ func next_level():
     $OmniLight3D2.visible = true
     board_size += 2
     hud.hide_show_balance()
-#    game_over_screen.queue_free()
     board.queue_free()
-#    hud.queue_free()
     $Camera3D.current = true
     GlobalVars._init()
     board = board_scene.instantiate()
-#    board._init_board(board_size)
     add_child(board)
-#    hud = hud_scene.instantiate()
-#    add_child(hud)
     hand.discard_hand()
     hand.deal_hand(GlobalVars.hand_size)
     GlobalVars.level_ended()
